@@ -1,0 +1,33 @@
+.jionExame {
+	color: white;
+	background-color: #A9A9A9;
+}
+
+.right>div {
+
+	margin-top: 20px;
+	width: 1300px;
+	height: 60px;
+	margin-left: 50px;
+	/* background-color: #8FBC8F; */
+	border: 1px solid #A9A9A9;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.right>div>a {
+	display: block;
+	line-height: 60px;
+	text-decoration: none;
+	font-size: 30px;
+	font-family: 'KaiTi';
+	border-radius: 5px;
+	background-color: lightcyan;
+	color: #3D5245;
+
+}
+
+.right>div>a:hover {
+	background-color: #3D5245;
+	color: #A9A9A9;
+}

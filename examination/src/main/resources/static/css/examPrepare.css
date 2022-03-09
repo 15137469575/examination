@@ -1,0 +1,32 @@
+body {
+	background: url("https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3453&q=80.jfif") fixed no-repeat;
+}
+
+.head {
+	height: 50px;
+	font-size: 40px;
+	color: red;
+	text-align: center;
+}
+
+.body {
+	width: 100%;
+	height: 650px;
+	/* background-color: #5F9EA0; */
+	margin: 0 auto;
+	overflow-y: scroll;
+}
+
+.foot {
+	width: 100%;
+	height: 100px;
+	/* background-color: #000000; */
+	text-align: center;
+}
+
+.foot>button {
+	padding: 10px;
+	font-size: large;
+	margin-top: 20px;
+	border-radius: 5px;
+}
