@@ -1,155 +1,82 @@
-* {
-	margin: 0;
-	padding: 0;
-}
-
 body {
-	font-family: "微软雅黑";
-	overflow-x: auto;
-	overflow-y: hidden;
+	font-family: KaiTi;
+	overflow: hidden;
 }
 
-.roof {
+.mheader {
 	width: 100%;
-	height: 60px;
-	margin: 0 auto;
-	background-color: #20222A;
-	overflow: hidden;
-	font-family: "宋体";
-	overflow: hidden;
-	font-size: 20px;
+	height: 3.125rem;
+	font-size: 25px;
+	background-color: darkseagreen;
 }
 
-.left {
-	float: left;
-	margin-left: 45px;
-}
-
-.logo {
-	width: 50px;
-	height: 50px;
+.welcom {
 	display: inline-block;
-}
-
-.tttle2 {
-	height: 60px;
-	display: inline-block;
-}
-
-.left>span {
-	display: inline-block;
-	color: #fff;
-	vertical-align: text-bottom;
-	font-size: 30px;
-
-}
-
-.right {
-	float: right;
-	margin-right: 15px;
-	line-height: 60px;
-	font-size: 16px;
-	color: #fff;
-	opacity: 0.7;
-}
-
-.user {
-	display: inline-block;
-	cursor: pointer;
+	margin-left: 3.125rem;
+	line-height: 3.125rem;
+	font-size: larger;
 }
 
 .back {
 	display: inline-block;
+	margin-left: 80rem;
+	line-height: ;
+
 }
 
 .back>a {
-	color: #fff;
+	padding: 0.5rem;
+	font-size: 1.5rem;
+	color: #20222A;
+	/* background-color: #009688; */
+	border-radius: 5px;
 	text-decoration: none;
 }
 
-.side-left {
-	top: 60px;
-	left: 0;
-	bottom: 0;
-	width: 200px;
-	background-color: #20222A;
-	position: absolute;
-
+.left {
+	display: inline-block;
+	width: 12.5rem;
+	height: 100rem;
+	border: 2px solid #20222A;
+	/* background-color: #009688; */
+	text-align: center;
 }
 
-/*左侧侧边栏样式*/
-.list_one {
-	/*width: 200px;*/
-	height: 45px;
-	padding-left: 49px;
-	border-left: solid 6px #393D49;
-	text-align: left;
-	line-height: 45px;
-	color: darkgray;
+.right {
+	display: inline-block;
+	float: right;
+	width: 96rem;
+	height: 100rem;
+	border: 2px solid #20222A;
+	/* background-color: #FF0000; */
+	background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F9eab332ac2d8ff4d0a8d11c26f18bb80664abc5870e49-lexxZc_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649410618&t=33f746163d67fe9b8160e3bd7dcd3445');
+	background-size: 100% 100%;
 }
 
-.list_one:hover {
+.notice,
+.jionExame,
+.viewResults {
+	display: block;
+	line-height: 2.4rem;
+	font-size: large;
+	color: black;
+	background-color: seashell;
+	text-decoration: none;
+	position: relative;
+}
+
+a:hover {
 	color: white;
-	border-left: solid 6px #009688;
-	cursor: pointer;
+	background-color: #A9A9A9;
 }
 
-.list_two {
-	width: 200px;
-	height: auto;
-	text-align: left;
-	line-height: 45px;
-	color: darkgray;
-	background-color: #282B33;
-	display: none;
+.back>a:hover {
+	color: red;
+	background-color: seashell;
 }
 
-.list_two>div {
-	width: 150px;
-	height: 45px;
-	padding-left: 50px;
-}
-
-.list_two>div:hover {
-	color: darkgray;
-	cursor: pointer;
-}
-
-.thisColor {
-	background-color: #009688;
-}
-
-.another {
-	background-color: #393D49;
-}
-
-#mr {
-	margin-right: 10px;
-	opacity: 0.7;
-	margin-left: 50px;
-	transition: all .3s;
-}
-
-.frame-div {
-	position: absolute;
-	left: 200px;
-	top: 60px;
-	right: 0;
-	bottom: 0;
-}
-
-.ifm {
-	width: 100%;
-	height: 100%;
-
-}
-
-.tuichu {
-	padding: 10px;
-	background: #41A809;
-	border-radius: 5px;
-}
-
-.tuichu:hover {
-	box-shadow: 0 0 1px 1px #cccccc;
+.backgroud {
+	height: 43rem;
+	background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi.6art.cn%2F82df0bc66ba6bf07872dc589583421f0%40.jpg&refer=http%3A%2F%2Fi.6art.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649323253&t=52f1211db923afa878a1d12f67ce9c46');
+	background-size: 100% 100%;
 }

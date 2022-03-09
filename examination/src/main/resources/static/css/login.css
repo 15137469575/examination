@@ -15,7 +15,6 @@ body {
 
 .login-form {
 	width: 240px;
-	height: 300px;
 	display: flex;
 	flex-direction: column;
 	padding: 40px;

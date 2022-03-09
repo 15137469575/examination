@@ -4,7 +4,7 @@ window.onload = function() {
 
 	studentLoginButton.onclick = function() {
 
-		location.href = 'student.html';
+		location.href = 'student_01.html';
 
 	}
 

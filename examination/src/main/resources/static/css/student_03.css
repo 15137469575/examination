@@ -1,0 +1,45 @@
+.viewResults {
+	color: white;
+	background-color: #A9A9A9;
+}
+
+.viewResultsDiv {
+	width: 40rem;
+	height: 12.5rem;
+	margin: 0 auto;
+	margin-top: 6rem;
+	/* background-color: #5F9EA0; */
+}
+
+.viewResultsDiv>input {
+	font-family: "KaiTi";
+	display: block;
+	margin-left: 5rem;
+	margin-top: 0.5rem;
+	width: 14rem;
+	height: 2rem;
+	border-radius: 5px;
+	font-size: large;
+}
+
+h1 {
+	font-size: 30px;
+}
+
+.viewResultsDiv>button {
+	height: 2rem;
+	width: 5rem;
+	margin-left: 20rem;
+
+}
+
+#rightBottom {
+	height: 12.5rem;
+	/* background-color: #000000; */
+
+}
+
+#rightBottom>div {
+	margin-left: 30rem;
+	font-size: 22px;
+}
