@@ -7,20 +7,20 @@
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script src="js/jquery-3.6.0.js"></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function(){
 		$("#studentLoginButton").on("click",function(){
 			$.ajax({
 				url:"/user/login",
 				type:"get",
-				data:{"id": $("#usernameText").val(), "pwd": $("#passwordText").val()},
-				success:function(rst){
-					console.log(rst.instance);
+				data:{"id": $("#usernameText").value, "pwd": $("#passwordText").value},
+				success:function(res){
+					console.log(99);
 				}
 			})
 		})
 	})
-</script>
+</script> -->
 </head>
 <body>
 test
@@ -29,11 +29,11 @@ test
 		<h2>登录</h2>
 		<input id="usernameText" name="id" placeholder="用户名" />
 		<input id="passwordText" name="pwd" placeholder="密码">
-		<button id="studentLoginButton">学生登录</button>
+		<button id="studentLoginButton">登录</button>
 	</div>
 </div>
 
-<!-- <script>
+<script>
 	function getMsg() {
 		var id = document.getElementById("usernameText").value;
 		var pwd = document.getElementById("passwordText").value;
@@ -45,13 +45,13 @@ test
 
 		jQuery.get("/user/login",form,function (rst) {
 			if(rst){
-				console.log(rst.instance);
+				console.log(99999);
 			}else{
 				alert("登陆信息有误");
 			}
 		});
 	}
-</script> -->
+</script> 
 
 </body>
 </html>
