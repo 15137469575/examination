@@ -2,13 +2,13 @@ package org.upc.examination.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
-import org.upc.examination.entity.User;
+import org.upc.examination.entity.Users;
 
 @Mapper
 public interface UserMapper {
 
-    User login(String id,String pwd);
+    Users login(String id, String pwd);
 
-    int register(User user);
+    int register(Users user);
 
 }

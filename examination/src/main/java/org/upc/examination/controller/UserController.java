@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.upc.examination.entity.User;
+import org.upc.examination.entity.Users;
 import org.upc.examination.service.UserService;
 
 import javax.annotation.Resource;
@@ -17,17 +17,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public User login(String id, String pwd){
-        return userService.login(id,pwd);
+    public Users login(String userId, String userPassword){
+        return userService.login(userId,userPassword);
     }
 
     @PostMapping("/register")
-    public int register(User user){
+    public int register(Users user){
         return userService.register(user);
     }
 
-    @GetMapping("/test")
-    public String msg(){
-        return "得到信息第二次";
-    }
 }

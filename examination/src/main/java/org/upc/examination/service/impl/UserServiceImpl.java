@@ -1,7 +1,7 @@
 package org.upc.examination.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.upc.examination.entity.User;
+import org.upc.examination.entity.Users;
 import org.upc.examination.mapper.UserMapper;
 import org.upc.examination.service.UserService;
 
@@ -15,12 +15,12 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User login(String id, String pwd) {
-        return userMapper.login(id, pwd);
+    public Users login(String userId, String userPassword) {
+        return userMapper.login(userId, userPassword);
     }
 
     @Override
-    public int register(User user) {
+    public int register(Users user) {
         return userMapper.register(user);
     }
 

@@ -1,10 +1,11 @@
 package org.upc.examination.service;
-import org.upc.examination.entity.User;
+
+import org.upc.examination.entity.Users;
 
 public interface UserService {
 
-    User login(String id, String pwd);
+    Users login(String id, String pwd);
 
-    int register(User user);
+    int register(Users user);
 
 }

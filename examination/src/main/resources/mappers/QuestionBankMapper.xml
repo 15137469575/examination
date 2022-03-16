@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.upc.examination.mapper.QuestionBankMapper">
+
+    <insert id="insert" parameterType="org.upc.examination.entity.QuestionBank">
+        insert into question_bank
+            (question_id,question,optionA,optionB,optionC,optionD,subject,type,degree_difficulty,question_labels,answer)
+        values
+            (#{questionId},#{question},#{optionA},#{optionB},#{optionC},#{optionD},#{subject},#{type},#{degreeDifficulty},#{questionLabels},#{answer})
+    </insert>
+
+    <select id="queryPage" resultType="org.upc.examination.entity.QuestionBank">
+        select * from question_bank
+        where subject=#{object}
+    </select>
+
+    <select id="queryById" resultType="org.upc.examination.entity.QuestionBank">
+        select * from question_bank
+        where question_id=#{index}
+    </select>
+</mapper>
