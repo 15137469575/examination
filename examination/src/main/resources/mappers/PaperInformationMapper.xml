@@ -10,4 +10,14 @@
         valueS (#{paperId},#{paperTeacherId},#{questionNum},#{subject},#{remark})
 
     </insert>
+    <select id="selectById" resultType="org.upc.examination.entity.PaperInformation">
+        select paper_id,paper_teacher_id,question_num,subject,remark
+        from paper_information
+        where paper_id = #{index};
+    </select>
+    <select id="selectBySubjects" resultType="org.upc.examination.entity.PaperInformation">
+        select paper_id,paper_teacher_id,question_num,subject,remark
+        from paper_information
+        where subject = #{subject};
+    </select>
 </mapper>
