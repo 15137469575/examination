@@ -39,8 +39,8 @@ test
 		var pwd = document.getElementById("passwordText").value;
 
 		var form = {
-			"id" : id,
-			"pwd" : pwd,
+			"userId" : id,
+			"userPassword" : pwd,
 		};
 
 		jQuery.get("/user/login",form,function (rst) {

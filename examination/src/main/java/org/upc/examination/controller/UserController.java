@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public Users login(String userId, String userPassword){
+    public Users login(int userId, String userPassword){
         return userService.login(userId,userPassword);
     }
 
