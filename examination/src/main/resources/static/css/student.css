@@ -14,14 +14,14 @@ body {
 
 .welcom {
 	display: inline-block;
-	margin-left: 5%;
+	margin-left: 5vw;
 	line-height:2em;
 	font-size: larger;
 }
 
 .back {
 	display: inline-block;
-	margin-left: 76%;
+	margin-left: 76vw;
 }
 
 .back>a {
@@ -35,7 +35,7 @@ body {
 
 .left {
 	display: inline-block;
-	width: 12%;
+	width: 12vw;
 	height: 100vh;
 	border: 2px solid #20222A;
 	/* background-color: #009688; */
@@ -45,7 +45,7 @@ body {
 .right {
 	display: inline-block;
 	float: right;
-	width: 87.7%;
+	width: 87.7vw;
 	height: 100vh;
 	/* border: 2px solid #20222A; */
 	/* background-color: #FF0000; */
