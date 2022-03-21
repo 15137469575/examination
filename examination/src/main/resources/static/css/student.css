@@ -5,7 +5,7 @@ body {
 
 .mheader {
 	width: 100%;
-	height: 5%;
+	height: 5vh;
 	font-size: 20px;
 	background-color: darkseagreen;
 	/* 555 */
@@ -14,14 +14,14 @@ body {
 
 .welcom {
 	display: inline-block;
-	margin-left: 3%;
+	margin-left: 5vw;
 	line-height:2em;
 	font-size: larger;
 }
 
 .back {
 	display: inline-block;
-	margin-left: 70%;
+	margin-left: 76vw;
 }
 
 .back>a {
@@ -35,8 +35,8 @@ body {
 
 .left {
 	display: inline-block;
-	width: 12%;
-	height: 100%;
+	width: 12vw;
+	height: 100vh;
 	border: 2px solid #20222A;
 	/* background-color: #009688; */
 	text-align: center;
@@ -45,8 +45,8 @@ body {
 .right {
 	display: inline-block;
 	float: right;
-	width: 87.5%;
-	height: 1600px;
+	width: 87.7vw;
+	height: 100vh;
 	/* border: 2px solid #20222A; */
 	/* background-color: #FF0000; */
 	background:url("https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3453&q=80.jfif") fixed no-repeat;
