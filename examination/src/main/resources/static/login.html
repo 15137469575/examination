@@ -29,18 +29,18 @@ test
 		<h2>登录</h2>
 		<input id="usernameText" name="id" placeholder="用户名" />
 		<input id="passwordText" name="pwd" placeholder="密码">
-		<button id="studentLoginButton">登录</button>
+		<button id="studentLoginButton" onclick="getMsg()">登录</button>
 	</div>
 </div>
 
 <script>
 	function getMsg() {
-		var id = document.getElementById("usernameText").value;
-		var pwd = document.getElementById("passwordText").value;
+		var userId = document.getElementById("usernameText").value;
+		var userPassword = document.getElementById("passwordText").value;
 
 		var form = {
-			"id" : id,
-			"pwd" : pwd,
+			"userId" : userId,
+			"userPassword" : userPassword,
 		};
 
 		jQuery.get("/user/login",form,function (rst) {

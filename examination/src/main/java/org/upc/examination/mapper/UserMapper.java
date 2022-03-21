@@ -7,7 +7,7 @@ import org.upc.examination.entity.Users;
 @Mapper
 public interface UserMapper {
 
-    Users login(String id, String pwd);
+    Users login(int userId, String userPassword);
 
     int register(Users user);
 

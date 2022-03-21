@@ -10,6 +10,11 @@
             (#{questionId},#{question},#{optionA},#{optionB},#{optionC},#{optionD},#{subject},#{type},#{degreeDifficulty},#{questionLabels},#{answer})
     </insert>
 
+    <delete id="delete">
+
+        
+    </delete>
+
     <select id="queryPage" resultType="org.upc.examination.entity.QuestionBank">
         select * from question_bank
         where subject=#{object}

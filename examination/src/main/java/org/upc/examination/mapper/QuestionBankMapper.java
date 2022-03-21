@@ -14,4 +14,6 @@ public interface QuestionBankMapper {
 
     QuestionBank queryById(int index);
 
+    int delete(int index);
+
 }

@@ -15,7 +15,6 @@ class ExaminationApplicationTests {
 
     @Test
     void says(){
-        QuestionBank questionBank = new QuestionBank();
-        System.out.println(questionBank.getOptionB());
+
     }
 }
