@@ -5,8 +5,8 @@ body {
 
 .mheader {
 	width: 100%;
-	height: 50px;
-	font-size: 25px;
+	height: 5%;
+	font-size: 20px;
 	background-color: darkseagreen;
 	/* 555 */
 	/* 555 */
@@ -14,21 +14,19 @@ body {
 
 .welcom {
 	display: inline-block;
-	margin-left: 50px;
-	line-height: 50px;
+	margin-left: 5%;
+	line-height:2em;
 	font-size: larger;
 }
 
 .back {
 	display: inline-block;
-	margin-left: 1440px;
-	line-height: ;
-
+	margin-left: 76%;
 }
 
 .back>a {
 	padding: 8px;
-	font-size: 24px;
+	font-size: 1.3em;
 	color: #20222A;
 	/* background-color: #009688; */
 	border-radius: 5px;
@@ -37,8 +35,8 @@ body {
 
 .left {
 	display: inline-block;
-	width: 240px;
-	height: 1600px;
+	width: 12%;
+	height: 100%;
 	border: 2px solid #20222A;
 	/* background-color: #009688; */
 	text-align: center;
@@ -47,7 +45,7 @@ body {
 .right {
 	display: inline-block;
 	float: right;
-	width: 1676px;
+	width: 87.7%;
 	height: 1600px;
 	/* border: 2px solid #20222A; */
 	/* background-color: #FF0000; */
@@ -58,7 +56,7 @@ body {
 
 .left>div>a{
 	display: block;
-	line-height: 64px;
+	line-height: 3.2em;
 	font-size: larger;
 	border: 5px solid  seashell;
 	color: black;
@@ -78,7 +76,7 @@ body {
 }
 
 .backgroud {
-	height: 688px;
+	height: 43em;
 	background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi.6art.cn%2F82df0bc66ba6bf07872dc589583421f0%40.jpg&refer=http%3A%2F%2Fi.6art.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649323253&t=52f1211db923afa878a1d12f67ce9c46');
 	background-size: 100% 100%;
 }
