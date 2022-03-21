@@ -5,10 +5,17 @@
 
 
     <insert id="insert" parameterType="org.upc.examination.entity.QuestionPaper">
-        INSERT INTO question_paper
-        (paper_id,question_id,question_paper_sort,remark)
-        VALUES(#{paperId},#{questionId},#{questionPaperSort},#{remark})
+        insert into question_paper
+        (question_paper_id,paper_id,question_id,question_paper_sort,remark)
+        values
+        (#{questionPaperId},#{paperId},#{questionId},#{questionPaperSort},#{remark})
 
     </insert>
+
+    <select id="selectByPaperId" resultType="org.upc.examination.entity.QuestionPaper">
+        select question_paper_id,paper_id,question_id,question_paper_sort,remark
+        from question_paper
+        where paper_id =#{paperId}
+    </select>
 
 </mapper>
