@@ -4,20 +4,22 @@
 }
 
 .viewResultsDiv {
-	width: 40rem;
-	height: 12.5rem;
+	width: 640px;
+	height: 200px;
 	margin: 0 auto;
-	margin-top: 6rem;
+	margin-top: 96px;
 	/* background-color: #5F9EA0; */
+	/* 5555 */
+	/* 555 */
 }
 
 .viewResultsDiv>input {
 	font-family: "KaiTi";
 	display: block;
-	margin-left: 5rem;
-	margin-top: 0.5rem;
-	width: 14rem;
-	height: 2rem;
+	margin-left: 80px;
+	margin-top: 8px;
+	width: 224px;
+	height: 32px;
 	border-radius: 5px;
 	font-size: large;
 }
@@ -27,19 +29,19 @@ h1 {
 }
 
 .viewResultsDiv>button {
-	height: 2rem;
-	width: 5rem;
-	margin-left: 20rem;
+	height: 32px;
+	width: 80px;
+	margin-left: 320px;
 
 }
 
 #rightBottom {
-	height: 12.5rem;
+	height: 200px;
 	/* background-color: #000000; */
 
 }
 
 #rightBottom>div {
-	margin-left: 30rem;
+	margin-left: 180px;
 	font-size: 22px;
 }

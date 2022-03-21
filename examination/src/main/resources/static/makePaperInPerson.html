@@ -3,9 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
+	<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 	<link rel="stylesheet" type="text/css" href="css/student.css" />
-	<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+	
 	<style type="text/css">
 	
 		
@@ -39,21 +40,16 @@
 			margin-left: 80px;
 			margin-top: 20px;
 		}
+		#savePaper{
+			width: 150px;
+			margin-left: 50px;
+			padding: 5px;
+			float: right;
+		}
 	</style>
 		<script type="text/javascript">
 			$(function(){
-				$(document).ready(function(){
-				          $("#object_select").change(function (){
-				              val($("#object_select").val());
-				          });
-						  $("#questionType_select").change(function (){
-						      val($("#questionType_select").val());
-						  });
-						  $("#difficulty_select").change(function (){
-						      val($("#difficulty_select").val());
-						  });
 				
-				    });
 					// 这里是给自动组卷的响应函数
 				$("#makePaperButton").on("click",function(){
 					
@@ -72,6 +68,7 @@
 					}
 					
 				})
+				//这是手动组卷的响应函数
 				$("#searchButton").on("click",function(){
 					
 					if($("#object_select").val() == -1){
@@ -90,8 +87,23 @@
 					})
 						
 					};
-					
 				})
+				$("#savePaper").on("click",function(){
+					alert("shijuanyibaocun");
+				})
+				//这是select
+				$(document).ready(function(){
+				          $("#object_select").change(function (){
+				              val($("#object_select").val());
+				          });
+						  $("#questionType_select").change(function (){
+						      val($("#questionType_select").val());
+						  });
+						  $("#difficulty_select").change(function (){
+						      val($("#difficulty_select").val());
+						  });
+				
+				    });
 			})
 		</script>
 </head>
@@ -152,8 +164,9 @@
 			<button id="searchButton">查询</button>
 			<button id="makePaperButton">自动组卷</button>
 		</div>
-		<div class="questionView">
+		<div class="questionView"> 
 			这里是题目显示区域;
+			<button type="button" id="savePaper">保存试卷</button>
 		</div>
 	</div>
 </div>
