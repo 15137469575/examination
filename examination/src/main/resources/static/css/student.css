@@ -14,7 +14,7 @@ body {
 
 .welcom {
 	display: inline-block;
-	margin-left: 5%;
+	margin-left: 3%;
 	line-height:2em;
 	font-size: larger;
 }
@@ -45,7 +45,7 @@ body {
 .right {
 	display: inline-block;
 	float: right;
-	width: 87.7%;
+	width: 85%;
 	height: 1600px;
 	/* border: 2px solid #20222A; */
 	/* background-color: #FF0000; */
