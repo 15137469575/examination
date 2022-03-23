@@ -15,4 +15,5 @@ public interface PaperInformationMapper {
      PaperInformation selectBySubjects(String subject);
 
 
+
 }
