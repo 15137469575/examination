@@ -50,8 +50,8 @@
 							"questionNumber":$("#questionNumber").val(),
 							"normal":$("#normal").val()
 						};
-						$.get("",form,function(res){
-							
+						$.get("/paperInformation/insert",form,function(res){
+							alert(success);
 						})
 					}
 				})
