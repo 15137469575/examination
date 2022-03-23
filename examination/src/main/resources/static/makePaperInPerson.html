@@ -49,6 +49,19 @@
 		}
 	</style>
 	<script type="text/javascript">
+		window.onload = function(){
+			
+			var paperId = document.getElementById('paperId');
+			var str = localStorage.getItem('id');
+			if(str){
+				paperId.value= str;
+			}
+			window.onbeforeunload = function(){
+				localStorage.setItem('id',paperId.value);
+			}
+		}
+	</script>
+	<script type="text/javascript">
 			$(function(){
 				
 					// 这里是给自动组卷的响应函数
@@ -134,7 +147,7 @@
 	</div>
 	<div class="right">
 		<div class="rightTop">
-
+			试卷编号：<textarea readonly id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;"></textarea>
 			科目(必选):
 			<select id="object_select" class="num_select">
 				<option value='-1' style='display: none'></option>
