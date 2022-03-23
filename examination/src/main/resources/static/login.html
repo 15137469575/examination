@@ -43,9 +43,9 @@ test
 			"userPassword" : pwd,
 		};
 
-		jQuery.get("/user/login",form,function (rst) {
-			if(rst){
-				console.log(99999);
+		jQuery.get("user/login",form,function (rst) {
+			if(rst.identidy == 'student'){
+
 			}else{
 				alert("登陆信息有误");
 			}
