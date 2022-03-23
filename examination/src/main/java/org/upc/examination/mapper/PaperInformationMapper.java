@@ -10,9 +10,9 @@ public interface PaperInformationMapper {
 
     int insert(PaperInformation paperInformation);
 
-     List<PaperInformation> selectById(int index);
+     PaperInformation selectById(int index);
 
-     PaperInformation selectBySubjects(String subject);
+     List<PaperInformation> selectBySubjects(String subject);
 
 
 
