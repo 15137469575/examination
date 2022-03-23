@@ -33,7 +33,7 @@
 				//这是select
 				$(document).ready(function(){
 				          $("#object_select").change(function (){
-				              val($("#object_select").val());
+				              $("#object_select").val();
 				          });
 						
 						  
@@ -51,7 +51,7 @@
 							"questionNumber":$("#questionNumber").val(),
 							"normal":$("#normal").val()
 						};
-						$.get("/paperInformation/insert",form,function(res){
+						$.get("paperInformation/insert",form,function(res){
 							alert(success);
 						})
 					}
@@ -65,6 +65,7 @@
 			var str = localStorage.getItem('id');
 			if(str){
 				paperId.value = str;
+				localStorage.removeItem('id');
 			}
 			window.onbeforeunload = function(){
 				localStorage.setItem('id',paperId.value);
@@ -120,7 +121,7 @@
 		<ul id="paperList">
 			<li>
 				试卷编号：
-				<textarea readonly id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;">999999</textarea>
+				<textarea disabled id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;" >aaaa </textarea>
 				<a href="makePaperInPerson.html">组卷</a>
 			</li>
 		</ul>

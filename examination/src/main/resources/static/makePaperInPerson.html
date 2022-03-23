@@ -55,6 +55,7 @@
 			var str = localStorage.getItem('id');
 			if(str){
 				paperId.value= str;
+				localStorage.removeItem('id');
 			}
 			window.onbeforeunload = function(){
 				localStorage.setItem('id',paperId.value);
@@ -91,6 +92,7 @@
 					else{
 						
 					var form = {
+						
 						"object":$("#object_select").val(),
 						"questionType":$("#questionType_select").val(),
 						"difficulty":$("#difficulty_select").val()
@@ -108,13 +110,13 @@
 				//这是select
 				$(document).ready(function(){
 				          $("#object_select").change(function (){
-				              val($("#object_select").val());
+				              $("#object_select").val();
 				          });
 						  $("#questionType_select").change(function (){
-						      val($("#questionType_select").val());
+						      $("#questionType_select").val();
 						  });
 						  $("#difficulty_select").change(function (){
-						      val($("#difficulty_select").val());
+						      $("#difficulty_select").val();
 						  });
 				
 				    });
