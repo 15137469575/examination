@@ -29,7 +29,6 @@
 	</style>
 	<script type="text/javascript">
 			$(function(){
-			
 				//这是select
 				$(document).ready(function(){
 				          $("#object_select").change(function (){
@@ -52,8 +51,7 @@
 							"normal":$("#normal").val()
 						};
 						$.get("paperInformation/insert",form,function(res){
-							$("#paperId").innerText = res;
-							//8
+							$("#paperId").value = res;
 						})
 					}
 				})
@@ -63,15 +61,18 @@
 		window.onload = function(){
 			
 			var paperId = document.getElementById('paperId');
+        
 			var str = localStorage.getItem('id');
 			if(str){
 				paperId.value = str;
+				localStorage.removeItem('id');
 			}
 			window.onbeforeunload = function(){
 				localStorage.setItem('id',paperId.value);
 			}
 		}
 	</script>
+	
 </head>
 <body>
 
@@ -121,7 +122,7 @@
 		<ul id="paperList">
 			<li>
 				试卷编号：
-				<textarea readonly id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;">999999</textarea>
+				<textarea readonly id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;"></textarea>
 				<a href="makePaperInPerson.html">组卷</a>
 			</li>
 		</ul>
