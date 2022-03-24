@@ -20,4 +20,9 @@ public class PaperInformationController {
         return paperInformationService.doInsert(paperInformation);
 
     }
+
+    @RequestMapping("/selectById")
+    public PaperInformation selectByID(int index){
+        return paperInformationService.selectById(index);
+    }
 }
