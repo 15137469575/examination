@@ -149,7 +149,7 @@
 	</div>
 	<div class="right">
 		<div class="rightTop">
-			试卷编号：<textarea readonly id="paperId" rows="1%" cols="5%" style="resize: none; outline: none;"></textarea>
+			试卷编号：<input type="text" id="paperId" value="" />
 			科目(必选):
 			<select id="object_select" class="num_select">
 				<option value='-1' style='display: none'></option>
@@ -181,8 +181,15 @@
 			<button id="makePaperButton">自动组卷</button>
 		</div>
 		<div class="questionView">
-			这里是题目显示区域;
+			
 			<button type="button" id="savePaper">保存试卷</button>
+			
+			<table border="" cellspacing="" cellpadding="">
+				<tr><th>Header</th><th>Header</th><th>Header</th><th>Header</th><th>Header</th></tr>
+				
+				<tr><td>Data</td></tr>
+			</table>
+			
 		</div>
 	</div>
 </div>
