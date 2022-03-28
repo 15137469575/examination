@@ -10,11 +10,6 @@
             (#{questionId},#{question},#{optionA},#{optionB},#{optionC},#{optionD},#{subject},#{type},#{degreeDifficulty},#{questionLabels},#{answer})
     </insert>
 
-    <delete id="delete">
-
-        
-    </delete>
-
     <select id="queryPage" resultType="org.upc.examination.entity.QuestionBank">
         select * from question_bank
         where subject=#{object}
@@ -24,4 +19,50 @@
         select * from question_bank
         where question_id=#{index}
     </select>
+
+    <select id="queryByType" resultType="org.upc.examination.entity.QuestionBank">
+        select * from question_bank
+        where type=#{type}
+    </select>
+
+    <update id="update">
+        update question_bank
+        <set>
+            <where>
+                <if test="question != null and question != ''">
+                    question=#{question}
+                </if>
+                <if test="optionA != null and optionA != ''v">
+                    optionA=#{optionA}
+                </if>
+                <if test="optionB != null and optionB != ''">
+                    optionB=#{optionB}
+                </if>
+                <if test="optionC != null and optionC != ''">
+                    optionC=#{optionC}
+                </if>
+                <if test="optionD != null and optionD != ''">
+                    optionD=#{optionD}
+                </if>
+                <if test="subject != null and subject != ''">
+                    subject=#{subject}
+                </if>
+                <if test="type != null and type != ''">
+                    type=#{type}
+                </if>
+                <if test="degreeDifficulty != null and degreeDifficulty != ''">
+                    degree_difficulty=#{degreeDifficulty}
+                </if>
+                <if test="questionLabels != null and questionLabels != ''">
+                    question_labels=#{questionLabels}
+                </if>
+                <if test="answer != null and answer != ''">
+                    answer=#{answer}
+                </if>
+            </where>
+        </set>
+        <where>
+            question_id=#{questionId}
+        </where>
+    </update>
 </mapper>

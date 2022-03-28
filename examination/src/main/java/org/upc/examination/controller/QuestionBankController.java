@@ -31,4 +31,15 @@ public class QuestionBankController {
         return questionBankService.doQuery(object,pageNum,pageSize);
     }
 
+    @GetMapping("/findByType")
+    public PageInfo<QuestionBank> findByType(String type, int pageNum, int pageSize){
+        return questionBankService.doQueryByType(type,pageNum,pageSize);
+    }
+
+    @GetMapping("/update")
+    public int update(QuestionBank questionBank){
+        return questionBankService.update(questionBank);
+    }
+
+
 }

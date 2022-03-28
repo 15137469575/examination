@@ -33,4 +33,17 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     public QuestionBank doQueryById(int index) {
         return questionBankMapper.queryById(index);
     }
+
+    @Override
+    public int update(QuestionBank questionBank) {
+        return questionBankMapper.update(questionBank);
+    }
+
+    @Override
+    public PageInfo<QuestionBank> doQueryByType(String type,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<QuestionBank> lists =  questionBankMapper.queryByType(type);
+        PageInfo<QuestionBank> page = new PageInfo<>(lists);
+        return page;
+    }
 }

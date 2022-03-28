@@ -7,8 +7,12 @@ public interface QuestionBankService {
 
     int doInsert(QuestionBank questionBank);
 
-    PageInfo<QuestionBank> doQuery(String object, int pageNum, int pageSiza);
+    PageInfo<QuestionBank> doQuery(String object, int pageNum, int pageSize);
 
     QuestionBank doQueryById(int index);
+
+    int update(QuestionBank questionBank);
+
+    PageInfo<QuestionBank> doQueryByType(String type, int pageNum, int pageSize);
 
 }
