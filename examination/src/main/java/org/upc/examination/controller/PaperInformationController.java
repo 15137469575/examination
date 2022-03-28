@@ -18,7 +18,7 @@ public class PaperInformationController {
     @RequestMapping("/insert")
     public int doInsert(PaperInformation paperInformation){
         return paperInformationService.doInsert(paperInformation);
-
+        //return 1;
     }
 
     @RequestMapping("/selectById")
