@@ -75,7 +75,7 @@
 						$.ajax({
 							url:"",
 							type:"get",
-							data:"object":$("#object_select").val(),
+							data:"object":$("#object_select").val(),"paperId":$("#paperId").value,
 							success:function(res){
 								alert("组卷成功，可点击查看试卷");
 							}
@@ -98,7 +98,7 @@
 						"difficulty":$("#difficulty_select").val()
 					};	
 						
-					$.get("",form,function(question){
+					$.get("question/findByObject",form,function(question){
 						alert("success");
 					})
 						
@@ -183,12 +183,6 @@
 		<div class="questionView">
 			
 			<button type="button" id="savePaper">保存试卷</button>
-			
-			<table border="" cellspacing="" cellpadding="">
-				<tr><th>Header</th><th>Header</th><th>Header</th><th>Header</th><th>Header</th></tr>
-				
-				<tr><td>Data</td></tr>
-			</table>
 			
 		</div>
 	</div>
