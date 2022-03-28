@@ -75,7 +75,7 @@
 						$.ajax({
 							url:"",
 							type:"get",
-							data:"object":$("#object_select").val(),"paperId":$("#paperId").value,
+							data:{"object":$("#object_select").val(),"paperId":$("#paperId").value},
 							success:function(res){
 								alert("组卷成功，可点击查看试卷");
 							}
@@ -98,7 +98,7 @@
 						"difficulty":$("#difficulty_select").val()
 					};	
 						
-					$.get("question/findByObject",form,function(question){
+					$.get("/question/findByObject",form,function(question){
 						alert("success");
 					})
 						
