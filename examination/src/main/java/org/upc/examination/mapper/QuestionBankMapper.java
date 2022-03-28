@@ -14,4 +14,14 @@ public interface QuestionBankMapper {
 
     QuestionBank queryById(int index);
 
+    int update(QuestionBank questionBank);
+
+    List<QuestionBank> queryByType(String type);
+
+    int delete(int index);
+
+    int deleteArray(int[] list);
+
+    List<QuestionBank> queryByObjectAndType(String object,String type);
+
 }
