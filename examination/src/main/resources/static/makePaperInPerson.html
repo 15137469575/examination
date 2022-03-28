@@ -2,19 +2,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title></title>
 	<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
-	<link rel="stylesheet" type="text/css" href="css/student.css" />
-	
+	<link rel="stylesheet" href="css/student.css"/>
+
 	<style type="text/css">
-	
-		
+
+
 		.num_select {
 		    position: relative;
 		    z-index: 1;
-		    width: 220px;
-		    height: 32px;
+		    width: 10vw;
+		    height: 3vh;
 		    border-radius: 3px;
 		    font-weight: bold;
 		    font-size: 14px;
@@ -25,29 +26,43 @@
 			margin-bottom: 10px;
 		}
 		#searchButton,#makePaperButton{
-			width: 150px;
-			margin-left: 50px;
-			padding: 5px;
-			
-			
+			width: 10%;
+			margin-left: 5%;
+			padding: 0.2%;
+
+
 		}
 		.questionView{
-			width: 1520px;
-			height: 800px;
+			width: 89%;
+			height:80vh;
 			border: 2px solid #000000;
 			border-radius: 10px;
 			background-color: #9a9a9c ;
-			margin-left: 80px;
-			margin-top: 20px;
+			margin-left: 5%;
+			margin-top: 1vh;
 		}
 		#savePaper{
-			width: 150px;
-			margin-left: 50px;
-			padding: 5px;
+			width: 10%;
+			margin-left: 50%;
+			padding: 0.2%;
 			float: right;
 		}
 	</style>
-		<script type="text/javascript">
+	<script type="text/javascript">
+		window.onload = function(){
+			
+			var paperId = document.getElementById('paperId');
+			var str = localStorage.getItem('id');
+			if(str){
+				paperId.value= str;
+				localStorage.removeItem('id');
+			}
+			window.onbeforeunload = function(){
+				localStorage.setItem('id',paperId.value);
+			}
+		}
+	</script>
+	<script type="text/javascript">
 			$(function(){
 				
 					// 这里是给自动组卷的响应函数
@@ -60,7 +75,7 @@
 						$.ajax({
 							url:"",
 							type:"get",
-							data:"object":$("#object_select").val(),
+							data:"object":$("#object_select").val(),"paperId":$("#paperId").value,
 							success:function(res){
 								alert("组卷成功，可点击查看试卷");
 							}
@@ -77,12 +92,13 @@
 					else{
 						
 					var form = {
+						
 						"object":$("#object_select").val(),
 						"questionType":$("#questionType_select").val(),
 						"difficulty":$("#difficulty_select").val()
 					};	
 						
-					$.get("",form,function(question){
+					$.get("question/findByObject",form,function(question){
 						alert("success");
 					})
 						
@@ -94,13 +110,13 @@
 				//这是select
 				$(document).ready(function(){
 				          $("#object_select").change(function (){
-				              val($("#object_select").val());
+				              $("#object_select").val();
 				          });
 						  $("#questionType_select").change(function (){
-						      val($("#questionType_select").val());
+						      $("#questionType_select").val();
 						  });
 						  $("#difficulty_select").change(function (){
-						      val($("#difficulty_select").val());
+						      $("#difficulty_select").val();
 						  });
 				
 				    });
@@ -120,7 +136,7 @@
 
 <div class="mbody">
 	<div class="left">
-		
+
 		<div>
 			<a class="notice" href="#">发布通知</a>
 		</div>
@@ -133,40 +149,41 @@
 	</div>
 	<div class="right">
 		<div class="rightTop">
-			
+			试卷编号：<input type="text" id="paperId" value="" />
 			科目(必选):
-		    <select id="object_select" class="num_select">
-		        <option value='-1' style='display: none'></option>
-		        <option value="语文">语文</option>
-		        <option value="数学">数学</option>
-		        <option value="政治">政治</option>
+			<select id="object_select" class="num_select">
+				<option value='-1' style='display: none'></option>
+				<option value="语文">语文</option>
+				<option value="数学">数学</option>
+				<option value="政治">政治</option>
 				<option value="历史">历史</option>
 				<option value="地理">地理</option>
 				<option value="生物">生物</option>
-		    </select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</select>
+
 			题型:
 			<select id="questionType_select" class="num_select">
-			    <option value='-1' style='display: none'></option>
-			    <option value="单选">单选</option>
+				<option value='-1' style='display: none'></option>
+				<option value="单选">单选</option>
 			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 			难度:
 			<select id="difficulty_select" class="num_select">
-			    <option value='-1' style='display: none'></option>
-			    <option value="1">1</option>
-			    <option value="2">2</option>
-			    <option value="3">3</option>
-				 <option value="4">4</option>
-				  <option value="5">5</option>
+				<option value='-1' style='display: none'></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
 			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 			<button id="searchButton">查询</button>
 			<button id="makePaperButton">自动组卷</button>
 		</div>
-		<div class="questionView"> 
-			这里是题目显示区域;
+		<div class="questionView">
+			
 			<button type="button" id="savePaper">保存试卷</button>
+			
 		</div>
 	</div>
 </div>

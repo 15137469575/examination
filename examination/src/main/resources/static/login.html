@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
 
-	<link rel="stylesheet" type="text/css" href="css/login.css">
-	<script src="js/jquery-3.6.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+		<script src="js/jquery-3.6.0.js"></script>
 
-<!-- <script type="text/javascript">
+		<!-- <script type="text/javascript">
 	$(function(){
 		$("#studentLoginButton").on("click",function(){
 			$.ajax({
@@ -21,37 +21,44 @@
 		})
 	})
 </script> -->
-</head>
-<body>
-test
-<div class="container">
-	<div class="login-form">
-		<h2>登录</h2>
-		<input id="usernameText" name="id" placeholder="用户名" />
-		<input id="passwordText" name="pwd" placeholder="密码">
-		<button id="studentLoginButton">登录</button>
-	</div>
-</div>
+	</head>
+	<body>
+		test
+		<div class="container">
+			<div class="login-form">
+				<h2>登录</h2>
+				<input id="usernameText" name="id" placeholder="用户名" />
+				<input id="passwordText" name="pwd" placeholder="密码">
+				<button id="studentLoginButton" onclick="getMsg()">登录</button>
+			</div>
+		</div>
 
-<script>
-	function getMsg() {
-		var id = document.getElementById("usernameText").value;
-		var pwd = document.getElementById("passwordText").value;
+		<script>
+			function getMsg() {
+				var id = document.getElementById("usernameText").value;
+				var pwd = document.getElementById("passwordText").value;
 
-		var form = {
-			"userId" : id,
-			"userPassword" : pwd,
-		};
+				var form = {
+					"userId": id,
+					"userPassword": pwd,
+				};
 
-		jQuery.get("/user/login",form,function (rst) {
-			if(rst){
-				console.log(99999);
-			}else{
-				alert("登陆信息有误");
+				jQuery.get("/user/login", form, function(rst) {
+					if (rst.identidy == 'student') {
+						location.href = 'student_01.html';
+
+					} else if (rst.identidy == 'teacher') {
+						location.href = 'teacher.html';
+					} else if (rst.identidy == 'admin') {
+						location.href = 'admin.html';
+					} else if (!rst) {
+						alert("您的登录信息有误，请重新登录");
+					}
+
+
+				});
 			}
-		});
-	}
-</script> 
+		</script>
 
-</body>
+	</body>
 </html>
