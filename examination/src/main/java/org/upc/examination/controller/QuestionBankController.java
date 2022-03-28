@@ -41,5 +41,19 @@ public class QuestionBankController {
         return questionBankService.update(questionBank);
     }
 
+    @GetMapping("/delete")
+    public int delete(int index){
+        return questionBankService.doDelete(index);
+    }
+
+    @GetMapping("deleteArray")
+    public int deleteArray(int[] list){
+        return questionBankService.deDeleteArray(list);
+    }
+
+    @GetMapping("/findByObjectAndType")
+    public PageInfo<QuestionBank> findByObjectAndType(String object,String type,int pageNum,int pageSize){
+        return questionBankService.doQueryByObjectAndType(object, type, pageNum, pageSize);
+    }
 
 }

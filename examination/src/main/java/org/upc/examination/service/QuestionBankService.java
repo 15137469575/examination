@@ -15,4 +15,10 @@ public interface QuestionBankService {
 
     PageInfo<QuestionBank> doQueryByType(String type, int pageNum, int pageSize);
 
+    int doDelete(int index);
+
+    int deDeleteArray(int[] list);
+
+    PageInfo<QuestionBank> doQueryByObjectAndType(String object,String type,int pageNum,int pageSize);
+
 }

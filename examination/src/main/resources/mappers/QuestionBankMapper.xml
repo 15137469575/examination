@@ -10,6 +10,21 @@
             (#{questionId},#{question},#{optionA},#{optionB},#{optionC},#{optionD},#{subject},#{type},#{degreeDifficulty},#{questionLabels},#{answer})
     </insert>
 
+    <delete id="delete">
+        delete from question_bank
+        where question_id=#{index}
+    </delete>
+
+    <delete id="deleteArray" parameterType="int">
+        delete from question_bank
+        <where>
+            question_id in
+            <foreach collection="array" separator="," close=")" open="(" item="index">
+                #{index}
+            </foreach>
+        </where>
+    </delete>
+
     <select id="queryPage" resultType="org.upc.examination.entity.QuestionBank">
         select * from question_bank
         where subject=#{object}
@@ -23,6 +38,11 @@
     <select id="queryByType" resultType="org.upc.examination.entity.QuestionBank">
         select * from question_bank
         where type=#{type}
+    </select>
+
+    <select id="queryByObjectAndType" resultType="org.upc.examination.entity.QuestionBank">
+        select * from  question_bank
+        where type=#{type} and subject=#{object}
     </select>
 
     <update id="update">

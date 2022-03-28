@@ -18,4 +18,10 @@ public interface QuestionBankMapper {
 
     List<QuestionBank> queryByType(String type);
 
+    int delete(int index);
+
+    int deleteArray(int[] list);
+
+    List<QuestionBank> queryByObjectAndType(String object,String type);
+
 }
