@@ -7,7 +7,6 @@ import org.upc.examination.entity.QuestionPaper;
 import org.upc.examination.service.QuestionPaperService;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 @RequestMapping("/questionPaper")
@@ -21,9 +20,11 @@ public class QuestionPaperController {
         return questionPaperService.doInsert(questionPaper);
     }
 
-
+/**
+ * 根据paperId来筛选出同一个试卷中的所有题目，所以可以使用list
+ * */
     @RequestMapping("/selectByPaperID")
-    public PageInfo<QuestionPaper> selectByPaperID(int pageNUm,int pageSize,int paperId){
-        return questionPaperService.selectByPaperId(pageNUm, pageSize, paperId);
+    public PageInfo<QuestionPaper> selectByPaperID(int pageNum,int pageSize,int paperId){
+        return questionPaperService.selectByPaperId(pageNum,pageSize,paperId);
     }
 }

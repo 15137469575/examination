@@ -17,8 +17,15 @@ public class PaperInformationServiceImpl implements PaperInformationService {
     private PaperInformationMapper paperInformationMapper;
     @Override
     public int doInsert(PaperInformation paperInformation) {
-        //return paperInformationMapper.insert(paperInformation);
-        return paperInformation.getPaperId();
+
+        if(paperInformation.getPaperId()==null){
+            paperInformationMapper.insert2(paperInformation);
+            return paperInformation.getPaperId();
+        }
+        else {
+            paperInformationMapper.insert(paperInformation);
+            return paperInformation.getPaperId();
+        }
     }
 
     @Override

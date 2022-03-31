@@ -4,10 +4,21 @@
 <mapper namespace="org.upc.examination.mapper.PaperInformationMapper">
 
 
+
     <insert id="insert" parameterType="org.upc.examination.entity.PaperInformation">
         insert into paper_information
         (paper_id,paper_teacher_id,question_num,subject,remark)
         valueS (#{paperId},#{paperTeacherId},#{questionNum},#{subject},#{remark})
+
+    </insert>
+
+    <insert id="insert2">
+        <selectKey resultType="java.lang.Integer" keyProperty="paperId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into paper_information
+            (paper_teacher_id,question_num,subject,remark)
+        valueS (#{paperTeacherId},#{questionNum},#{subject},#{remark})
 
     </insert>
     <select id="selectById" resultType="org.upc.examination.entity.PaperInformation">
@@ -16,8 +27,11 @@
         where paper_id = #{index};
     </select>
     <select id="selectBySubjects" resultType="org.upc.examination.entity.PaperInformation">
+
         select paper_id,paper_teacher_id,question_num,subject,remark
         from paper_information
         where subject = #{subject};
+
+
     </select>
 </mapper>

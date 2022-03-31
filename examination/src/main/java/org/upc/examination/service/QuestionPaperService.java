@@ -1,7 +1,6 @@
 package org.upc.examination.service;
 
 import com.github.pagehelper.PageInfo;
-import org.upc.examination.entity.PaperInformation;
 import org.upc.examination.entity.QuestionPaper;
 
 public interface QuestionPaperService {

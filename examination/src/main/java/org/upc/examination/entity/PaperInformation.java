@@ -9,6 +9,18 @@ public class PaperInformation {
   private Integer paperTeacherId;
   private String remark;
 
+  private Users users;
+
+
+  public Users getUsers() {
+    return users;
+  }
+
+  public void setUsers(Users users) {
+    this.users = users;
+  }
+
+
 
   public Integer getPaperId() {
     return paperId;
