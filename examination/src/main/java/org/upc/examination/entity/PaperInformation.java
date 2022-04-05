@@ -66,4 +66,17 @@ public class PaperInformation {
     this.remark = remark;
   }
 
+
+
+  @Override
+  public String toString() {
+    return "PaperInformation{" +
+            "paperId=" + paperId +
+            ", subject='" + subject + '\'' +
+            ", questionNum=" + questionNum +
+            ", paperTeacherId=" + paperTeacherId +
+            ", remark='" + remark + '\'' +
+            ", users=" + users +
+            '}';
+  }
 }

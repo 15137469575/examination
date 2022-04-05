@@ -16,4 +16,5 @@ public interface QuestionPaperMapper {
      * 根据试卷序号来选择题目
      * */
     List<QuestionPaper> selectByPaperId(int index);
+
 }

@@ -3,19 +3,38 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.upc.examination.mapper.QuestionPaperMapper">
 
-
+    <resultMap id="selectByPaper" type="org.upc.examination.entity.QuestionPaper">
+        <result property="questionPaperId" column="id"/>
+        <result property="questionPaperSort" column="sort"/>
+        <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
+            <result property="question" column="qus"/>
+            <result property="optionA" column="A"/>
+            <result property="optionB" column="B"/>
+            <result property="optionC" column="C"/>
+            <result property="optionD" column="D"/>
+        </association>
+    </resultMap>
     <insert id="insert" parameterType="org.upc.examination.entity.QuestionPaper">
         insert into question_paper
         (question_paper_id,paper_id,question_id,question_paper_sort,remark)
         values
         (#{questionPaperId},#{paperId},#{questionId},#{questionPaperSort},#{remark})
-
     </insert>
 
-    <select id="selectByPaperId" resultType="org.upc.examination.entity.QuestionPaper">
-        select question_paper_id,paper_id,question_id,question_paper_sort,remark
-        from question_paper
-        where paper_id =#{paperId}
+    <select id="selectByPaperId" resultMap="selectByPaper">
+        SELECT  question_paper.question_paper_id id,
+                question_paper.question_paper_sort sort,
+                question_bank.question qus,
+                question_bank.optionA A,
+                question_bank.optionB B,
+                question_bank.optionC C,
+                question_bank.optionD D
+        FROM question_paper ,question_bank
+        WHERE question_paper.paper_id = #{index}
+          AND question_paper.question_id = question_bank.question_id
+        ORDER BY(question_paper.question_paper_sort)
     </select>
+
+
 
 </mapper>
