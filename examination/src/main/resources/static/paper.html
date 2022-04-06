@@ -11,7 +11,7 @@
 
 			.left {
 				display: inline-block;
-				width:24.8rem;
+				width:25%;
 				height: 100rem;
 			border-right: 3px solid #000000;
 				background-color: #F5F5DC;
@@ -20,36 +20,52 @@
 			.right{
 				display: inline-block;
 				float: right;
-				width: 95rem ;
+				width: 74.7% ;
 				height:100rem;
 				/* background-color: yellow; */
 			}
 			.questionCard{
 				width: 100%;
-				height:35rem;
+				height:55vh;
 				border-bottom: 2px solid #000000;
 			}
 			span{
-				font-size: 28px;
+				font-size:1.8em;
 			}
 			#notebook{
 				width: 98%;
-				height: 19.8rem;
-				font-size: 20px;
+				height: 45vh;
+				font-size: 1.5em;
 				background-color: #8FBC8F
 			}
 			.question{
 				width: 100%;
-				height: 35rem;
+				height: 55vh;
 				background-color: #A9A9A9;
 				border-bottom: 2px solid #000000;
 			}
 			.answer{
 				width: 100%;
-				height: 100rem;
+				height: 45vh;
 				background-color: aqua;
 			}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				$(document).ready(function(){
+					$.ajax({
+						url:"",
+						type:"get",
+						data:"ready",
+						success:function(res){
+							alert(res);
+						}
+					})
+						
+					
+				})
+			})
+		</script>
 		<script type="text/javascript">
 			window.onload = function(){
 				var notebook = document.getElementById('notebook');
