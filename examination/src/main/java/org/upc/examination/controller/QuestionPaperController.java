@@ -1,12 +1,16 @@
 package org.upc.examination.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.upc.examination.entity.QuestionPaper;
 import org.upc.examination.service.QuestionPaperService;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/questionPaper")
@@ -26,5 +30,12 @@ public class QuestionPaperController {
     @RequestMapping("/selectByPaperID")
     public PageInfo<QuestionPaper> selectByPaperID(int pageNum,int pageSize,int paperId){
         return questionPaperService.selectByPaperId(pageNum,pageSize,paperId);
+    }
+    @RequestMapping("/random")
+    public int randomPaper(@RequestParam() Map<String, Object> map){
+        System.out.println(map.keySet());
+        System.out.println(map.values());;
+
+        return 1;
     }
 }

@@ -9,4 +9,6 @@ public interface QuestionPaperService {
 
 
     PageInfo<QuestionPaper> selectByPaperId(int pageNum, int pageSize, int paperId);
+
+    //int randomInsert(int paperId,String subject);
 }
