@@ -18,7 +18,7 @@
 				font-weight: bold;
 				font-size: 14px;
 				color: #9a9a9c;
-		 	border: 1px solid #cccccc;
+				border: 1px solid #cccccc;
 				box-sizing: border-box;
 				margin-top: 10px;
 				margin-bottom: 10px;
@@ -77,7 +77,7 @@
 							url: "",
 							type: "get",
 							data: {
-								"object": $("#object_select").val(),
+								"subject": $("#object_select").val(),
 								"paperId": $("#paperId").value
 							},
 							success: function(res) {
@@ -93,31 +93,69 @@
 					if ($("#object_select").val() == -1) {
 						alert("请选择考试科目");
 					} else {
-						var str="";
 						var form = {
 
 							"object": $("#object_select").val(),
-							"questionType": $("#questionType_select").val(),
-							"difficulty": $("#difficulty_select").val()
+							"type": $("#questionType_select").val(),
+							"pageNum": 1,
+							"pageSize": 10
 						};
 
-						$.get("question/findByObject", form, function(question) {
-							for (var i = 0; i < question .length; i++) {
-								str += "<div>" + question[i].questionId + "</div>";
+						$.get("/question/findByObjectAndType", form, function(question) {
+							// console.log(question.list[1]);
+							// alert(question.list[1].answer);
+							var data = question.list;
+							var str1 = "";
+
+							for (var i = 0; i < data.length; i++) {
+								str1 += "<tr cate-id='0' fid='0'>" +
+									"<td>" + data[i].question + "</td>" +
+									"<td>" + data[i].optionA + "</td>" +
+									"<td>" + data[i].optionB + "</td>" +
+									"<td>" + data[i].optionC + "</td>" +
+									"<td>" + data[i].optionD + "</td>" +
+									"<td>" + data[i].answer + "</td>" +
+									"<td>" + data[i].questionId + "</td>" +
+									"<td>" + data[i].subject + "</td>" +
+									"<td>" + data[i].type + "</td>" +
+									"<td>" + data[i].degreeDifficulty + "</td>" +
+									"<td>" + "<button id = 'add'>" + "添加" + "</button>" + "</td>";
+
+
+
 							}
-							$(".questionView").append(str);
-							
+							test.innerHTML = str1;
+							//这是添加试题；
+							var btn = document.getElementsByTagName("button");
+							// alert(btn[3].parentNode.parentNode.children[2].innerText);
+
+
+							$(document).on('click', '#add', function() {
+								var form1 = {
+									"paperId": $("#paperId").val(),
+									"questionId": $(this).parents("tr").find("td").eq(6).text()
+
+								};
+								$.get("/questionPaper/insert", form1, function() {
+									alert(999);
+								})
+							})
+
 						})
+
+
 
 					};
 				})
+
+				//这是保存试卷
 				$("#savePaper").on("click", function() {
 					alert("shijuanyibaocun");
 				})
 				//这是select
 				$(document).ready(function() {
 					$("#object_select").change(function() {
-				 	$("#object_select").val();
+						$("#object_select").val();
 					});
 					$("#questionType_select").change(function() {
 						$("#questionType_select").val();
@@ -129,6 +167,7 @@
 				});
 			})
 		</script>
+
 	</head>
 	<body>
 
@@ -190,6 +229,28 @@
 				<div class="questionView">
 
 					<button type="button" id="savePaper">保存试卷</button>
+					<!-- 试卷tabel -->
+					<table class="questionTable">
+						<thead>
+							<tr>
+
+								<th width="1000">问题</th>
+								<th width="200">选项A</th>
+								<th width="200">选项B</th>
+								<th width="200">选项C</th>
+								<th width="200">选项D</th>
+								<th width="200">答案</th>
+								<th width="200">编号</th>
+								<th width="200">科目</th>
+								<th width="200">题型</th>
+								<th width="200">难度</th>
+								<th width="200">操作</th>
+						</thead>
+						<tbody class="x-cate" id="test">
+
+						</tbody>
+					</table>
+
 
 				</div>
 			</div>
