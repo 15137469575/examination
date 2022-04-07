@@ -19,9 +19,7 @@
         (paper_id,question_id,question_paper_sort,remark)
         values
         (#{paperId},#{questionId},#{questionPaperSort},#{remark})
-        <if test="paper_id = #{paperId}">
-            <if test="q"></if>
-        </if>
+
     </insert>
 
 
@@ -38,7 +36,7 @@
           AND question_paper.question_id = question_bank.question_id
         ORDER BY(question_paper.question_paper_sort)
     </select>
-    <select id="randomSelectFromBank" resultType="org.upc.examination.entity.QuestionBank">
+    <select id="randomSelectFromBank" resultType="java.lang.Integer">
         SELECT question_id
         FROM question_bank
         WHERE subject = #{subject}

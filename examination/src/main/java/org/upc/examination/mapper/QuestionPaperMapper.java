@@ -21,7 +21,7 @@ public interface QuestionPaperMapper {
 
     List<Integer>  isSame(int paperId);
 
-    //List<Integer> randomSelectFromBank(String subject);
+    List<Integer> randomSelectFromBank(String subject);
 
 
 }

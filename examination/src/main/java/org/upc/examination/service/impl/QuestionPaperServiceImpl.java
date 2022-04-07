@@ -39,15 +39,18 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
 
         return pages;
     }
-/**
+
     @Override
     public int randomInsert(int paperId,String subject) {
-        List<Integer> questionBank = questionPaperMapper.randomSelectFromBank(subject);
+        List<Integer> ques = questionPaperMapper.randomSelectFromBank(subject);
         QuestionPaper questionPaper = new QuestionPaper();
-        questionPaper.setQuestionId();
-        int row = questionPaperMapper.insert(questionPaper);
-        return row;
+        for(int i = 0;i<ques.size();i++){
+            questionPaper.setQuestionId(ques.get(i));
+            questionPaper.setPaperId(paperId);
+            questionPaperMapper.insert(questionPaper);
+        }
+        return 1;
     }
-**/
+
 
 }

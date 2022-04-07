@@ -32,10 +32,12 @@ public class QuestionPaperController {
         return questionPaperService.selectByPaperId(pageNum,pageSize,paperId);
     }
     @RequestMapping("/random")
-    public int randomPaper(@RequestParam() Map<String, Object> map){
-        System.out.println(map.keySet());
-        System.out.println(map.values());;
-
-        return 1;
+    public int randomPaper(String subject,Integer paperId){
+        int row =  questionPaperService.randomInsert(paperId,subject);
+        if(row == 1){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 }
