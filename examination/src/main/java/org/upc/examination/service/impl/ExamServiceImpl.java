@@ -35,4 +35,10 @@ public class ExamServiceImpl implements ExamService {
         return examMapper.selectQuestion(examId);
 
     }
+
+    @Override
+    public Exam selectQuestionIn(int examId, int questionId) {
+        Exam exam = examMapper.selectQuestionIn(examId, questionId);
+        return exam;
+    }
 }

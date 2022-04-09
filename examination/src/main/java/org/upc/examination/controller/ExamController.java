@@ -37,5 +37,9 @@ public class ExamController {
         //System.out.println(list.toString());
         return list;
     }
+    @RequestMapping("/selectQuestionIn")
+    public Exam selectQuestionIn(int examId,int questionId){
+        return examService.selectQuestionIn(examId, questionId);
+    }
 
 }

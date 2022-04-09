@@ -157,8 +157,9 @@ public class Exam {
             //", examRoomBatch='" + examRoomBatch + '\'' +
             //", state='" + state + '\'' +
             //", remark='" + remark + '\'' +
-            //", questionBank=" + questionBank +
-            ", questionPaper=" + questionPaper.getQuestionPaperSort() +
+            " questionBank=" + questionBank.getQuestion() +questionBank.getOptionA()
+            //", questionPaper=" + questionPaper.getQuestionPaperSort()
+    +
             '}';
   }
 }

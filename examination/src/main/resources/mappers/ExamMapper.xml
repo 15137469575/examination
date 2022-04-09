@@ -9,6 +9,15 @@
 
         </association>
     </resultMap>
+    <resultMap id="selectNo2" type="org.upc.examination.entity.Exam">
+        <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
+            <result property="question" column="question"/>
+            <result property="optionA" column="optionA"/>
+            <result property="optionB" column="optionB"/>
+            <result property="optionC" column="optionC"/>
+            <result property="optionD" column="optionD"/>
+        </association>
+    </resultMap>
     <insert id="insert">
         INSERT INTO exam (exam_id,exam_name,paper_id,invigilator_teacher_id,exam_time,length_exam,lim_time_entry,lim_time_sub,exam_batches,exam_room_batch,state,remark)
         VALUES (#{examId},#{examName},#{paperId},#{invigilatorTeacherId},#{examTime},#{lengthExam},#{limTimeEntry},#{limTimeSub},#{examBatches},#{examRoomBatch},#{state},#{remark})
@@ -38,5 +47,19 @@
                WHERE exam_id = #{examId})
         ORDER BY question_paper_sort ASC
 
+    </select>
+    <select id="selectQuestionIn" resultMap="selectNo2">
+
+        SELECT question,optionA,optionB,optionC,optionD
+        FROM question_bank
+        WHERE question_id =
+              (SELECT question_id
+               FROM question_paper
+               WHERE question_paper_sort = #{questionId} AND paper_id =
+                                                 (
+                                                     SELECT paper_id
+                                                     FROM exam
+                                                     WHERE exam_id = #{examId}
+                                                 ))
     </select>
 </mapper>

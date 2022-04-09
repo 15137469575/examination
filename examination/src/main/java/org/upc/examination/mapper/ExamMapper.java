@@ -24,4 +24,6 @@ public interface ExamMapper {
     int countAll(int examId);
 
     List<Exam> selectQuestion(int examId);
+
+    Exam selectQuestionIn(int examId,int questionId);
 }
