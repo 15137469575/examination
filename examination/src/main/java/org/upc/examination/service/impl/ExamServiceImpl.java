@@ -31,6 +31,7 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public List<Exam> selectQuestion(int examId) {
+
         return examMapper.selectQuestion(examId);
 
     }
