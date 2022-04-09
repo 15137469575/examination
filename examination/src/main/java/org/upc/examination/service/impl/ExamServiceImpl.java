@@ -6,6 +6,7 @@ import org.upc.examination.mapper.ExamMapper;
 import org.upc.examination.service.ExamService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<Integer> selectQuestion(int examId) {
+    public List<Exam> selectQuestion(int examId) {
         return examMapper.selectQuestion(examId);
+
     }
 }
