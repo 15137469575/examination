@@ -7,6 +7,7 @@ import org.upc.examination.entity.Exam;
 import org.upc.examination.service.ExamService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,8 +27,15 @@ public class ExamController {
     }
 
     @RequestMapping("/selectQuestSort")
-    public List<Exam> selectQuestSort(int examId){
-        return examService.selectQuestion(examId);
+    public List<Integer> selectQuestSort(int examId){
+        List<Exam> row = examService.selectQuestion(examId);
+        List<Integer> list = new ArrayList<Integer>();
+
+        for(int i= 0;i<row.size();i++){
+            list.add(row.get(i).getQuestionPaper().getQuestionPaperSort()) ;
+        }
+        //System.out.println(list.toString());
+        return list;
     }
 
 }
