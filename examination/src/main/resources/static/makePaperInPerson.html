@@ -39,6 +39,9 @@
 				border: 2px solid #000000;
 				border-radius: 10px;
 				background-color: #9a9a9c;
+				/* opacity: 0.5; */
+				background: rgba(100,100,100,0.3);
+				text-align: center;
 				margin-left: 5%;
 				margin-top: 1vh;
 			}
@@ -48,6 +51,10 @@
 				margin-left: 50%;
 				padding: 0.2%;
 				float: right;
+			}
+			table{
+				background-color: #9a9a9c;
+				
 			}
 		</style>
 		<script type="text/javascript">
@@ -136,8 +143,13 @@
 									"questionId": $(this).parents("tr").find("td").eq(6).text()
 
 								};
-								$.get("/questionPaper/insert", form1, function() {
-									alert(999);
+								$.get("/questionPaper/insert", form1, function(res) {
+									if(res === 1){
+										alert('添加成功');
+									}
+									else{
+										alert("已经添加过");
+									}
 								})
 							})
 
@@ -148,10 +160,7 @@
 					};
 				})
 
-				//这是保存试卷
-				$("#savePaper").on("click", function() {
-					alert("shijuanyibaocun");
-				})
+				
 				//这是select
 				$(document).ready(function() {
 					$("#object_select").change(function() {
@@ -192,6 +201,9 @@
 				<div>
 					<a class="viewResults" href="#">手动组卷</a>
 				</div>
+				<div>
+					<a class="checkPaper" href="#">查看试卷</a>
+				</div>
 			</div>
 			<div class="right">
 				<div class="rightTop">
@@ -228,23 +240,23 @@
 				</div>
 				<div class="questionView">
 
-					<button type="button" id="savePaper">保存试卷</button>
+					
 					<!-- 试卷tabel -->
 					<table class="questionTable">
 						<thead>
 							<tr>
 
-								<th width="1000">问题</th>
-								<th width="200">选项A</th>
-								<th width="200">选项B</th>
-								<th width="200">选项C</th>
-								<th width="200">选项D</th>
-								<th width="200">答案</th>
-								<th width="200">编号</th>
-								<th width="200">科目</th>
-								<th width="200">题型</th>
-								<th width="200">难度</th>
-								<th width="200">操作</th>
+								<th width="32%">问题</th>
+								<th width="10%">选项A</th>
+								<th width="10%">选项B</th>
+								<th width="10%">选项C</th>
+								<th width="10%">选项D</th>
+								<th width="5%">答案</th>
+								<th width="5%">编号</th>
+								<th width="5%">科目</th>
+								<th width="5%">题型</th>
+								<th width="5%">难度</th>
+								<th width="5%">&nbsp;操作</th>
 						</thead>
 						<tbody class="x-cate" id="test">
 
