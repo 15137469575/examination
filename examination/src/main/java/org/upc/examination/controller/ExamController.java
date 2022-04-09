@@ -25,8 +25,8 @@ public class ExamController {
         return examService.countAll(examId);
     }
 
-    @RequestMapping("/selectQuestion")
-     public List<Integer> selectQuestion(int examId){
+    @RequestMapping("/selectQuestSort")
+    public List<Integer> selectQuestSort(int examId){
         return examService.selectQuestion(examId);
     }
 
