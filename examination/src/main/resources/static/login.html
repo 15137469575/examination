@@ -44,13 +44,8 @@
 				};
 
 				jQuery.get("/user/login", form, function(rst) {
-					if (rst.identidy == 'student') {
-						location.href = 'student_01.html';
-
-					} else if (rst.identidy == 'teacher') {
-						location.href = 'teacher.html';
-					} else if (rst.identidy == 'admin') {
-						location.href = 'admin.html';
+					if(res){
+						window.location.href = "face.html";
 					} else if (!rst) {
 						alert("您的登录信息有误，请重新登录");
 					}

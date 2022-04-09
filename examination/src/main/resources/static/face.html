@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>navigator.MediaDevices.getUserMedia()</title>
+	<link rel="stylesheet" type="text/css" href="css/resetting.css"/>
+	<script type="text/javascript" src="js/html2Canvas.js"></script>
+	 <script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+    <meta charset="utf-8"/>
+    <style>
+      video {
+        width: 1280px;
+        height: 720px;
+        margin: 0 auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+	  <h1 id="show">请保持人脸在屏幕正中，倒计时：<span id="time"></span></h1>
+      <video id="video" class="video"></video>   
+	 
+	
+    <script>
+		alert("点击确定开始人脸验证");
+        let constraints = {
+          video: { width: 1280, height: 720 },
+          audio: false
+        };
+        let video = document.getElementById("video");
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function(MediaStream) {
+			video.srcObject = MediaStream;
+			video.play();
+			console.dir(video)
+        });
+		var timer;
+		var time = document.getElementById('time');
+		var num = 0;
+		// var show = document.getElementById("show");
+		var timer =  setInterval(function(){
+								
+								time.innerHTML = num++;
+								
+								if(num == 7){
+									// show.remove();
+									        // event.preventDefault();  
+									        html2canvas(document.body).then(function(canvas) {
+									            var dataUrl = canvas.toDataURL();
+									            var newImg = document.createElement("img");
+									            newImg.src =  dataUrl;
+									            // document.body.appendChild(newImg);
+												$.get("",newImg,function(res){
+													if (rst.identidy == 'student') {
+														location.href = 'student_01.html';
+													
+													} else if (rst.identidy == 'teacher') {
+														location.href = 'teacher.html';
+													} else if (rst.identidy == 'admin') {
+														location.href = 'admin.html';
+													}else if(!res){
+														alert("您的人脸比对不成功，请重新登录");
+														window.location.href = "login.html";
+														
+													}
+												})
+												
+									        })
+											
+												
+									clearInterval(timer);
+									
+									//clearInterval(timer)可以接受任意值，如果参数是一个有效的标识，则停止
+									//如果是无效的，则会什么也不做；
+									
+									
+								}
+								
+		},1000)
+	   </script>  
+  </body>
+</html>

@@ -11,4 +11,13 @@ window.onload = function() {
 	window.onbeforeunload = function() {
 		localStorage.setItem('id', paperId.value);
 	}
+	var toCreate = document.getElementById("toCreate");
+	toCreate.onclick = function(){
+		if(!paperId.value){
+			alert("请先创建试卷");
+		}
+		else{
+			window.location.href = "makePaperInPerson.html";
+		}
+	}
 }
