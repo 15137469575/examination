@@ -16,6 +16,24 @@ public class Exam {
   private String state;
   private String remark;
 
+  private QuestionBank questionBank;
+  private QuestionPaper questionPaper;
+
+  public void setQuestionPaper(QuestionPaper questionPaper) {
+    this.questionPaper = questionPaper;
+  }
+
+  public QuestionPaper getQuestionPaper() {
+    return questionPaper;
+  }
+
+  public QuestionBank getQuestionBank() {
+    return questionBank;
+  }
+
+  public void setQuestionBank(QuestionBank questionBank) {
+    this.questionBank = questionBank;
+  }
 
   public Integer getExamId() {
     return examId;
@@ -124,4 +142,23 @@ public class Exam {
     this.remark = remark;
   }
 
+  @Override
+  public String toString() {
+    return "Exam{" +
+            //"examId=" + examId +
+           // ", examName='" + examName + '\'' +
+            //", paperId=" + paperId +
+            //", invigilatorTeacherId=" + invigilatorTeacherId +
+            //", examTime='" + examTime + '\'' +
+            //", lengthExam=" + lengthExam +
+            //", limTimeEntry='" + limTimeEntry + '\'' +
+            //", limTimeSub='" + limTimeSub + '\'' +
+            //", examBatches=" + examBatches +
+            //", examRoomBatch='" + examRoomBatch + '\'' +
+            //", state='" + state + '\'' +
+            //", remark='" + remark + '\'' +
+            //", questionBank=" + questionBank +
+            ", questionPaper=" + questionPaper.getQuestionPaperSort() +
+            '}';
+  }
 }

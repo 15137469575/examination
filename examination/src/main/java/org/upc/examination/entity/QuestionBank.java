@@ -114,4 +114,10 @@ public class QuestionBank {
     this.answer = answer;
   }
 
+  @Override
+  public String toString() {
+    return "QuestionBank{" +
+            "questionId=" + questionId +
+            '}';
+  }
 }
