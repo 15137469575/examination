@@ -16,6 +16,7 @@
             <result property="optionB" column="optionB"/>
             <result property="optionC" column="optionC"/>
             <result property="optionD" column="optionD"/>
+            <result property="type" column="type"/>
         </association>
     </resultMap>
     <insert id="insert">
@@ -50,7 +51,7 @@
     </select>
     <select id="selectQuestionIn" resultMap="selectNo2">
 
-        SELECT question,optionA,optionB,optionC,optionD
+        SELECT question,optionA,optionB,optionC,optionD,type
         FROM question_bank
         WHERE question_id =
               (SELECT question_id
