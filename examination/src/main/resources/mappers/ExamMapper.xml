@@ -45,7 +45,7 @@
               (SELECT paper_id
                FROM exam
                WHERE exam_id = #{examId})
-        ORDER BY question_paper_sort ASC
+        <!--paper_sort ASC-->
 
     </select>
     <select id="selectQuestionIn" resultMap="selectNo2">
