@@ -15,7 +15,7 @@ public class ExamStudentController {
     /**
      * 接收前台传来的excel表格解析后的列表，并且返回插入几条数据。
      * **/
-    @RequestMapping("insert")
+    @RequestMapping("/insert")
     int insert(int examId, List<Integer> studentIds) {
         int row = examStudentService.insert(examId, studentIds);
         return row;

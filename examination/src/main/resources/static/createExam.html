@@ -26,8 +26,8 @@
 		</script>
 		<!-- 这是添加表格 -->
 		<script type="text/javascript">
-			window.onload = function() {
-		
+			
+		$(function(){
 				// js读取解析Excel
 				// 定义一个carData,用来保存读取到的数据
 				var carData;
@@ -66,7 +66,11 @@
 		
 							// carData就是我们需要的JSON数据
 							carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-				   console.log(carData);
+							var Cardata = new Array(carData.length);
+							for(var i= 0 ; i< carData.length; i++){
+								Cardata[i] = carData[i].StudentId;
+							}
+				   console.log(Cardata);
 						};
 						if (rABS) {
 							reader.readAsArrayBuffer(f);
@@ -76,24 +80,24 @@
 					})
 		
 				});
-		
-			}
-		</script>
-		
-		<!-- 这是单机响应 -->
-		<script type="text/javascript">
-			$(function() {
+
 				var createExam = document.getElementById('createExam');
 		
 				createExam.onclick = function() {
 					var form = {
 						"examName": $("#object_select").val(),
-						"paperId": $("#paperId").val(),
-						"invigilatorTeacherId": $("#teacherId").val()
+						"paperId": $("#paperId").value,
+						"invigilatorTeacherId": $("#teacherId").value,
+						"remark":$("#normal").value
 					};
 					$.get("/exam/insert", form, function(res) {
 						var examId = document.getElementById('examId');
 						examId.value = res;
+						// $("#add").on("click",function(){
+						// 	var form1 = {
+						// 		"studentId": carData[].student
+						// 	}
+						// })
 		
 					})
 				}
@@ -115,15 +119,15 @@
 
 		<div class="mbody">
 			<div class="left">
-
+				
 				<div>
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
 				<div>
-					<a class="checkPaper" href="createPaper.html">查看试卷</a>
+					<a class="checkPaper" href="#">查看试卷</a>
 				</div>
 				<div>
-					<a class="jionExame" href="#">创建考试</a>
+					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
 			</div>
 			<div class="right">
@@ -143,17 +147,19 @@
 				<input type="text" id="normal" />
 				试卷编号：
 				<input type="text" readonly="readonly" id="paperId" value="" />
+				
 				<button type="button" id="createExam">创建考试</button>
 		
 				<ul>
-					<li>
+					<li>&nbsp;</li>
+					
 						考试编号：
 						<input type="text" readonly="readonly" id="examId" value="" />
 						导入考生名单：
 						<input type="file" id="file" />
-
+						<button type="button" id="addStudent">导入</button>
 						<div id="car-list"></div>
-
+						<li>&nbsp;</li>
 						<button type="button" id="addTime">申请考试时间</button>
 				</ul>
 			</div>
