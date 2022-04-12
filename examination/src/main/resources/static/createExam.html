@@ -30,57 +30,7 @@
 		$(function(){
 				// js读取解析Excel
 				// 定义一个carData,用来保存读取到的数据
-				var carData;
-				$(document).ready(function() {
-		
-					var wb; //读取完成的数据
-					var rABS = false; //是否将文件读取为二进制字符串
-		
-					function fixdata(data) { //文件流转BinaryString
-						var o = "",
-							l = 0,
-							w = 10240;
-						for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data
-							.slice(l * w, l * w + w)));
-						o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-						return o;
-					}
-		
-					$("#file").change(function() {
-				 	if (!this.files) {
-							return;
-						}
-						var f = this.files[0];
-						var reader = new FileReader();
-						reader.onload = function(e) {
-							var data = e.target.result;
-							if (rABS) {
-								wb = XLSX.read(btoa(fixdata(data)), {
-									type: 'base64'
-								});
-							} else {
-								wb = XLSX.read(data, {
-									type: 'binary'
-								});
-							}
-		
-							// carData就是我们需要的JSON数据
-							carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-							var Cardata = new Array(carData.length);
-							for(var i= 0 ; i< carData.length; i++){
-								Cardata[i] = carData[i].StudentId;
-							}
-				   console.log(Cardata);
-						};
-						if (rABS) {
-							reader.readAsArrayBuffer(f);
-						} else {
-							reader.readAsBinaryString(f);
-						}
-					})
-		
-				});
-
+				
 				var createExam = document.getElementById('createExam');
 		
 				createExam.onclick = function() {
@@ -93,12 +43,73 @@
 					$.get("/exam/insert", form, function(res) {
 						var examId = document.getElementById('examId');
 						examId.value = res;
-						// $("#add").on("click",function(){
-						// 	var form1 = {
-						// 		"studentId": carData[].student
-						// 	}
-						// })
-		
+						var carData;
+						var  Cardata;
+						$(document).ready(function() {
+								
+							var wb; //读取完成的数据
+							var rABS = false; //是否将文件读取为二进制字符串
+								
+							function fixdata(data) { //文件流转BinaryString
+								var o = "",
+									l = 0,
+									w = 10240;
+								for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data
+									.slice(l * w, l * w + w)));
+								o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+								return o;
+							}
+								
+							$("#file").change(function() {
+						 	if (!this.files) {
+									return;
+								}
+								var f = this.files[0];
+								var reader = new FileReader();
+								reader.onload = function(e) {
+									var data = e.target.result;
+									if (rABS) {
+										wb = XLSX.read(btoa(fixdata(data)), {
+											type: 'base64'
+										});
+									} else {
+										wb = XLSX.read(data, {
+											type: 'binary'
+										});
+									}
+								
+									// carData就是我们需要的JSON数据
+									carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+									Cardata = new Array(carData.length);
+									for(var i= 0 ; i< carData.length; i++){
+										Cardata[i] = parseInt(carData[i].StudentId);
+									}
+									console.log(typeof(Cardata[0]));	
+						  
+						   		
+								};
+								if (rABS) {
+									reader.readAsArrayBuffer(f);
+								} else {
+									reader.readAsBinaryString(f);
+								}
+							})
+								
+						});
+						$("#addStudent").on("click",function(){
+							var arr  = new Array();
+							arr[0] = 1001;
+							arr[1] = 1002;
+							var form1 = {
+								"examId" :103,
+								"studentId": [1001,1002]
+							};
+						$.get("/examStudentConller/insert",form1,function(resg){
+							alert(resg);
+						})
+						
+						})
+						
 					})
 				}
 			})
