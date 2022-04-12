@@ -47,5 +47,15 @@ public class Message {
     private String time;
     private String remark;
 
+    public Integer getExamId() {
+        return examId;
+    }
+
+    public void setExamId(Integer examId) {
+        this.examId = examId;
+    }
+
+    private Integer examId;
+
 
 }

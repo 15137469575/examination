@@ -4,8 +4,8 @@
 <mapper namespace="org.upc.examination.mapper.MessageMapper">
 
     <insert id="insert">
-        INSERT INTO msg
-            (msg,exam_id,teacher_id,time,remark)
+        INSERT INTO message
+            (msgIn,exam_id,teacher_id,time,remark)
         VALUES
             (#{msg},#{examId},#{teacherId},#{time},#{remark})
     </insert>
