@@ -15,6 +15,7 @@ public class ExamServiceImpl implements ExamService {
     private ExamMapper examMapper;
     @Override
     public int insert(Exam exam) {
+
         if(exam.getExamId()==null){
             int row = examMapper.insert2(exam);
             return row;

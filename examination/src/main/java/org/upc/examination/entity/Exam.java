@@ -1,6 +1,8 @@
 package org.upc.examination.entity;
 
 
+import java.util.List;
+
 public class Exam {
 
   private Integer examId;
@@ -16,8 +18,19 @@ public class Exam {
   private String state;
   private String remark;
 
+
+  public List<ExamStudent> getExamStudent() {
+    return examStudent;
+  }
+
+  public void setExamStudent(List<ExamStudent> examStudent) {
+    this.examStudent = examStudent;
+  }
+
+  private List<ExamStudent> examStudent;
   private QuestionBank questionBank;
   private QuestionPaper questionPaper;
+
 
   public void setQuestionPaper(QuestionPaper questionPaper) {
     this.questionPaper = questionPaper;
