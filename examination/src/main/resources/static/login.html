@@ -21,6 +21,7 @@
 		})
 	})
 </script> -->
+
 	</head>
 	<body>
 		test
@@ -32,12 +33,31 @@
 				<button id="studentLoginButton" onclick="getMsg()">登录</button>
 			</div>
 		</div>
-
+		
+			<script type="text/javascript">
+				window.onload = function() {
+			
+					var usernameText = document.getElementById('usernameText');
+					var str = localStorage.getItem('userId');
+					if (str) {
+						usernameText.value = str;
+						//localStorage.removeItem('userId');
+					}
+					window.onbeforeunload = function() {
+						localStorage.setItem('userId', paperId.value);
+					}
+				}
+			</script>
+		
 		<script>
 			function getMsg() {
 				var id = document.getElementById("usernameText").value;
 				var pwd = document.getElementById("passwordText").value;
-
+				
+				
+				localStorage.setItem('userId', id);
+			
+				
 				var form = {
 					"userId": id,
 					"userPassword": pwd,

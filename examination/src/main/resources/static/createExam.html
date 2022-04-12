@@ -38,7 +38,8 @@
 						"examName": $("#object_select").val(),
 						"paperId": $("#paperId").value,
 						"invigilatorTeacherId": $("#teacherId").value,
-						"remark":$("#normal").value
+						"remark":$("#normal").value,
+						"examTime":$("#examTime").Value
 					};
 					$.get("/exam/insert", form, function(res) {
 						var examId = document.getElementById('examId');
@@ -85,7 +86,36 @@
 										Cardata[i] = parseInt(carData[i].StudentId);
 									}
 									console.log(typeof(Cardata[0]));	
-						  
+									$("#addStudent").on("click",function(){
+										
+										var form1 = {
+											"examId" : $("#examId").val(),
+											"studentId": Cardata
+										};
+									$.get("/examStudentConller/insert",form1,function(resg){
+										alert("考生信息导入成功");
+										var notice = document.getElementById('notice');
+										notice.value = object_select.value + "将于" + examTime.value + "开考，请各位同学做好准备！";
+											
+										$("#issueNotice").on("click",function(){
+											
+											var form2 = {
+												"examId":$("#examId").val(),
+												"msg":notice.value
+											};
+											$.get("/msg/insert",form2,function(resj){
+												alert("发布通知成功");
+												
+											})
+											
+										})
+											
+										})
+										
+									})
+									
+									
+									
 						   		
 								};
 								if (rABS) {
@@ -96,19 +126,6 @@
 							})
 								
 						});
-						$("#addStudent").on("click",function(){
-							var arr  = new Array();
-							arr[0] = 1001;
-							arr[1] = 1002;
-							var form1 = {
-								"examId" :103,
-								"studentId": [1001,1002]
-							};
-						$.get("/examStudentConller/insert",form1,function(resg){
-							alert(resg);
-						})
-						
-						})
 						
 					})
 				}
@@ -158,6 +175,8 @@
 				<input type="text" id="normal" />
 				试卷编号：
 				<input type="text" readonly="readonly" id="paperId" value="" />
+				考试时间：
+				<input type="text"  id="examTime" placeholder="格式:yy/mm/dd/8:00PM" value="" />
 				
 				<button type="button" id="createExam">创建考试</button>
 		
@@ -171,7 +190,10 @@
 						<button type="button" id="addStudent">导入</button>
 						<div id="car-list"></div>
 						<li>&nbsp;</li>
-						<button type="button" id="addTime">申请考试时间</button>
+						<input type="text" id="notice" style="width: 40%;" value="" />
+						<button type="button" id="issueNotice">发布考试通知</button>
+						<button type="button" id="issueExam">发布考试</button>
+						
 				</ul>
 			</div>
 		</div>
