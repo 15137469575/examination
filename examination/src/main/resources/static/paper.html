@@ -6,76 +6,162 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
-			body{
+			body {
 				overflow: hidden;
 			}
 
 			.left {
 				display: inline-block;
-				width:25%;
+				width: 25%;
 				height: 100rem;
-			border-right: 3px solid #000000;
+				border-right: 3px solid #000000;
 				background-color: #F5F5DC;
 				font-family: 'KaiTi';
 			}
-			.right{
+
+			.right {
 				display: inline-block;
 				float: right;
-				width: 74.7% ;
-				height:100rem;
+				width: 74.7%;
+				height: 100rem;
 				/* background-color: yellow; */
 			}
-			.questionCard{
+
+			.questionCard {
 				width: 100%;
-				height:55vh;
+				height: 55vh;
+				overflow-y: scroll;
 				border-bottom: 2px solid #000000;
 			}
-			span{
-				font-size:1.8em;
+
+			span {
+				font-size: 1.8em;
 			}
-			#notebook{
+
+			#notebook {
 				width: 98%;
 				height: 45vh;
 				font-size: 1.5em;
 				background-color: #8FBC8F
 			}
-			.question{
+
+			.question {
 				width: 100%;
 				height: 55vh;
+				font-size: 2em;
 				background-color: #A9A9A9;
 				border-bottom: 2px solid #000000;
 			}
-			.answer{
+
+			.answer {
 				width: 100%;
 				height: 45vh;
+				font-size: 1.5em;
 				background-color: aqua;
 			}
+
+			#questionCard {
+				color: #F5F5DC;
+			}
+			.qi{
+				width: 70%;
+				line-height: 100%;
+				text-align: center;
+			}
+			#qi{
+				width: 98%;
+			}
 		</style>
+
 		<script type="text/javascript">
-			$(function(){
-				$(document).ready(function(){
-					$.ajax({
-						url:"/exam/countAll",
-						type:"get",
-						data:"ready",
-						success:function(res){
-							alert(res);
+			$(function() {
+				var questioncard = document.getElementById('questionCard');
+				$(document).ready(function() {
+
+					var form = {
+						"examId": 103
+					};
+					$.get("/exam/selectQuestSort", form, function(res) {
+						var str1 = "";
+						for (var i = 0; i < res.length; i++) {
+							str1 += "<tr cate-id='0' fid='0'>" +
+								"<td>" + res[i] + "</td>" +
+								"<td class = 'qi'>" + "<button id = 'qi'>" + i + "</button>" + "</td>"+
+								"<td>" + "<button id = 'red'>" + "标记该题" + "</button>" + "</td>" + 
+								"<td>" + "<button id = 'black'>" + "取消标记" + "</button>" + "</td>";
+
+
+
 						}
+
+						questioncard.innerHTML = str1;
+						$(document).on("click","#red",function(){
+							
+								$(this).parents("tr").find("td").eq(1).css("background-color","red");
+							
+						})
+						$(document).on("click","#black",function(){
+							
+								$(this).parents("tr").find("td").eq(1).css("background-color","#F5F5DC");
+							
+						})
+						$(document).on("click", "#qi", function() {
+						$(this).css("background-color","yellow");
+							var form1 = {
+								"examId": 103,
+								"questionId": $(this).parents("tr").find("td").eq(0).text()
+							};
+							$.get("/exam//selectQuestionIn", form1, function(resg) {
+								var question = document.getElementById('question');
+								question.innerHTML = resg.questionBank.question;
+								var answer = document.getElementById('answer');
+								if (resg.questionBank.type == "单选") {
+									
+									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionA + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionB + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionC + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionD + "</td>";
+								}
+								else if (resg.questionBank.type == "多选") {
+									
+									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionA + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionB + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionC + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.questionBank.optionD + "</td>";
+								}
+							})
+						})
+
 					})
-						
-					
+
 				})
 			})
 		</script>
 		<script type="text/javascript">
-			window.onload = function(){
+			window.onload = function() {
 				var notebook = document.getElementById('notebook');
 				var str = localStorage.getItem('inputText');
-				if(str){
+				if (str) {
 					notebook.value = str;
 				}
-				window.onbeforeunload = function(){
-					localStorage.setItem('inputText',notebook.value);
+				window.onbeforeunload = function() {
+					localStorage.setItem('inputText', notebook.value);
 				}
 			}
 		</script>
@@ -83,25 +169,38 @@
 	<body>
 		<div class="left">
 			<div class="questionCard">
-				
+				<table class="questionCardTable">
+					<thead>
+
+					</thead>
+					<tbody class="x-cate" id="questionCard">
+
+					</tbody>
+				</table>
 			</div>
 			<div>
 				&nbsp;
 			</div>
 			<span>你可以将重要内容暂时记录于下</span>
 			<span>&nbsp;</span>
-			
+
 			<textarea id="notebook" rows="" cols="">记事本</textarea>
-			
-			
+
+
 		</div>
 		<div class="right">
-          <div class="question">
-          	<a href="test.html">下一页</a>
-          </div>
-		  <div class="answer">
-		  	
-		  </div>
+			<div class="question" id="question">
+			</div>
+			<div class="answer">
+				<table class="questionCardTable">
+					<thead>
+
+					</thead>
+					<tbody class="x-cate" id="answer">
+					
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>

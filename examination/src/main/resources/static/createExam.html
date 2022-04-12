@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
+		<link rel="stylesheet" type="text/css" href="css/student.css" />
+		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- 这是缓存 -->
+		<script type="text/javascript">
+			window.onload = function() {
+		
+				var paperId = document.getElementById('paperId');
+				var str = localStorage.getItem('id');
+				if (str) {
+					paperId.value = str;
+					localStorage.removeItem('id');
+				}
+				window.onbeforeunload = function() {
+					localStorage.setItem('id', paperId.value);
+				}
+			}
+		</script>
+		<!-- 这是添加表格 -->
+		<script type="text/javascript">
+			window.onload = function() {
+		
+				// js读取解析Excel
+				// 定义一个carData,用来保存读取到的数据
+				var carData;
+				$(document).ready(function() {
+		
+					var wb; //读取完成的数据
+					var rABS = false; //是否将文件读取为二进制字符串
+		
+					function fixdata(data) { //文件流转BinaryString
+						var o = "",
+							l = 0,
+							w = 10240;
+						for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data
+							.slice(l * w, l * w + w)));
+						o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+						return o;
+					}
+		
+					$("#file").change(function() {
+				 	if (!this.files) {
+							return;
+						}
+						var f = this.files[0];
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							var data = e.target.result;
+							if (rABS) {
+								wb = XLSX.read(btoa(fixdata(data)), {
+									type: 'base64'
+								});
+							} else {
+								wb = XLSX.read(data, {
+									type: 'binary'
+								});
+							}
+		
+							// carData就是我们需要的JSON数据
+							carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+				   console.log(carData);
+						};
+						if (rABS) {
+							reader.readAsArrayBuffer(f);
+						} else {
+							reader.readAsBinaryString(f);
+						}
+					})
+		
+				});
+		
+			}
+		</script>
+		
+		<!-- 这是单机响应 -->
+		<script type="text/javascript">
+			$(function() {
+				var createExam = document.getElementById('createExam');
+		
+				createExam.onclick = function() {
+					var form = {
+						"examName": $("#object_select").val(),
+						"paperId": $("#paperId").val(),
+						"invigilatorTeacherId": $("#teacherId").val()
+					};
+					$.get("/exam/insert", form, function(res) {
+						var examId = document.getElementById('examId');
+						examId.value = res;
+		
+					})
+				}
+			})
+		</script>
+	</head>
+	<body>
+
+		<header class="mheader">
+			<div class="welcom">
+				欢迎来到线上考试平台
+			</div>
+			<div class="back">
+				<a href="login.html">返回</a>
+			</div>
+		</header>
+
+		
+
+		<div class="mbody">
+			<div class="left">
+
+				<div>
+					<a class="viewResults" href="createPaper.html">手动组卷</a>
+				</div>
+				<div>
+					<a class="checkPaper" href="createPaper.html">查看试卷</a>
+				</div>
+				<div>
+					<a class="jionExame" href="#">创建考试</a>
+				</div>
+			</div>
+			<div class="right">
+				科目(必选):
+				<select id="object_select" class="num_select">
+					<option value='-1' style='display: none'></option>
+					<option value="语文">语文</option>
+					<option value="数学">数学</option>
+					<option value="政治">政治</option>
+					<option value="历史">历史</option>
+					<option value="地理">地理</option>
+					<option value="生物">生物</option>
+				</select>
+				教职工号：
+				<input type="text" id="teacherId" />
+				备注：
+				<input type="text" id="normal" />
+				试卷编号：
+				<input type="text" readonly="readonly" id="paperId" value="" />
+				<button type="button" id="createExam">创建考试</button>
+		
+				<ul>
+					<li>
+						考试编号：
+						<input type="text" readonly="readonly" id="examId" value="" />
+						导入考生名单：
+						<input type="file" id="file" />
+
+						<div id="car-list"></div>
+
+						<button type="button" id="addTime">申请考试时间</button>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+</html>
