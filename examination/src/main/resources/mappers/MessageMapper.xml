@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.upc.examination.mapper.MessageMapper">
+
+    <insert id="insert">
+        INSERT INTO msg
+            (msg,exam_id,teacher_id,time,remark)
+        VALUES
+            (#{msg},#{examId},#{teacherId},#{time},#{remark})
+    </insert>
+
+    <select id="selectByStudentId"  resultType="string">
+        SELECT msgIn
+        FROM message
+        WHERE exam_id IN
+              (
+                  SELECT exam_id
+                  FROM exam_student
+                  WHERE student_id = #{studentId}
+              )
+    </select>
+</mapper>
