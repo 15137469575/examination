@@ -18,10 +18,10 @@ public class ExamServiceImpl implements ExamService {
 
         if(exam.getExamId()==null){
             int row = examMapper.insert2(exam);
-            return row;
+            return exam.getExamId();
         }else {
             int row = examMapper.insert(exam);
-            return row;
+            return exam.getExamId();
         }
     }
 

@@ -25,6 +25,9 @@
 
     </insert>
     <insert id="insert2">
+        <selectKey resultType="java.lang.Integer" keyProperty="examId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         INSERT INTO exam
             (exam_name,paper_id,invigilator_teacher_id,exam_time,length_exam,lim_time_entry,lim_time_sub,exam_batches,exam_room_batch,state,remark)
         VALUES
