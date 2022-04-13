@@ -22,7 +22,9 @@ public class FaceController {
 
     @PostMapping("/compare")
     public String compare(MultipartFile img,int index){
-        return userFaceInfoService.compareFaceFeature(img, index) > 0.8 ? "成功":"失败";
+        Double a = userFaceInfoService.compareFaceFeature(img, index);
+        System.out.println(a);
+        return a > 0.8 ? "成功":"失败";
     }
 
 }

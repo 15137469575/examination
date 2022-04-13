@@ -95,7 +95,7 @@
 									$.get("/examStudentConller/insert",form1,function(resg){
 										alert("考生信息导入成功");
 										var notice = document.getElementById('notice');
-										notice.value = object_select.value + "将于" + examTime.value + "开考，请各位同学做好准备！";
+										notice.value =object_select.value + "将于" + examTime.value + "开考，请各位同学做好准备！";
 											
 										$("#issueNotice").on("click",function(){
 											
@@ -105,6 +105,11 @@
 											};
 											$.get("/msg/insert",form2,function(resj){
 												alert("发布通知成功");
+												$("#issueExam").on("click",function(){
+													var form3 = {
+														
+													}
+												})
 												
 											})
 											

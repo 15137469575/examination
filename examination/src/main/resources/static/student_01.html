@@ -7,16 +7,18 @@
 	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 	<link rel="stylesheet" type="text/css" href="css/student.css" />
   
-	
+	<style type="text/css">
+		
+		table{
+			width: 80%;
+			background-color: #3D5245;
+			margin-left: 10%;
+		}
+		
+	</style>
 	<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-	<style type="text/css">
-	     .right{
-			 text-align: center;
-			 font-size: 2em;
-		 }
-	</style>
-
+	
 	
 </head>
 <body>
@@ -45,6 +47,7 @@
 	</div>
 	<div class="right">
 		<!-- <h1>您有<span id="noticeNum">&nbsp;</span>条通知待查看</h1> -->
+		
 		<table class="questionTable">
 			<thead>
 			</thead>
@@ -66,11 +69,7 @@
 					
 					for (var i = 0; i < res.length; i++) {
 						str1 += "<tr cate-id='0' fid='0'>" +
-							"<td>" + res[i] + "</td>" +
-							"<td>" + "<button id = 'delete'>" + "删除" + "</button>" + "</td>";
-					
-					
-					
+							"<td>" + res[i] + "</td>";
 					}
 					test.innerHTML = str1;
 					

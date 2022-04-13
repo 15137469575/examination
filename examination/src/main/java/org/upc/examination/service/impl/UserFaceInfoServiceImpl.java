@@ -95,6 +95,8 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
         FaceSimilar faceSimilar = new FaceSimilar();
         errorCode = faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
 
+        System.out.println(faceSimilar.getScore());
+
         return faceSimilar.getScore();
     }
 }
