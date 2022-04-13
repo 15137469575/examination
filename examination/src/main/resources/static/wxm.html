@@ -18,11 +18,11 @@
 function upload() {
     let formData = new FormData();
     formData.append('img',$("#img")[0].files[0]);
-    formData.append('index',$("#index").val());
+    formData.append('id',$("#index").val());
 
     $.ajax({
         type:"post",
-        url:"/face/compare",
+        url:"/face/faceRegister",
         data:formData,
         cache:false,
         async:true,
