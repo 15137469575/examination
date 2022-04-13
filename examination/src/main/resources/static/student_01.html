@@ -6,8 +6,18 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 	<link rel="stylesheet" type="text/css" href="css/student.css" />
-	<link rel="stylesheet" type="text/css" href="css/student_01.css" />
-	<script src="js/student_01.js" type="text/javascript" charset="utf-8"></script>
+  
+	
+	<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+	     .right{
+			 text-align: center;
+			 font-size: 2em;
+		 }
+	</style>
+
+	
 </head>
 <body>
 
@@ -35,14 +45,40 @@
 	</div>
 	<div class="right">
 		<!-- <h1>您有<span id="noticeNum">&nbsp;</span>条通知待查看</h1> -->
-		<ul id="ulId" class="noticeList">
-			<li>物理考试将于2022/02/01下午15：00考试<button id="n1">删除</button></li>
-			<li>英语考试将于2022/02/01下午15：00考试<button id="n2">删除</button></li>
-			<li>化学考试将于2022/02/01下午15：00考试<button id="n3">删除</button></li>
-			<li>语文考试将于2022/02/01下午15：00考试<button id="n4">删除</button></li>
-		</ul>
+		<table class="questionTable">
+			<thead>
+			</thead>
+			<tbody class="x-cate" id="test">
+		
+			</tbody>
+		</table>
 	</div>
 </div>
-
+<script type="text/javascript">
+		
+			$(document).ready(function(){
+				var form  = {
+					"studentId" : handleLocalStorage('get', 'userId')
+				};
+				$.get("/msg/selectByStudentId",form,function(res){
+					// console.log(res[2]);
+					var str1 = "";
+					
+					for (var i = 0; i < res.length; i++) {
+						str1 += "<tr cate-id='0' fid='0'>" +
+							"<td>" + res[i] + "</td>" +
+							"<td>" + "<button id = 'delete'>" + "删除" + "</button>" + "</td>";
+					
+					
+					
+					}
+					test.innerHTML = str1;
+					
+				})
+				
+			})
+			
+		
+	</script>
 </body>
 </html>

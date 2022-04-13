@@ -14,26 +14,57 @@
         display: block;
       }
     </style>
-  </head>
-  <body>
-	  <h1 id="show">请保持人脸在屏幕正中，倒计时：<span id="time"></span></h1>
-      <video id="video" class="video"></video>   
-	 
-	
-    <script>
-		// alert("点击确定开始人脸验证");
-		alert(localStorage.userId.value);
-        let constraints = {
-          video: { width: 1280, height: 720 },
-          audio: false
-        };
-        let video = document.getElementById("video");
-        let promise = navigator.mediaDevices.getUserMedia(constraints);
-        promise.then(function(MediaStream) {
+	<script type="text/javascript">
+		
+		
+				window.onload = function(){
+					function handleLocalStorage(method, key, value) {
+					  switch (method) {
+					    case 'get' : {
+					      let temp = window.localStorage.getItem(key);
+					      if (temp) {
+					        return temp
+					      } else {
+					        return false
+					      }
+					    }
+					    case 'set' : {
+					      window.localStorage.setItem(key, value);
+					      break
+					    }
+					    case 'remove': {
+					      window.localStorage.removeItem(key);
+					      break
+					    }
+					    default : {
+					      return false
+					    }
+					  }
+					}
+				window.onbeforeunload = function() {
+						handleLocalStorage('remove', 'userId');
+				}
+				 var str = handleLocalStorage('get', 'userid');
+				 alert(str);
+				
+				}
+		
+	</script>
+	<script>
+		 
+		$(function(){
+		
+	    let constraints = {
+	      video: { width: 1280, height: 720 },
+	      audio: false
+	    };
+	    let video = document.getElementById("video");
+	    let promise = navigator.mediaDevices.getUserMedia(constraints);
+	    promise.then(function(MediaStream) {
 			video.srcObject = MediaStream;
 			video.play();
 			console.dir(video)
-        });
+	    });
 		var timer;
 		var time = document.getElementById('time');
 		var num = 0;
@@ -77,6 +108,15 @@
 								}
 								
 		},1000)
+		})
 	   </script>  
+  </head>
+  <body>
+	  <h1 id="show">请保持人脸在屏幕正中，倒计时：<span id="time"></span></h1>
+      <video id="video" class="video"></video>   
+		
+	
+	
+   
   </body>
 </html>

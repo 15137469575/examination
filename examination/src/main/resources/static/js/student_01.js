@@ -1,6 +1,6 @@
 window.onload = function() {
-	var ulId = document.getElementById('ulId');
-	ulId.onclick = function(event) {
+	var delete = document.getElementById('delete');
+	delete.onclick = function(event) {
 		var event = event || window.event;
 		var target = event.target || event.srcElement;
 		if (target.tagName.toLowerCase() == 'button') {
@@ -8,7 +8,6 @@ window.onload = function() {
 			tr.parentNode.removeChild(tr);
 		}
 	}
-	var liArr = document.getElementsByTagName('li');
-	var noticeNum = document.getElementById('noticeNum');
-	noticeNum.innerText = liArr.length;
+	var trArr = document.getElementsByTagName('tr');
+	
 }

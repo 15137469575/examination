@@ -18,7 +18,7 @@ public class MessageConller {
         int row = msgService.insert(msg);
         return row;
     }
-    @RequestMapping("selectByStudentId")
+    @RequestMapping("/selectByStudentId")
     List<String> selectByStudentId(int studentId){
         return msgService.selectByStudentId(studentId);
     }

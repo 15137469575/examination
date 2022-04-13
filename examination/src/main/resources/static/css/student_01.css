@@ -1,38 +1,11 @@
-.notice {
-	color: white;
-	background-color: #A9A9A9;
+.right{
+	text-align: center;
+	font-family: "KaiTi";
+	font-size: 2em;
 }
 
-h1 {
-	font-size: 30px;
-}
 
-#noticeNum {
-	color: red;
-	/* 555 */
-}
 
-.noticeList>li {
-	margin-left: 2px;
-	line-height: 50px;
-	font-size: 20px;
-	margin-top: 16px;
-	border: 2px solid #000000;
-	border-radius: 5px;
-}
-
-li>button {
-	color: red;
-	font-size: 4.8px;
-	float: right;
-	padding: 8px;
-	margin-top: 4.8px;
-	margin-right: 48px;
-	background-color: beige;
-	border-radius: 5px;
-
-}
-
-li>button:hover {
+td>button:hover {
 	background-color: cadetblue;
 }
