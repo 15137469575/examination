@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.upc.examination.mapper.UserFaceInfoMapper">
+    <insert id="UserFaceRegister">
+        insert into user_face_info
+            (id,face_feature)
+        values
+            (#{id},#{faceFeature})
+    </insert>
+
+    <select id="query" resultType="org.upc.examination.entity.UserFaceInfo">
+        select id,face_feature from user_face_info
+        where id = #{id}
+    </select>
+</mapper>
