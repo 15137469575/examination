@@ -8,17 +8,17 @@
 <body>
 
 
-<form enctype="multipart/form-data" METHOD="post" action="/face/faceRegister">
-    <input type="file" name="img" id="img"/>
-    <input type="text" name="id" id="index">
-    <button onclick="upload()", id="submit">登录</button>
-</form>
+
+<input type="file" name="img" id="img"/>
+<input type="text" name="id" id="index">
+<button onclick="upload()" id="submit">登录</button>
+
 
 <script>
 function upload() {
     let formData = new FormData();
     formData.append('img',$("#img")[0].files[0]);
-	formData.append('id',$("#index").val());
+    formData.append('id',$("#index").val());
 
     $.ajax({
         type:"post",
@@ -29,10 +29,11 @@ function upload() {
         processData:false,
         contentType:false,
         success:function (rst) {
-            alert(rst);
+            alert(rst)
+        },
+        error:function (rst) {
+            alert(rst)
         }
-  
-
     })
 
 }
