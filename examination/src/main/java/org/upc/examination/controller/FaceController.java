@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.upc.examination.service.UserFaceInfoService;
 
-
 @RestController
 @RequestMapping("/face")
 public class FaceController {

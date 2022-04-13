@@ -8,29 +8,31 @@
 <body>
 
 
-<form enctype="multipart/form-data" method="POST" action="/face/faceRegister">
-    <input type="file" name="img" id="img"/>
-    <input type="text" name="id" id="id">
-    <button onclick="upload()", id="submit">登录</button>
-</form>
+
+<input type="file" name="img" id="img"/>
+<input type="text" name="id" id="index">
+<button onclick="upload()" id="submit">登录</button>
+
 
 <script>
 function upload() {
     let formData = new FormData();
     formData.append('img',$("#img")[0].files[0]);
-    formData.append('id',$("#index").val());
+    formData.append('index',$("#index").val());
 
     $.ajax({
         type:"post",
-        url:"/face/faceRegister",
+        url:"/face/compare",
         data:formData,
-        dataType:"json",
         cache:false,
-        async:false,
+        async:true,
         processData:false,
         contentType:false,
         success:function (rst) {
-            alert(rst);
+            alert(rst)
+        },
+        error:function (rst) {
+            alert(rst)
         }
     })
 
