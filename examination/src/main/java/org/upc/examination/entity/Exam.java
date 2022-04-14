@@ -158,21 +158,19 @@ public class Exam {
   @Override
   public String toString() {
     return "Exam{" +
-            //"examId=" + examId +
-           // ", examName='" + examName + '\'' +
-            //", paperId=" + paperId +
-            //", invigilatorTeacherId=" + invigilatorTeacherId +
-            //", examTime='" + examTime + '\'' +
-            //", lengthExam=" + lengthExam +
-            //", limTimeEntry='" + limTimeEntry + '\'' +
-            //", limTimeSub='" + limTimeSub + '\'' +
-            //", examBatches=" + examBatches +
-            //", examRoomBatch='" + examRoomBatch + '\'' +
-            //", state='" + state + '\'' +
-            //", remark='" + remark + '\'' +
-            " questionBank=" + questionBank.getQuestion() +questionBank.getOptionA()
-            //", questionPaper=" + questionPaper.getQuestionPaperSort()
-    +
+            "examId=" + examId +
+            ", examName='" + examName + '\'' +
+            ", paperId=" + paperId +
+            ", invigilatorTeacherId=" + invigilatorTeacherId +
+            ", examTime='" + examTime + '\'' +
+            ", lengthExam=" + lengthExam +
+            ", limTimeEntry='" + limTimeEntry + '\'' +
+            ", limTimeSub='" + limTimeSub + '\'' +
+            ", examBatches=" + examBatches +
+            ", examRoomBatch='" + examRoomBatch + '\'' +
+            ", state='" + state + '\'' +
+            ", remark='" + remark + '\'' +
+
             '}';
   }
 }

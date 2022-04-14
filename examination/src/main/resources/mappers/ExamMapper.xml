@@ -66,4 +66,9 @@
                                                      WHERE exam_id = #{examId}
                                                  ))
     </select>
+    <select id="selectExamById" resultType="org.upc.examination.entity.Exam">
+        SELECT *
+        FROM exam
+        WHERE exam_id = #{examId}
+    </select>
 </mapper>

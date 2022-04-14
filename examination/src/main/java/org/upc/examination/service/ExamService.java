@@ -14,4 +14,8 @@ public interface ExamService {
     List<Exam> selectQuestion(int examId);
 
     Exam selectQuestionIn(int examId,int questionId);
+    /**
+     * 根据examId来查询出Exam对象,用于向学生展示考试信息
+     * */
+    Exam selectExamById(int examId);
 }
