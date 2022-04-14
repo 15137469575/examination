@@ -41,6 +41,8 @@
         FROM question_bank
         WHERE subject = #{subject}
         ORDER BY RAND()
+            LIMIT 20
+
     </select>
     <select id="isSame" resultType="java.lang.Integer">
         SELECT question_id

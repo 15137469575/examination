@@ -81,14 +81,15 @@
 						alert("请选择考试科目");
 					} else {
 						$.ajax({
-							url: "",
+							url: "/questionPaper/random",
 							type: "get",
 							data: {
 								"subject": $("#object_select").val(),
-								"paperId": $("#paperId").value
+								"paperId": $("#paperId").val()
 							},
 							success: function(res) {
 								alert("组卷成功，可点击查看试卷");
+								alert(res)
 							}
 						})
 					}
