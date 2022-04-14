@@ -26,4 +26,8 @@ public interface ExamMapper {
     List<Exam> selectQuestion(int examId);
 
     Exam selectQuestionIn(int examId,int questionId);
+    /**
+     * 根据examId来查询出Exam对象
+     * */
+    Exam selectExamById(int examId);
 }

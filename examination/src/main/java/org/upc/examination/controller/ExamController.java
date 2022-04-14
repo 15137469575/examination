@@ -15,17 +15,29 @@ import java.util.List;
 public class ExamController {
     @Resource
     private ExamService examService;
-
+/**
+ * 从前台接收创建的Exam对象，并且将对象保存在数据库中
+ * */
     @RequestMapping("/insert")
     int insert(Exam exam){
         return examService.insert(exam);
     }
 
+    /**
+     * 输入值是examId，通过一个examId来筛选出一个试卷中的题目数量
+     * 返回值是一个int的数值
+     * 已弃用
+     * **/
     @RequestMapping("/countAll")
     public int countAll(int examId){
         return examService.countAll(examId);
     }
 
+    /**
+     * 通过一个examId来筛选出一个试卷中所有题目的题号（是指在数据库中保存的question_paper_sort）,
+     * 返回值是一个List列表
+     * 是无序的
+     * **/
     @RequestMapping("/selectQuestSort")
     public List<Integer> selectQuestSort(int examId){
 
@@ -39,9 +51,19 @@ public class ExamController {
         return list;
 
     }
+    /**
+     * 通过examId和questId来筛选出和四个选项和题目类型
+     * 返回值是Exam，是因为在Exam中设置了questionBank的属性
+     * **/
     @RequestMapping("/selectQuestionIn")
     public Exam selectQuestionIn(int examId,int questionId){
         return examService.selectQuestionIn(examId, questionId);
     }
 
+    /**
+     * 根据examId来查询出Exam对象,用于向学生展示考试信息
+     * */
+    public Exam selectExamById(int examId){
+        return examService.selectExamById(examId);
+    }
 }
