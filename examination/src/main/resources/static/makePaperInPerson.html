@@ -89,7 +89,7 @@
 							},
 							success: function(res) {
 								alert("组卷成功，可点击查看试卷");
-								alert(res)
+								window.location.href = "checkPaper.html";
 							}
 						})
 					}
@@ -145,10 +145,11 @@
 
 								};
 								$.get("/questionPaper/insert", form1, function(res) {
-									if(res === 1){
+									alert(res)
+									if(res == 1){
 										alert('添加成功');
 									}
-									else{
+									else if(res == 0){
 										alert("已经添加过");
 									}
 								})
