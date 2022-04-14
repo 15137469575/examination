@@ -9,6 +9,7 @@
 		
 		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
 		
+		
 		<!-- 这是缓存 -->
 		<script type="text/javascript">
 			window.onload = function() {
@@ -107,7 +108,7 @@
 												alert("发布通知成功");
 												$("#issueExam").on("click",function(){
 													var form3 = {
-														
+														"examId":$("#examId").val(),
 													}
 												})
 												
@@ -157,7 +158,7 @@
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
 				<div>
-					<a class="checkPaper" href="#">查看试卷</a>
+					<a class="checkPaper" href="checkPaper.html">查看试卷</a>
 				</div>
 				<div>
 					<a class="jionExame" href="createExam.html">创建考试</a>
