@@ -1,6 +1,9 @@
 package org.upc.examination.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+
 import java.util.List;
 
 public class Exam {
@@ -9,7 +12,9 @@ public class Exam {
   private String examName;
   private Integer paperId;
   private Integer invigilatorTeacherId;
+  @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
   private String examTime;
+
   private Double lengthExam;
   private String limTimeEntry;
   private String limTimeSub;
