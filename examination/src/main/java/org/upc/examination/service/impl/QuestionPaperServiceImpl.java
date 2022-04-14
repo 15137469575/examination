@@ -20,8 +20,10 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
     @Override
     public int doInsert(QuestionPaper questionPaper) {
         List<Integer> i = questionPaperMapper.isSame(questionPaper.getPaperId());
-        for(Integer j:i){
-            if(j==questionPaper.getQuestionId()){
+
+
+        for(int j = 0;j<i.size();j ++){
+            if(questionPaper.getQuestionId() == i.get(j)){
                 return 0;
             }
         }
