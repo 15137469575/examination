@@ -18,7 +18,10 @@ public class QuestionPaperController {
 
     @Resource
     private QuestionPaperService questionPaperService;
-
+/**
+ * 接收前端传来的对象，并保存为QuestionPaper，在此操作中，会实现检查数据库中是否有已重复的题目存在，若存在
+ * 则返回0，若不存在，则返回1.
+ * */
     @RequestMapping("/insert")
     public int doInsert(QuestionPaper questionPaper){
         return questionPaperService.doInsert(questionPaper);
@@ -28,8 +31,8 @@ public class QuestionPaperController {
  * 根据paperId来筛选出同一个试卷中的所有题目，所以可以使用list
  * */
     @RequestMapping("/selectByPaperID")
-    public PageInfo<QuestionPaper> selectByPaperID(int pageNum,int pageSize,int paperId){
-        return questionPaperService.selectByPaperId(pageNum,pageSize,paperId);
+    public List<QuestionPaper> selectByPaperID(int paperId){
+        return questionPaperService.selectByPaperId(paperId);
     }
     @RequestMapping("/random")
     public int randomPaper(String subject,Integer paperId){
