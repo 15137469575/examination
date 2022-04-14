@@ -1,83 +1,53 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>navigator.MediaDevices.getUserMedia()</title>
-		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
-		<script type="text/javascript" src="js/html2Canvas.js"></script>
-		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
-		<meta charset="utf-8" />
-		<style>
-			video {
-				width: 1280px;
-				height: 720px;
-				margin: 0 auto;
-				display: block;
-			}
-		</style>
-		<script>
-			$(function() {
-				let constraints = {
-					video: {
-						width: 1280,
-						height: 720
-					},
-					audio: false
-				};
-				let video = document.getElementById("video");
-				let promise = navigator.mediaDevices.getUserMedia(constraints);
-				promise.then(function(MediaStream) {
-					video.srcObject = MediaStream;
-					video.play();
-					console.dir(video)
-				});
-				var timer;
-				var time = document.getElementById('time');
-				var num = 0;
-				var timer = setInterval(function() {
-					time.innerHTML = num++;
-					if (num == 3) {
-						html2canvas(document.body).then(function(canvas) {
-							var dataUrl = canvas.toDataURL();
-							var input = document.getElementById("img");
-							input.value = dataUrl;
-							console.log(dataUrl)
-							// $.ajax({
-							//     type:"post",
-							//     url:"/face/faceRegister",
-							//     data:formData,
-							//     cache:false,
-							//     async:true,
-							//     processData:false,
-							//     contentType:false,
-							//     success:function (rst) {
-							//         alert(rst)
-							//     },
-							//     error:function (rst) {
-							//         alert(rst)
-							//     }
-							// })
-							// var newImg = document.createElement("img");
-							// newImg.src = dataUrl;
-							// var blob = newImg.src;
-							// console.log(blob.Blob)
-							// document.body.appendChild(newImg);
-						})
-						clearInterval(timer);
-					}
-
-				}, 1000)
-			})
-			
-			function asd()
-{
-	let input2 = document.getElementById("img");
-	console.log(input2.value);
-}		</script>
-	</head>
-	<body>
-		<h1 id="show">请保持人脸在屏幕正中，倒计时：<span id="time"></span></h1>
-		<video id="video" class="video"></video>
-		<input type="file" name="img" id="img"/>
-		<button id="he" onclick="asd()"></button>
-	</body>
+<head>
+    <title>navigator.MediaDevices.getUserMedia()</title>
+    <link rel="stylesheet" type="text/css" href="css/resetting.css"/>
+    <script type="text/javascript" src="js/html2Canvas.js"></script>
+    <script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+    <meta charset="utf-8"/>
+    <style>
+        video {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+    <script>
+        $(function () {
+            let constraints = {
+                video: {width: 1280, height: 720},
+                audio: false
+            };
+            let video = document.getElementById("video");
+            let promise = navigator.mediaDevices.getUserMedia(constraints);
+            promise.then(function (MediaStream) {
+                video.srcObject = MediaStream;
+                video.play();
+                console.dir(video)
+            });
+            var timer;
+            var time = document.getElementById('time');
+            var num = 0;
+            var timer = setInterval(function () {
+                time.innerHTML = num++;
+                if (num == 7) {
+                    html2canvas(document.body).then(function (canvas) {
+                        var dataUrl = canvas.toDataURL();
+                        var file = dataURL2File(dataUrl);
+                        var id = handleLocalStorage("get","userId");
+                        compare(file,id);
+                    })
+                    clearInterval(timer);
+                }
+            }, 1000)
+        })
+    </script>
+</head>
+<body>
+<h1 id="show">请保持人脸在屏幕正中，屏幕中只有你本人存在，倒计时：<span id="time"></span></h1>
+<video id="video" class="video"></video>
+</body>
 </html>

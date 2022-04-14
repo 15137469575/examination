@@ -1,51 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-
-		<link rel="stylesheet" type="text/css" href="css/login.css">
-		<script src="js/jquery-3.6.0.js" type="text/javascript"></script>
-		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
-		<div class="container">
-			<div class="login-form">
-				<h2>登录</h2>
-				<input type="text" id="usernameText" name="id" placeholder="用户名" />
-				<input type="password" id="passwordText" name="pwd" placeholder="密码">
-				<button id="studentLoginButton" onclick="getMsg()">登录</button>
-			</div>
-		</div>
-
-
-
-		<script>
-			function getMsg() {
-				var id = document.getElementById("usernameText").value;
-				var pwd = document.getElementById("passwordText").value;
-
-				var form = {
-					"userId": id,
-					"userPassword": pwd,
-				};
-
-				jQuery.get("/user/login", form, function(rst) {
-
-					if (rst.identidy == "student") {
-						handleLocalStorage('set', 'userId', id);
-						window.location.href = "student_01.html";
-					} else if (rst.identidy == "teacher") {
-						handleLocalStorage('set', 'userId', id);
-						window.location.href = "createPaper.html";
-					} else if (!rst) {
-						alert("您的登录信息有误，请重新登录");
-					}
-
-
-				});
-			}
-		</script>
-
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script src="js/jquery-3.6.0.js" type="text/javascript"></script>
+    <script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="container">
+    <div class="login-form">
+        <h2>登录</h2>
+        <input type="text" id="usernameText" name="id" placeholder="用户名"/>
+        <input type="password" id="passwordText" name="pwd" placeholder="密码">
+        <button id="studentLoginButton" onclick="getMsg()">登录</button>
+    </div>
+</div>
+</body>
 </html>
