@@ -26,7 +26,9 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
             if(questionPaper.getQuestionId() == i.get(j)){
                 return 0;
             }
+
         }
+        questionPaperMapper.insert(questionPaper);
         return 1;
     }
 

@@ -40,7 +40,7 @@
 				border-radius: 10px;
 				background-color: #9a9a9c;
 				/* opacity: 0.5; */
-				background: rgba(100,100,100,0.3);
+				background: rgba(100, 100, 100, 0.3);
 				text-align: center;
 				margin-left: 5%;
 				margin-top: 1vh;
@@ -52,9 +52,10 @@
 				padding: 0.2%;
 				float: right;
 			}
-			table{
+
+			table {
 				background-color: #9a9a9c;
-				
+
 			}
 		</style>
 		<script type="text/javascript">
@@ -141,15 +142,15 @@
 							$(document).on('click', '#add', function() {
 								var form1 = {
 									"paperId": $("#paperId").val(),
-									"questionId": $(this).parents("tr").find("td").eq(6).text()
+									"questionId": $(this).parents("tr").find("td").eq(6)
+										.text()
 
 								};
 								$.get("/questionPaper/insert", form1, function(res) {
-									alert(res)
-									if(res == 1){
+
+									if (res == 1) {
 										alert('添加成功');
-									}
-									else if(res == 0){
+									} else if (res == 0) {
 										alert("已经添加过");
 									}
 								})
@@ -162,7 +163,7 @@
 					};
 				})
 
-				
+
 				//这是select
 				$(document).ready(function() {
 					$("#object_select").change(function() {
@@ -193,7 +194,7 @@
 
 		<div class="mbody">
 			<div class="left">
-				
+
 				<div>
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
@@ -239,7 +240,7 @@
 				</div>
 				<div class="questionView">
 
-					
+
 					<!-- 试卷tabel -->
 					<table class="questionTable">
 						<thead>
