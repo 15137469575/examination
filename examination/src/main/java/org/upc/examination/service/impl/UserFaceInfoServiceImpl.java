@@ -85,6 +85,9 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
         UserFaceInfo sourceFaceInfo = FaceUtils.detectFaces(path,faceEngine);
         File file = new File(path);
         file.delete();
+        if (sourceFaceInfo == null){
+            return 0;
+        }
         byte[] sourceFeature = sourceFaceInfo.getFaceFeature();
 
         FaceFeature sourceFaceFeature = new FaceFeature();

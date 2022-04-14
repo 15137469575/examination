@@ -22,15 +22,14 @@ function compare(file, index) {
         processData: false,
         contentType: false,
         success: function (rst) {
-            if (rst == "鎴愬姛"){
+            if (rst == "成功"){
                 location.href="examPrepare.html";
             }else {
-				console.log(rst);
-                alert("999");
+                alert("认证失败，请确保符合拍照规范");
             }
         },
         error: function (rst) {
-            alert("333");
+            alert("出现了不可预知的错误，请稍后重新尝试！");
         }
     })
 }
@@ -48,14 +47,14 @@ function register(file, id) {
         processData: false,
         contentType: false,
         success: function (rst) {
-            if (rst == "锟缴癸拷"){
-                alert("锟缴癸拷")
+            if (rst == "成功"){
+                alert("成功")
             }else {
-                alert("失锟斤拷");
+                alert("失败");
             }
         },
         error: function (rst) {
-            alert("锟斤拷锟斤拷锟剿诧拷锟斤拷预知锟侥达拷锟斤拷锟斤拷锟皆猴拷锟斤拷锟铰筹拷锟皆ｏ拷");
+            alert("出现了不可预知的错误，请稍后重新尝试！");
         }
     })
 }
