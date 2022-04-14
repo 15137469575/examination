@@ -22,14 +22,14 @@ function compare(file, index) {
         processData: false,
         contentType: false,
         success: function (rst) {
-            if (rst == "³É¹¦"){
+            if (rst == "success"){
                 location.href="examPrepare.html";
             }else {
-                alert("ÈÏÖ¤Ê§°Ü£¬ÇëÈ·±£·ûºÏÅÄÕÕ¹æ·¶");
+                alert("è®¤è¯å¤±è´¥ï¼Œè¯·ç¡®ä¿ç¬¦åˆæ‹ç…§è§„èŒƒ");
             }
         },
         error: function (rst) {
-            alert("³öÏÖÁË²»¿ÉÔ¤ÖªµÄ´íÎó£¬ÇëÉÔºóÖØĞÂ³¢ÊÔ£¡");
+            alert("å‡ºç°äº†ä¸å¯é¢„çŸ¥çš„é”™è¯¯ï¼Œè¯·ç¨åé‡æ–°å°è¯•ï¼");
         }
     })
 }
@@ -47,14 +47,14 @@ function register(file, id) {
         processData: false,
         contentType: false,
         success: function (rst) {
-            if (rst == "³É¹¦"){
-                alert("³É¹¦")
+            if (rst == "success"){
+                alert("æˆåŠŸ")
             }else {
-                alert("Ê§°Ü");
+                alert("å¤±è´¥");
             }
         },
         error: function (rst) {
-            alert("³öÏÖÁË²»¿ÉÔ¤ÖªµÄ´íÎó£¬ÇëÉÔºóÖØĞÂ³¢ÊÔ£¡");
+            alert("å‡ºç°äº†ä¸å¯é¢„çŸ¥çš„é”™è¯¯ï¼Œè¯·ç¨åé‡æ–°å°è¯•ï¼");
         }
     })
 }
