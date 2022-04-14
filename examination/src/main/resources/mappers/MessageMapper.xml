@@ -10,6 +10,7 @@
             (#{msg},#{examId},#{teacherId},#{time},#{remark})
     </insert>
 
+
     <select id="selectByStudentId"  resultType="string">
         SELECT msgIn
         FROM message
