@@ -13,6 +13,7 @@ function compare(file, index) {
     var formData = new FormData();
     formData.append("img", file);
     formData.append("index", index);
+    //5555
     $.ajax({
         type: "post",
         url: "/face/compare",
