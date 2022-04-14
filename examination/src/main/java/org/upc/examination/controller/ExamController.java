@@ -63,6 +63,7 @@ public class ExamController {
     /**
      * 根据examId来查询出Exam对象,用于向学生展示考试信息
      * */
+    @RequestMapping("/selectExamById")
     public Exam selectExamById(int examId){
         return examService.selectExamById(examId);
     }
