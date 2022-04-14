@@ -6,6 +6,7 @@
     <script type="text/javascript" src="js/html2Canvas.js"></script>
     <script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/faceUtils.js" type="text/javascript" charset="utf-8"></script>
     <meta charset="utf-8"/>
     <style>
         video {
@@ -15,8 +16,12 @@
             display: block;
         }
     </style>
-    <script>
-        $(function () {
+</head>
+<body>
+<h1 id="show">请保持人脸在屏幕正中，屏幕中只有你本人存在，倒计时：<span id="time"></span></h1>
+<video id="video" class="video"></video>
+</body>
+<script>
             let constraints = {
                 video: {width: 1280, height: 720},
                 audio: false
@@ -43,11 +48,5 @@
                     clearInterval(timer);
                 }
             }, 1000)
-        })
     </script>
-</head>
-<body>
-<h1 id="show">请保持人脸在屏幕正中，屏幕中只有你本人存在，倒计时：<span id="time"></span></h1>
-<video id="video" class="video"></video>
-</body>
 </html>
