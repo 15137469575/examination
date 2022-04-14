@@ -23,7 +23,7 @@ function compare(file, index) {
         contentType: false,
         success: function (rst) {
             if (rst == "成功"){
-                location.href="examPrepare";
+                location.href="examPrepare.html";
             }else {
                 alert("认证失败，请确保符合拍照规范");
             }

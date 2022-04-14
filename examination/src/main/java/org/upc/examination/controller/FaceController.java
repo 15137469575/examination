@@ -16,12 +16,12 @@ public class FaceController {
 
     @PostMapping("/faceRegister")
     public String faceRegister(MultipartFile img,int id){
-        return userFaceInfoService.register(img,id) == 1 ? "成功":"失败";
+        return userFaceInfoService.register(img,id) == 1 ? "success":"fail";
     }
 
     @PostMapping("/compare")
     public String compare(MultipartFile img,int index){
-        return userFaceInfoService.compareFaceFeature(img, index) > 0.8 ? "成功":"失败";
+        return userFaceInfoService.compareFaceFeature(img, index) > 0.8 ? "success":"fail";
     }
 
 }
