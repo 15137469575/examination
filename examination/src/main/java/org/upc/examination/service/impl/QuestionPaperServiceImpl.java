@@ -32,15 +32,12 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
     }
 
     @Override
-    public PageInfo<QuestionPaper> selectByPaperId(int pageNum, int pageSize, int paperId) {
-        PageInfo<QuestionPaper> pages= null;
-
-        PageHelper.startPage(pageNum, pageSize);
+    public List<QuestionPaper> selectByPaperId( int paperId) {
         List<QuestionPaper> questions = questionPaperMapper.selectByPaperId(paperId);
 
-        pages = new PageInfo<>(questions,10);
 
-        return pages;
+
+        return questions;
     }
 
     @Override
