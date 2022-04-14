@@ -27,6 +27,7 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
                 return 0;
             }
         }
+        questionPaperMapper.insert(questionPaper);
         return 1;
     }
 
