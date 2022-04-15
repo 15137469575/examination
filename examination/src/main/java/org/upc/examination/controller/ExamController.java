@@ -61,10 +61,19 @@ public class ExamController {
     }
 
     /**
+     * 和下面的selectExamById()配套，实现考试发布功能
+     * 考试发布：教师选择考试发布
+     * */
+    @RequestMapping("/reselve")
+    public void reselve(int examId){
+         int temp = examId;
+    }
+    /**
      * 根据examId来查询出Exam对象,用于向学生展示考试信息
      * */
-    @RequestMapping("/selectExamById")
-    public Exam selectExamById(int examId){
-        return examService.selectExamById(examId);
-    }
+   // @RequestMapping("/selectExamById")
+   // public Exam selectExamById(){
+
+     //   return examService.selectExamById(examId);
+    //}
 }

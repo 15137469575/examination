@@ -34,6 +34,11 @@ public class QuestionPaperController {
     public List<QuestionPaper> selectByPaperID(int paperId){
         return questionPaperService.selectByPaperId(paperId);
     }
+    /**
+     * 智能组卷功能
+     * 返回值1，表示组卷成功
+     * 返回值0，表示组卷失败
+     * */
     @RequestMapping("/random")
     public int randomPaper(String subject,Integer paperId){
         int row =  questionPaperService.randomInsert(paperId,subject);

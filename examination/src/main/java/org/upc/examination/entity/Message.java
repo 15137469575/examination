@@ -1,6 +1,13 @@
 package org.upc.examination.entity;
 
 public class Message {
+
+    private Integer id;
+    private String msg;
+    private Integer teacherId;
+    private String time;
+    private String remark;
+
     public Integer getId() {
         return id;
     }
@@ -41,11 +48,7 @@ public class Message {
         this.remark = remark;
     }
 
-    private Integer id;
-    private String msg;
-    private Integer teacherId;
-    private String time;
-    private String remark;
+
 
     public Integer getExamId() {
         return examId;

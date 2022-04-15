@@ -1,9 +1,7 @@
 package org.upc.examination.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import org.springframework.stereotype.Service;
-import org.upc.examination.entity.QuestionBank;
 import org.upc.examination.entity.QuestionPaper;
 import org.upc.examination.mapper.QuestionPaperMapper;
 import org.upc.examination.service.QuestionPaperService;
@@ -16,7 +14,13 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
 
     @Resource
     private QuestionPaperMapper questionPaperMapper;
-
+/**
+ * 首先，先找出从前台传来的questionPaper中的paperId中的questionId，
+ * 然后比较从前台传来的questionPaper中的questionId是否有重复的，
+ * 如果有重复的那么直接返回0
+ * 否则返回1
+ *
+ * */
     @Override
     public int doInsert(QuestionPaper questionPaper) {
         List<Integer> i = questionPaperMapper.isSame(questionPaper.getPaperId());
@@ -36,11 +40,11 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
     public List<QuestionPaper> selectByPaperId( int paperId) {
         List<QuestionPaper> questions = questionPaperMapper.selectByPaperId(paperId);
 
-
-
         return questions;
     }
-
+/**
+ * 智能组卷，
+ * */
     @Override
     public int randomInsert(int paperId,String subject) {
         List<Integer> ques = questionPaperMapper.randomSelectFromBank(subject);
