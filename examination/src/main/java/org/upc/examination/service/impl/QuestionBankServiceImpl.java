@@ -64,4 +64,12 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         PageInfo<QuestionBank> page = new PageInfo<>(lists);
         return page;
     }
+
+    @Override
+    public PageInfo<QuestionBank> doQueryByAnyParams(QuestionBank questionBank,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<QuestionBank> lists = questionBankMapper.queryByAnyParams(questionBank);
+        PageInfo<QuestionBank> page = new PageInfo<>(lists);
+        return page;
+    }
 }
