@@ -24,4 +24,6 @@ public interface QuestionBankMapper {
 
     List<QuestionBank> queryByObjectAndType(String object,String type);
 
+    List<QuestionBank> queryByAnyParams(QuestionBank questionBank);
+
 }

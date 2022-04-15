@@ -56,4 +56,9 @@ public class QuestionBankController {
         return questionBankService.doQueryByObjectAndType(object, type, pageNum, pageSize);
     }
 
+    @GetMapping("/findByAnyParams")
+    public PageInfo<QuestionBank> findBuAnyParams(QuestionBank questionBank,int pageNum,int pageSize){
+        return questionBankService.doQueryByAnyParams(questionBank,pageNum,pageSize);
+    }
+
 }
