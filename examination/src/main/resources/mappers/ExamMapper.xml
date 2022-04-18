@@ -71,6 +71,17 @@
         FROM exam
         WHERE exam_id = #{examId}
     </select>
+    <select id="selectAllByStudent" resultType="org.upc.examination.entity.Exam">
+        SELECT *
+        FROM exam
+        WHERE exam_id IN
+              (
+                  SELECT exam_id
+                  FROM exam_student
+                  WHERE student_id = 1001
+              )
+    </select>
 
-    
+
+
 </mapper>
