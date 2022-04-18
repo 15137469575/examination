@@ -69,4 +69,9 @@ public class ExamServiceImpl implements ExamService {
     public Exam selectExamById(int examId) {
         return examMapper.selectExamById(examId);
     }
+
+    @Override
+    public List<Exam> selectAllByStudent(int studentId) {
+        return examMapper.selectAllByStudent(studentId);
+    }
 }

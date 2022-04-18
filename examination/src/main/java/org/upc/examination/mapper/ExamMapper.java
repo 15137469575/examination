@@ -37,4 +37,11 @@ public interface ExamMapper {
      * 根据examId来查询出Exam对象
      * */
     Exam selectExamById(int examId);
+
+    /**
+     * 根据studentId来找出该学生所有的Exam对象
+     * */
+    List<Exam> selectAllByStudent(int studentId);
+
+
 }

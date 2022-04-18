@@ -76,4 +76,10 @@ public class ExamController {
 
         return examService.selectExamById(examId);
     }
+
+
+    @RequestMapping("/selectAllByStudent")
+    public List<Exam> selectAllByStudent(int studentId){
+        return examService.selectAllByStudent(studentId);
+    }
 }

@@ -34,4 +34,6 @@ public interface ExamService {
      * 根据examId来查询出Exam对象,用于向学生展示考试信息
      * */
     Exam selectExamById(int examId);
+
+    List<Exam> selectAllByStudent(int studentId);
 }
