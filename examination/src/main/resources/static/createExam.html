@@ -6,9 +6,15 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
-		
+		<style type="text/css">
+			#year{
+				width:2%;
+			}
+			
+		</style>
 		
 		<!-- 这是缓存 -->
 		<script type="text/javascript">
@@ -25,115 +31,178 @@
 				}
 			}
 		</script>
+		<!-- 这是select -->
+		
 		<!-- 这是添加表格 -->
 		<script type="text/javascript">
 			
 		$(function(){
 				// js读取解析Excel
 				// 定义一个carData,用来保存读取到的数据
+				$(document).ready(function() {
+					$("#month_select").change(function() {
+						$("#month_select").val();
+					});
+					$("#day_select").change(function() {
+						$("#day_select").val();
+					});
+					$("#hour_select").change(function() {
+						$("#hour_select").val();
+					});
+				});
+				
+				
+				
+				
+				var teacherId = document.getElementById('teacherId');
+				var year = document.getElementById('year');
+				var date=new Date;
+				
+				
+				teacherId.value = handleLocalStorage("get","userId");
+				year.value = date.getFullYear();
+				
+				
 				
 				var createExam = document.getElementById('createExam');
-		
 				createExam.onclick = function() {
-					var form = {
-						"examName": $("#object_select").val(),
-						"paperId": $("#paperId").value,
-						"invigilatorTeacherId": $("#teacherId").value,
-						"remark":$("#normal").value,
-						"examTime":$("#examTime").Value
-					};
-					$.get("/exam/insert", form, function(res) {
-						var examId = document.getElementById('examId');
-						examId.value = res;
-						var carData;
-						var  Cardata;
-						$(document).ready(function() {
-								
-							var wb; //读取完成的数据
-							var rABS = false; //是否将文件读取为二进制字符串
-								
-							function fixdata(data) { //文件流转BinaryString
-								var o = "",
-									l = 0,
-									w = 10240;
-								for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data
-									.slice(l * w, l * w + w)));
-								o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-								return o;
-							}
-								
-							$("#file").change(function() {
-						 	if (!this.files) {
-									return;
+					
+					if(month_select.value == -1 || day_select.value == -1 || hour_select.value == -1){
+						alert("时间未填写完整")
+					}
+					
+					
+					
+					else {
+						
+						
+						
+						var timeStr = year.value + "-" + month_select.value + "-" + day_select.value + " " + hour_select.value + ":00:00";
+						
+						var limTimeEntry = year.value + "-" + month_select.value + "-" + day_select.value + " " + hour_select.value + ":30:00";
+					
+						var jiayi = parseInt(hour_select.value) +1;
+						
+						var jiaYi = jiayi.toString();
+						
+						var limTimeSub = year.value + "-" + month_select.value + "-" + day_select.value + " "+"0"+ jiaYi + ":00:00";
+					
+						console.log(typeof(jiaYi));
+						
+						var form = {
+							
+							"paperId": $("#paperId").val(),
+							"examName":handleLocalStorage("get","subject"),
+							"invigilatorTeacherId": handleLocalStorage("get","userId"),
+							"remark":$("#normal").val(),
+							"examTime":timeStr,
+							"lengthExam":120,
+							"examBatches":1,
+							"examRoomBatch":"1",
+							"limTimeEntry":limTimeEntry,
+							"limTimeSub":limTimeSub,
+							"state":"未开始"
+							
+						};
+						$.get("/exam/insert",form, function(res) {
+							var examId = document.getElementById('examId');
+							examId.value = res;
+							var carData;
+							var  Cardata;
+							$(document).ready(function() {
+									
+								var wb; //读取完成的数据
+								var rABS = false; //是否将文件读取为二进制字符串
+									
+								function fixdata(data) { //文件流转BinaryString
+									var o = "",
+										l = 0,
+										w = 10240;
+									for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data
+										.slice(l * w, l * w + w)));
+									o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+									return o;
 								}
-								var f = this.files[0];
-								var reader = new FileReader();
-								reader.onload = function(e) {
-									var data = e.target.result;
-									if (rABS) {
-										wb = XLSX.read(btoa(fixdata(data)), {
-											type: 'base64'
-										});
-									} else {
-										wb = XLSX.read(data, {
-											type: 'binary'
-										});
+									
+								$("#file").change(function() {
+							 	if (!this.files) {
+										return;
 									}
-								
-									// carData就是我们需要的JSON数据
-									carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-									Cardata = new Array(carData.length);
-									for(var i= 0 ; i< carData.length; i++){
-										Cardata[i] = parseInt(carData[i].StudentId);
-									}
-									console.log(typeof(Cardata[0]));	
-									$("#addStudent").on("click",function(){
-										
-										var form1 = {
-											"examId" : $("#examId").val(),
-											"studentId": Cardata
-										};
-									$.get("/examStudentConller/insert",form1,function(resg){
-										alert("考生信息导入成功");
-										var notice = document.getElementById('notice');
-										notice.value =object_select.value + "将于" + examTime.value + "开考，请各位同学做好准备！";
+									var f = this.files[0];
+									var reader = new FileReader();
+									reader.onload = function(e) {
+										var data = e.target.result;
+										if (rABS) {
+											wb = XLSX.read(btoa(fixdata(data)), {
+												type: 'base64'
+											});
+										} else {
+											wb = XLSX.read(data, {
+												type: 'binary'
+											});
+										}
+									
+										// carData就是我们需要的JSON数据
+										carData = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+										Cardata = new Array(carData.length);
+										for(var i= 0 ; i< carData.length; i++){
+											Cardata[i] = parseInt(carData[i].StudentId);
+										}
+										console.log(typeof(Cardata[0]));	
+										$("#addStudent").on("click",function(){
 											
-										$("#issueNotice").on("click",function(){
-											
-											var form2 = {
-												"examId":$("#examId").val(),
-												"msg":notice.value
+											var form1 = {
+												"examId" : $("#examId").val(),
+												"studentId": Cardata
 											};
-											$.get("/msg/insert",form2,function(resj){
-												alert("发布通知成功");
-												$("#issueExam").on("click",function(){
-													var form3 = {
-														"examId":$("#examId").val(),
-													}
+										$.get("/examStudentConller/insert",form1,function(resg){
+											alert("考生信息导入成功");
+											var notice = document.getElementById('notice');
+											notice.value =handleLocalStorage("get","subject") + "将于" + year.value+ "年" + month_select.value + "月"  + day_select.value+ "日" + hour_select.value+":00" + "开考，请各位同学提前复习";
+												
+											$("#issueNotice").on("click",function(){
+												
+												var form2 = {
+													"examId":$("#examId").val(),
+													"msg":notice.value
+												};
+												$.get("/msg/insert",form2,function(resj){
+													alert("发布通知成功,请发布考试");
+													$("#issueExam").on("click",function(){
+														var form3 = {
+															"examId":$("#examId").val(),
+														};
+														$.get("/exam/selectExamById",form3,function(resf){
+															alert("您已发布考试！");
+															examId.value = "";
+															paperId.value = "";
+														})
+													})
+													
 												})
+												
+											})
 												
 											})
 											
 										})
-											
-										})
 										
-									})
+										
+										
+							   		
+									};
+									if (rABS) {
+										reader.readAsArrayBuffer(f);
+									} else {
+										reader.readAsBinaryString(f);
+									}
+								})
 									
-									
-									
-						   		
-								};
-								if (rABS) {
-									reader.readAsArrayBuffer(f);
-								} else {
-									reader.readAsBinaryString(f);
-								}
-							})
-								
-						});
-						
-					})
+							});
+							
+						})
+					}
+					
 				}
 			})
 		</script>
@@ -165,25 +234,93 @@
 				</div>
 			</div>
 			<div class="right">
-				科目(必选):
-				<select id="object_select" class="num_select">
-					<option value='-1' style='display: none'></option>
-					<option value="语文">语文</option>
-					<option value="数学">数学</option>
-					<option value="政治">政治</option>
-					<option value="历史">历史</option>
-					<option value="地理">地理</option>
-					<option value="生物">生物</option>
-				</select>
 				教职工号：
-				<input type="text" id="teacherId" />
+				<input type="text" readonly="readonly"  id="teacherId"  value=""/>
 				备注：
 				<input type="text" id="normal" />
 				试卷编号：
 				<input type="text" readonly="readonly" id="paperId" value="" />
 				考试时间：
-				<input type="text"  id="examTime" placeholder="格式:yy/mm/dd/8:00PM" value="" />
-				
+				<!-- <input type="text"  id="examTime" placeholder="格式:yy/mm/dd/8:00PM" value="" /> -->
+				<input type="text"  id="year" value=""/>年
+				<select id="month_select" class="num_select">
+					<option value='-1' style='display: none'></option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>
+				月
+				<select id="day_select" class="num_select">
+					<option value='-1' style='display: none'></option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+				</select>
+				日
+				<select id="hour_select" class="num_select">
+					<option value='-1' style='display: none'></option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+				</select>
+				时
 				<button type="button" id="createExam">创建考试</button>
 		
 				<ul>
@@ -192,7 +329,7 @@
 						考试编号：
 						<input type="text" readonly="readonly" id="examId" value="" />
 						导入考生名单：
-						<input type="file" id="file" />
+						<input type="file" id="file" />(请您以.csv格式导入文件,并确保表格中学号列以StudentId作为表头)
 						<button type="button" id="addStudent">导入</button>
 						<div id="car-list"></div>
 						<li>&nbsp;</li>

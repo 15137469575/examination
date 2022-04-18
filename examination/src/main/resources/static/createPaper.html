@@ -7,10 +7,42 @@
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
-		<link rel="stylesheet" type="text/css" href="css/createPaper.css"/>
-		<script src="js/createPaper_01.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/createPaper.css" />
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/createPaper_02.js" type="text/javascript" charset="utf-8"></script>
-		
+		<!-- 不要封装，会报错 -->
+		<script type="text/javascript">
+			$(function() {
+				$(document).ready(function() {
+					$("#object_select").change(function() {
+						($("#object_select").val());
+					});
+				});
+				$("#creatPaper").on("click", function() {
+					if ($("#object_select").val() == -1) {
+						alert("请选择考试科目");
+					} else {
+
+						var form = {
+							"object": $("#object_select").val(),
+							"teacherName": $("#teacherName").val(),
+							"questionNumber": $("#questionNumber").val(),
+							"normal": $("#normal").val()
+						};
+
+						$.get("paperInformation/insert", form, function(res) {
+							alert("试卷创建成功");
+							var subject = document.getElementById('object_select').value;
+							// alert(object.value);
+							handleLocalStorage("set", "subject", subject);
+							var paperId = document.getElementById('paperId');
+							paperId.value = res;
+						})
+					}
+				})
+			})
+		</script>
+
 	</head>
 	<body>
 
@@ -25,7 +57,7 @@
 
 		<div class="mbody">
 			<div class="left">
-				
+
 				<div>
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
