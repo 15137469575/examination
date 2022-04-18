@@ -78,7 +78,7 @@
               (
                   SELECT exam_id
                   FROM exam_student
-                  WHERE student_id = 1001
+                  WHERE student_id = #{studentId}
               )
     </select>
 
