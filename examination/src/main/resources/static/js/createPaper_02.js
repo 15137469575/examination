@@ -1,5 +1,4 @@
-window.onload = function() {
-
+window.onload = function(){
 	var paperId = document.getElementById('paperId');
 
 	var str = localStorage.getItem('id');

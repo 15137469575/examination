@@ -13,7 +13,7 @@ function getMsg() {
             handleLocalStorage('set', 'userId', id);
             window.location.href = "createPaper.html";
         } else if (!rst) {
-            alert("您的登录信息有误，请重新登录");
+            alert("鎮ㄧ殑鐧诲綍淇℃伅鏈夎锛岃閲嶆柊鐧诲綍");
         }
     });
 }
