@@ -69,6 +69,9 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
 
     @Override
     public int register(MultipartFile img,int id) {
+        if (img == null){
+            return 0;
+        }
         String path = FileUtils.downLoad(img,baseDir);
         UserFaceInfo userFaceInfo = FaceUtils.detectFaces(path,faceEngine,id);
         File file = new File(path);
@@ -78,6 +81,9 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
 
     @Override
     public double compareFaceFeature(MultipartFile img, int targetId) {
+        if (img == null){
+            return 0;
+        }
         UserFaceInfo targetFaceInfo = userFaceInfoMapper.query(targetId);
         byte[] targetFeature = targetFaceInfo.getFaceFeature();
 

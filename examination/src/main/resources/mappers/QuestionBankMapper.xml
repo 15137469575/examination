@@ -45,7 +45,23 @@
         where type=#{type} and subject=#{object}
     </select>
 
-    <update id="update">
+    <select id="queryByAnyParams" resultType="org.upc.examination.entity.QuestionBank"
+                                  parameterType="org.upc.examination.entity.QuestionBank">
+        select * from question_bank;
+        <where>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="subject != null and subject != ''">
+                and subject = #{subject}
+            </if>
+            <if test="degreeDifficulty != null and degreeDifficulty != ''">
+                and degree_difficulty = #{degreeDifficulty}
+            </if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="org.upc.examination.entity.QuestionBank">
         update question_bank
         <set>
             <where>

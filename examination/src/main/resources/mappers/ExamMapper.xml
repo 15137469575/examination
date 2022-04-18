@@ -71,4 +71,6 @@
         FROM exam
         WHERE exam_id = #{examId}
     </select>
+
+    
 </mapper>

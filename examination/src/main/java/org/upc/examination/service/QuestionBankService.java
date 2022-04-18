@@ -21,4 +21,6 @@ public interface QuestionBankService {
 
     PageInfo<QuestionBank> doQueryByObjectAndType(String object,String type,int pageNum,int pageSize);
 
+    PageInfo<QuestionBank> doQueryByAnyParams(QuestionBank questionBank,int pageNum,int pageSize);
+
 }

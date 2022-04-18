@@ -14,12 +14,19 @@ public class PaperInformationController {
 
     @Resource
     private PaperInformationService paperInformationService;
+
+    /**
+     * 插入试卷信息，创建信息
+     * 返回值是paperId
+     * */
     @RequestMapping("/insert")
     public int doInsert(PaperInformation paperInformation){
         return paperInformationService.doInsert(paperInformation);
         //return 1;
     }
-
+/**
+ * 通过一个试卷Id,来获得该Id的试卷信息
+ * */
     @RequestMapping("/selectById")
     public PaperInformation selectByID(int index){
         return paperInformationService.selectById(index);

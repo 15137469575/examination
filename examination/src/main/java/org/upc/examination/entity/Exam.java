@@ -9,14 +9,14 @@ public class Exam {
   private String examName;
   private Integer paperId;
   private Integer invigilatorTeacherId;
-  private String examTime;//考试时间
-  private Double lengthExam;//考试时长
-  private String limTimeEntry;//限时进入
-  private String limTimeSub;//限时提交
-  private Integer examBatches;//考试批次
-  private String examRoomBatch;//考试场次
-  private String state;//考试状态，未开始，考试中，阅卷中，已结束
-  private String remark;//备注，可有可无，老师写备注
+  private String examTime;
+  private Double lengthExam;
+  private String limTimeEntry;
+  private String limTimeSub;
+  private Integer examBatches;
+  private String examRoomBatch;
+  private String state;
+  private String remark;
 
 
   public List<ExamStudent> getExamStudent() {

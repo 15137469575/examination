@@ -4,7 +4,6 @@
 <mapper namespace="org.upc.examination.mapper.QuestionPaperMapper">
 
     <resultMap id="selectByPaper" type="org.upc.examination.entity.QuestionPaper">
-        <result property="questionPaperId" column="id"/>
         <result property="questionPaperSort" column="sort"/>
         <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
             <result property="question" column="qus"/>
@@ -12,6 +11,10 @@
             <result property="optionB" column="B"/>
             <result property="optionC" column="C"/>
             <result property="optionD" column="D"/>
+            <result property="answer" column="answer"/>
+            <result property="degreeDifficulty" column="dd"/>
+            <result property="subject" column="sub"/>
+            <result property="type" column="ty"/>
         </association>
     </resultMap>
     <insert id="insert" parameterType="org.upc.examination.entity.QuestionPaper">
@@ -24,15 +27,19 @@
 
 
     <select id="selectByPaperId" resultMap="selectByPaper">
-        SELECT  question_paper.question_paper_id id,
-                question_paper.question_paper_sort sort,
-                question_bank.question qus,
-                question_bank.optionA A,
-                question_bank.optionB B,
-                question_bank.optionC C,
-                question_bank.optionD D
+        SELECT
+            question_paper.question_paper_sort sort,
+            question_bank.question qus,
+            question_bank.optionA A,
+            question_bank.optionB B,
+            question_bank.optionC C,
+            question_bank.optionD D,
+            question_bank.answer answer,
+            question_bank.degree_difficulty dd,
+            question_bank.subject sub,
+            question_bank.type ty
         FROM question_paper ,question_bank
-        WHERE question_paper.paper_id = #{index}
+        WHERE question_paper.paper_id = 8
           AND question_paper.question_id = question_bank.question_id
         ORDER BY(question_paper.question_paper_sort)
     </select>

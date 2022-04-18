@@ -15,13 +15,13 @@ public class ExamStudentController {
     @Resource
     private ExamStudentService examStudentService;
     /**
-     * 接收前台传来的excel表格解析后的列表，并且返回插入几条数据。
+     * 接收前台传来的excel表格解析后的列表，并且返回学生的数量。
      * **/
     @RequestMapping("/insert")
     int insert(ExamStudents examStudents) {
-        System.out.println("sdfs");
+
         int row = examStudentService.insert(examStudents.getExamId(), examStudents.getStudentId());
-        System.out.println(row);
+
         return row;
     }
 }

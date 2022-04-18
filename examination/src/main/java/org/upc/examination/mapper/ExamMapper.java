@@ -22,9 +22,16 @@ public interface ExamMapper {
      * 查询一个考试中的试卷中的题目数量
      */
     int countAll(int examId);
-
+/**
+ * 通过一个examId来筛选出一个试卷中所有题目的题号（是指在数据库中保存的question_paper_sort）,
+ *      * 返回值是一个List列表
+ *      * 是无序的
+ * */
     List<Exam> selectQuestion(int examId);
-
+/**
+ * 通过examId和questId来筛选出和四个选项和题目类型
+ *       返回值是Exam，是因为在Exam中设置了questionBank的属性
+ * */
     Exam selectQuestionIn(int examId,int questionId);
     /**
      * 根据examId来查询出Exam对象

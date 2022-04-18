@@ -1,6 +1,8 @@
 package org.upc.examination.entity;
 
 
+import java.text.SimpleDateFormat;
+
 public class QuestionBank {
 
   private Integer questionId;
@@ -14,6 +16,7 @@ public class QuestionBank {
   private Integer degreeDifficulty;
   private String questionLabels;
   private String answer;
+
 
 
   public Integer getQuestionId() {
@@ -117,7 +120,15 @@ public class QuestionBank {
   @Override
   public String toString() {
     return "QuestionBank{" +
-            "questionId=" + questionId +
+            "question='" + question + '\'' +
+            ", optionA='" + optionA + '\'' +
+            ", optionB='" + optionB + '\'' +
+            ", optionC='" + optionC + '\'' +
+            ", optionD='" + optionD + '\'' +
+            ", subject='" + subject + '\'' +
+            ", type='" + type + '\'' +
+            ", degreeDifficulty=" + degreeDifficulty +
+            ", answer='" + answer + '\'' +
             '}';
   }
 }
