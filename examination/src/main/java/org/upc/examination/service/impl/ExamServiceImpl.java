@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.upc.examination.entity.Exam;
 import org.upc.examination.mapper.ExamMapper;
 import org.upc.examination.service.ExamService;
+import org.upc.examination.utils.TimeFormat;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class ExamServiceImpl implements ExamService {
      * */
     @Override
     public int insert(Exam exam) {
-
+        TimeFormat timeFormat = new TimeFormat();
+        String strings = timeFormat.TimeConvert(exam.getExamTime());
+        exam.setExamTime(strings);
 
         if(exam.getExamId()==null){
             int row = examMapper.insert2(exam);
@@ -69,7 +72,11 @@ public class ExamServiceImpl implements ExamService {
      * */
     @Override
     public Exam selectExamById(int examId) {
-        return examMapper.selectExamById(examId);
+        Exam exam = examMapper.selectExamById(examId);
+        TimeFormat timeFormat = new TimeFormat();
+        String string = timeFormat.TimeConvert(exam.getExamTime());
+        exam.setExamTime(string);
+        return exam;
     }
 
     @Override

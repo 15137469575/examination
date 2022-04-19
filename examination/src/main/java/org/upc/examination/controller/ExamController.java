@@ -67,8 +67,9 @@ public class ExamController {
      * */
     @RequestMapping("/selectExamById")
     public Exam selectExamById(int examId){
+        Exam exam = examService.selectExamById(examId);
 
-        return examService.selectExamById(examId);
+        return exam;
     }
 
 
