@@ -49,7 +49,7 @@
         WHERE paper_id =
               (SELECT paper_id
                FROM exam
-               WHERE exam_id = 103)
+               WHERE exam_id = #{examId})
         ORDER BY question_paper_sort ASC
 
     </select>

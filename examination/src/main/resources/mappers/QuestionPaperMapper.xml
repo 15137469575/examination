@@ -45,7 +45,7 @@
             question_bank.subject sub,
             question_bank.type ty
         FROM question_paper ,question_bank
-        WHERE question_paper.paper_id = 8
+        WHERE question_paper.paper_id = #{paperId}
           AND question_paper.question_id = question_bank.question_id
         ORDER BY(question_paper.question_paper_sort)
     </select>

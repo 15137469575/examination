@@ -30,14 +30,16 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
             }
         }
         List<Integer> questionPaperSorted = questionPaperMapper.selectQuestionPaperSortList(questionPaper.getPaperId());
-        Integer temp = questionPaperSorted.get(0);
+
+
         questionPaperMapper.insert(questionPaper);
         int sort = 0;
         QuestionPaper questionPaper1 = questionPaperMapper.selectQuestionPaper(questionPaper.getQuestionPaperId());
-        if(temp == null){
+        if(questionPaperSorted.size() == 0){
             sort = 1;
             questionPaperMapper.updateQuestionPaperSortInt(questionPaper1.getQuestionPaperId(),sort);
         }else {
+            Integer temp = questionPaperSorted.get(0);
             sort = temp+1;
             questionPaperMapper.updateQuestionPaperSortInt(questionPaper1.getQuestionPaperId(),sort);
         }
