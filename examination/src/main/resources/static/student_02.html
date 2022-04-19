@@ -8,27 +8,85 @@
 		<link rel="stylesheet" type="text/css" href="css/student_02.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/getNowTime.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.right {
+				overflow-y: scroll;
+			}
+
+			table {
+				width: 100%;
+			}
+		</style>
 		<script type="text/javascript">
-		window.onload = function(){
-			console.log(typeof(handleLocalStorage("get","userId")));
-			var std = Number(handleLocalStorage("get","userId"));
-			console.log(typeof(std))
-			
-				$(document).ready(function(){
+			window.onload = function() {
+				console.log(typeof(handleLocalStorage("get", "userId")));
+				var std = Number(handleLocalStorage("get", "userId"));
+				console.log(typeof(std))
+
+				$(document).ready(function() {
 					var form = {
 						"studentId": std
-						
+
 					};
-					$.get("/exam/selectAllByStudent",form,function(res){
-						
+					$.get("/exam/selectAllByStudent", form, function(res) {
+
 						console.log(res);
-						
+						var str1 = "";
+
+						for (var i = 0; i < res.length; i++) {
+							str1 += "<tr cate-id='0' fid='0'>" +
+								"<td>" + res[i].examId + "</td>" +
+								"<td>" + res[i].examName + "</td>" +
+								"<td>" + res[i].paperId + "</td>" +
+								"<td>" + res[i].examTime + "</td>" +
+								"<td>" + res[i].limTimeEntry + "</td>" +
+								"<td>" + res[i].limTimeSub + "</td>" +
+								"<td>" + "<button id = 'in'>" + "进入考试" + "</button>" + "</td>";
+						}
+
+						test.innerHTML = str1;
+
+
+
+						$(document).on("click", "#in", function() {
+							var str2 = $(this).parents("tr").find("td").eq(3).text();
+							handleLocalStorage("set","examTime",str2);
+							var str3 = $(this).parents("tr").find("td").eq(4).text();
+							handleLocalStorage("set","limTimeEntry",str3);
+							// if (getNowTime() >= str2 && getNowTime() < str3) {
+							// 	var str4 = $(this).parents("tr").find("td").eq(2).text();
+								
+								
+							// 	handleLocalStorage("set", "examId", str4);
+								
+							// 	window.location.href = "face.html";
+								
+								
+							// } else {
+								
+							// 	alert("考试还未开始，请考试开始之后再进入答题")
+								
+							// }
+							var str4 = $(this).parents("tr").find("td").eq(2).text();
+							
+							
+							handleLocalStorage("set", "paperId", str4);
+							
+							var str5 = $(this).parents("tr").find("td").eq(0).text();
+							
+							handleLocalStorage("set", "examId", str5);
+							
+							window.location.href = "face.html";
+							
+						})
+
 					})
 				})
-		}
+			}
 		</script>
 	</head>
-	
+
 	<body>
 
 		<header class="mheader">
@@ -56,7 +114,18 @@
 			<div class="right">
 
 				<table class="questionTable">
+					<thead>
+						<tr>
 
+
+							<th width="10%">考试编号</th>
+							<th width="10%">考试科目</th>
+							<th width="10%">试卷编号</th>
+							<th width="20%">考试开始时间</th>
+							<th width="20%">禁止进入时间</th>
+							<th width="20%">考试结束时间</th>
+							<th width="10%">操作</th>
+					</thead>
 					<tbody class="x-cate" id="test">
 
 					</tbody>

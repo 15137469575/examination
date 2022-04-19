@@ -17,26 +17,36 @@
 					$("#object_select").change(function() {
 						($("#object_select").val());
 					});
+					
 				});
 				$("#creatPaper").on("click", function() {
 					if ($("#object_select").val() == -1) {
 						alert("请选择考试科目");
-					} else {
+						// console.log(typeof($("#queationNumber").val()));
+						
+					}
+					
+					 else {
 
+
+						 
+						 var tId = 	parseInt(handleLocalStorage("get","userId"));
 						var form = {
-							"object": $("#object_select").val(),
-							"teacherName": $("#teacherName").val(),
-							"questionNumber": $("#questionNumber").val(),
-							"normal": $("#normal").val()
+							"subject": object_select.value,
+							"paperTeacherId": tId,
+							"questionNum": $("#queationNumber").val(),
+							"remark": $("#normal").val()
 						};
 
-						$.get("paperInformation/insert", form, function(res) {
-							alert("试卷创建成功");
-							var subject = document.getElementById('object_select').value;
-							// alert(object.value);
-							handleLocalStorage("set", "subject", subject);
-							var paperId = document.getElementById('paperId');
-							paperId.value = res;
+						$.get("/paperInformation/insert", form, function(res) {
+							
+								alert("试卷创建成功");
+								var subject = document.getElementById('object_select').value;
+								// alert(object.value);
+								handleLocalStorage("set", "subject", subject);
+								var paperId = document.getElementById('paperId');
+								paperId.value = res;
+							
 						})
 					}
 				})
@@ -84,7 +94,7 @@
 				出题人姓名：
 				<input type="text" id="teacherName" />
 				题目数量：
-				<input type="text" id="queationNumber" />
+				<input type="text" id="queationNumber"  placeholder="请输入纯数字"/>
 				备注：
 				<input type="text" id="normal" />
 				<button id="creatPaper">创建试卷</button>
