@@ -65,7 +65,7 @@
     <select id="selectQuestionPaperSortList" resultType="java.lang.Integer">
         SELECT question_paper_sort
         FROM question_paper
-        WHERE paper_id = 8
+        WHERE paper_id = #{paperId}
         ORDER BY question_paper_sort DESC
 
     </select>
