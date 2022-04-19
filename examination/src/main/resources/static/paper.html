@@ -5,6 +5,7 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			body {
 				overflow: hidden;
@@ -77,9 +78,11 @@
 			$(function() {
 				var questioncard = document.getElementById('questionCard');
 				$(document).ready(function() {
-
+					
+					var eId = parseInt(handleLocalStorage("get","examId"));
+					console.log(typeof(eId));
 					var form = {
-						"examId": 103
+						"examId": eId
 					};
 					$.get("/exam/selectQuestSort", form, function(res) {
 						var str1 = "";
