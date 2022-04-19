@@ -24,15 +24,23 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
     @Override
     public int doInsert(QuestionPaper questionPaper) {
         List<Integer> i = questionPaperMapper.isSame(questionPaper.getPaperId());
-
-
         for(int j = 0;j<i.size();j ++){
             if(questionPaper.getQuestionId() == i.get(j)){
                 return 0;
             }
-
         }
+        List<Integer> questionPaperSorted = questionPaperMapper.selectQuestionPaperSortList(questionPaper.getPaperId());
+        Integer temp = questionPaperSorted.get(0);
         questionPaperMapper.insert(questionPaper);
+        int sort = 0;
+        QuestionPaper questionPaper1 = questionPaperMapper.selectQuestionPaper(questionPaper.getQuestionPaperId());
+        if(temp == null){
+            sort = 1;
+            questionPaperMapper.updateQuestionPaperSortInt(questionPaper1.getQuestionPaperId(),sort);
+        }else {
+            sort = temp+1;
+            questionPaperMapper.updateQuestionPaperSortInt(questionPaper1.getQuestionPaperId(),sort);
+        }
         return 1;
     }
 

@@ -41,14 +41,8 @@ public class ExamController {
     @RequestMapping("/selectQuestSort")
     public List<Integer> selectQuestSort(int examId){
 
-        List<Exam> row = examService.selectQuestion(examId);
-        List<Integer> list = new ArrayList<Integer>();
-
-        for(int i= 0;i<row.size();i++){
-            list.add(row.get(i).getQuestionPaper().getQuestionPaperSort()) ;
-        }
-
-        return list;
+        List<Integer> row = examService.selectQuestion(examId);
+        return row;
 
     }
     /**

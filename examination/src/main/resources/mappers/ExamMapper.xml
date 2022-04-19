@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.upc.examination.mapper.ExamMapper">
-
-    <resultMap id="selectList" type="org.upc.examination.entity.Exam">
+<!--
+    <resultMap id="selectList" type="integer">
         <association property="questionPaper" javaType="org.upc.examination.entity.QuestionPaper">
             <result property="questionPaperSort" column="qps"/>
 
         </association>
     </resultMap>
+    -->
     <resultMap id="selectNo2" type="org.upc.examination.entity.Exam">
         <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
             <result property="question" column="question"/>
@@ -42,14 +43,14 @@
                FROM exam
                WHERE exam_id = #{examId})
     </select>
-    <select id="selectQuestion" resultMap="selectList">
+    <select id="selectQuestion" resultType="integer">
         SELECT question_paper_sort qps
         FROM question_paper
         WHERE paper_id =
               (SELECT paper_id
                FROM exam
-               WHERE exam_id = #{examId})
-        <!--paper_sort ASC-->
+               WHERE exam_id = 103)
+        ORDER BY question_paper_sort ASC
 
     </select>
     <select id="selectQuestionIn" resultMap="selectNo2">

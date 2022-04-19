@@ -26,8 +26,14 @@ public interface QuestionPaperMapper {
  * 智能组卷，限定量是20
  * */
     List<Integer> randomSelectFromBank(String subject);
+/**
+ * 根据paperId来筛选出question_paper_sord
+ * */
+    List<Integer> selectQuestionPaperSortList(int paperId);
 
+    int updateQuestionPaperSortInt(int questionPaperId,int questionPaperSort);
 
+    QuestionPaper selectQuestionPaper(int questionPaperId);
 
 
 }

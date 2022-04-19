@@ -42,16 +42,18 @@ public class ExamServiceImpl implements ExamService {
     public int countAll(int examId) {
         return examMapper.countAll(examId);
     }
+
+
     /**
      * 通过一个examId来筛选出一个试卷中所有题目的题号（是指在数据库中保存的question_paper_sort）,
      *      * 返回值是一个List列表
      *      * 是无序的
      * */
+
     @Override
-    public List<Exam> selectQuestion(int examId) {
+    public List<Integer> selectQuestion(int examId) {
 
         return examMapper.selectQuestion(examId);
-
     }
     /**
      * 通过examId和questId来筛选出和四个选项和题目类型

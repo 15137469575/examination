@@ -27,7 +27,7 @@ public interface ExamMapper {
  *      * 返回值是一个List列表
  *      * 是无序的
  * */
-    List<Exam> selectQuestion(int examId);
+    List<Integer> selectQuestion(int examId);
 /**
  * 通过examId和questId来筛选出和四个选项和题目类型
  *       返回值是Exam，是因为在Exam中设置了questionBank的属性

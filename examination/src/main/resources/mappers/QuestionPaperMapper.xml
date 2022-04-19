@@ -17,13 +17,19 @@
             <result property="type" column="ty"/>
         </association>
     </resultMap>
-    <insert id="insert" parameterType="org.upc.examination.entity.QuestionPaper">
+    <insert id="insert" parameterType="org.upc.examination.entity.QuestionPaper" useGeneratedKeys="true" keyProperty="questionPaperId">
+
         insert into question_paper
         (paper_id,question_id,question_paper_sort,remark)
         values
         (#{paperId},#{questionId},#{questionPaperSort},#{remark})
 
     </insert>
+    <update id="updateQuestionPaperSortInt">
+        UPDATE question_paper
+        SET question_paper_sort = #{questionPaperSort}
+        WHERE question_paper_id = #{questionPaperId}
+    </update>
 
 
     <select id="selectByPaperId" resultMap="selectByPaper">
@@ -55,6 +61,19 @@
         SELECT question_id
         FROM question_paper
         WHERE paper_id = #{paperId}
+    </select>
+    <select id="selectQuestionPaperSortList" resultType="java.lang.Integer">
+        SELECT question_paper_sort
+        FROM question_paper
+        WHERE paper_id = 8
+        ORDER BY question_paper_sort DESC
+
+    </select>
+    <select id="selectQuestionPaper" resultType="org.upc.examination.entity.QuestionPaper">
+        SELECT *
+        FROM question_paper
+        WHERE question_paper_id =#{questionPaperId}
+
     </select>
 
 
