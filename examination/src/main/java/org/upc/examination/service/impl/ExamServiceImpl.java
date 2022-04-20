@@ -81,6 +81,13 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public List<Exam> selectAllByStudent(int studentId) {
-        return examMapper.selectAllByStudent(studentId);
+        List<Exam> examList = examMapper.selectAllByStudent(studentId);
+        //for(int i = 0;i<examList.size();i++){
+            TimeFormat timeFormat = new TimeFormat();
+            String timeStr =  examList.get(0).getExamTime();
+             String timeFormatStr = timeFormat.TimeConvert(timeStr);
+            examList.get(0).setExamTime(timeFormatStr);
+        //}
+        return examList;
     }
 }
