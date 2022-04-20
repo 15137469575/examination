@@ -62,6 +62,7 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
         for(int i = 0;i<ques.size();i++){
             questionPaper.setQuestionId(ques.get(i));
             questionPaper.setPaperId(paperId);
+            questionPaper.setQuestionPaperSort(i+1);
             questionPaperMapper.insert(questionPaper);
         }
         return 1;
