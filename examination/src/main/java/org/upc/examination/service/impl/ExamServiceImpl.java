@@ -85,8 +85,14 @@ public class ExamServiceImpl implements ExamService {
         for(int i = 0;i<examList.size();i++){
             TimeFormat timeFormat = new TimeFormat();
             String timeStr =  examList.get(i).getExamTime();
+            String stringEntry = examList.get(i).getLimTimeEntry();
+            String stringSub = examList.get(i).getLimTimeSub();
              String timeFormatStr = timeFormat.TimeConvert(timeStr);
+             String entryFormatStr = timeFormat.TimeConvert(stringEntry);
+            String subFormatStr = timeFormat.TimeConvert(stringSub);
             examList.get(i).setExamTime(timeFormatStr);
+            examList.get(i).setLimTimeEntry(entryFormatStr);
+            examList.get(i).setLimTimeSub(subFormatStr);
         }
         return examList;
     }
