@@ -4,5 +4,5 @@ import org.upc.examination.entity.AnswerInformantion;
 
 public interface AnswerInforService {
 
-    int insert(AnswerInformantion answerInformantion);
+    void insert(AnswerInformantion answerInformantion);
 }

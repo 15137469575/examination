@@ -18,4 +18,6 @@ public interface AnswerInforMapper {
      * */
     AnswerInformantion selectAnswerInformantion(int userId,int examId,int questionPaperId);
 
+    int updateAnswerInformantion(AnswerInformantion answerInformantion);
+
 }
