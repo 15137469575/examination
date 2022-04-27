@@ -54,20 +54,13 @@
 							handleLocalStorage("set","examTime",str2);
 							var str3 = $(this).parents("tr").find("td").eq(4).text();
 							handleLocalStorage("set","limTimeEntry",str3);
-							// if (getNowTime() >= str2 && getNowTime() < str3) {
-							// 	var str4 = $(this).parents("tr").find("td").eq(2).text();
-								
-								
-							// 	handleLocalStorage("set", "examId", str4);
-								
-							// 	window.location.href = "face.html";
-								
-								
-							// } else {
-								
-							// 	alert("考试还未开始，请考试开始之后再进入答题")
-								
+							var str6 = $(this).parents("tr").find("td").eq(5).text();
+							handleLocalStorage("set","limTimeSub",str6);
+							
+							// if(getNowTime() < str2){
+							// 	alert("考试还未开始")
 							// }
+							// else if(getNowTime() >= str2 && )
 							var str4 = $(this).parents("tr").find("td").eq(2).text();
 							
 							

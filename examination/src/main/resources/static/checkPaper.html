@@ -6,26 +6,43 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		
 		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
 		
 		
-		<!-- 这是缓存 -->
 		<script type="text/javascript">
-			window.onload = function() {
-		
-				var paperId = document.getElementById('paperId');
-				var str = localStorage.getItem('id');
-				if (str) {
-					paperId.value = str;
-					localStorage.removeItem('id');
-				}
-				window.onbeforeunload = function() {
-					localStorage.setItem('id', paperId.value);
-				}
-			}
+			$(function(){
+				$(document).ready(function(){
+					var form  = {
+						"paperId":handleLocalStorage("get","paperId")
+					};
+					$.get("",form,function(res){
+						var str = "";
+						str += "<tr cate-id='0' fid='0'>" +
+						"<td>" + "<button id = 'check'>" + "查看题目完整信息" + "</button>" + "</td>"+
+						"<td>" + "<button id = 'add'>" + "删除" + "</button>" + "</td>";	
+						
+						//显示题目的代码
+						
+						
+						//
+						
+						
+						replay.onclick = function(){
+							window.location.href = "makePaperInPerson.html";
+							
+						}
+						delect.onclick = function(){
+							window.location.href = "checkPaper.html";
+						}
+						
+						
+						
+					})
+				})
+			})
 		</script>
-		
 		
 	</head>
 	<body>
@@ -53,9 +70,22 @@
 				<div>
 					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
+				<div>
+					<a class="markingExaminationPaper" href="markingExaminationPaper.html">批阅试卷</a>
+				</div>
 			</div>
 			<div class="right">
-				这是查看试卷页面
+				<button type="button" id="replay">重组试卷</button>
+				<button type="button" id="delect">删除试卷</button>
+			<table class="questionTable">
+				<thead>
+					<th style="width: 500px;">题目</th>
+					<th style="width: 100px;">操作</th>
+				</thead>
+				<tbody class="x-cate" id="test">
+			
+				</tbody>
+			</table>
 			</div>
 		</div>
 

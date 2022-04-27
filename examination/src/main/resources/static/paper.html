@@ -6,6 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="js/cutTime.js" type="text/javascript" charset="utf-8"></script> -->
+		
 		<style type="text/css">
 			body {
 				overflow: hidden;
@@ -35,9 +37,9 @@
 				border-bottom: 2px solid #000000;
 			}
 
-			span {
+			/* span {
 				font-size: 1.8em;
-			}
+			} */
 
 			#notebook {
 				width: 98%;
@@ -72,6 +74,25 @@
 			#qi{
 				width: 98%;
 			}
+			p span {
+				
+			   color: red;
+					
+			 }
+					
+			p span.time {
+					
+			   color: black
+					
+			 }
+			 #endExam{
+				 float: right;
+			 }
+			 #question{
+				 width: 90%;
+				 display: inline-block;
+			 }
+					
 		</style>
 
 		<script type="text/javascript">
@@ -79,17 +100,21 @@
 				var questioncard = document.getElementById('questionCard');
 				$(document).ready(function() {
 					
+					
+					
 					var eId = parseInt(handleLocalStorage("get","examId"));
-					console.log(typeof(eId));
+					// console.log(eId);
 					var form = {
 						"examId": eId
+						
 					};
 					$.get("/exam/selectQuestSort", form, function(res) {
+						console.log(res);
 						var str1 = "";
 						for (var i = 0; i < res.length; i++) {
 							str1 += "<tr cate-id='0' fid='0'>" +
 								"<td>" + res[i] + "</td>" +
-								"<td class = 'qi'>" + "<button id = 'qi'>" + i + "</button>" + "</td>"+
+								"<td class = 'qi'>" + "<button id = 'qi'>" + res[i]  + "</button>" + "</td>"+
 								"<td>" + "<button id = 'red'>" + "标记该题" + "</button>" + "</td>" + 
 								"<td>" + "<button id = 'black'>" + "取消标记" + "</button>" + "</td>";
 
@@ -110,47 +135,83 @@
 						})
 						$(document).on("click", "#qi", function() {
 						$(this).css("background-color","yellow");
+						var str2 = $(this).parents("tr").find("td").eq(0).text();
+						handleLocalStorage("set","qi",str2);
 							var form1 = {
-								"examId": 103,
-								"questionId": $(this).parents("tr").find("td").eq(0).text()
+								"examId": eId,
+								"questionId": str2,
+								"studentId":handleLocalStorage("get","userId")
 							};
 							$.get("/exam//selectQuestionIn", form1, function(resg) {
+								console.log(resg);
 								var question = document.getElementById('question');
-								question.innerHTML = resg.questionBank.question;
+								question.innerHTML = resg.question;
 								var answer = document.getElementById('answer');
-								if (resg.questionBank.type == "单选") {
+								if (resg.type == "单选") {
 									
 									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionA + "</td>" +
+										"<td>" + "<input type='checkbox' id = 'checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.a + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionB + "</td>" +
+										"<td>" + "<input type='checkbox'  id = 'checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.b + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionC + "</td>" +
+										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.c + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionD + "</td>";
+										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.d + "</td>";
 								}
-								else if (resg.questionBank.type == "多选") {
+								else if (resg.type == "多选") {
 									
 									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
 										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionA + "</td>" +
+										"<td>" + resg.a + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
 										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionB + "</td>" +
+										"<td>" + resg.b + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
 										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionC + "</td>" +
+										"<td>" + resg.c + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
 										"<td>" + "<input type='checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
-										"<td>" + resg.questionBank.optionD + "</td>";
+										"<td>" + resg.d + "</td>";
 								}
 							})
 						})
-
+						$(document).on("click","#checkbox",function(){
+							if(this.checked == true){	
+								var str3 =  $(this).parents("tr").find("td").eq(1).text()
+								var form2 = {
+									"userId":parseInt(handleLocalStorage("get","userId")),
+									"examId":parseInt(handleLocalStorage("get","examId")),
+									"questionPaperId":parseInt(handleLocalStorage("get","qi")),
+									"answer":str3[0]
+								};
+								
+								$.get("/answerInformation/insert",form2,function(resj){
+									
+									alert(999);
+								})
+							}
+							else{
+								
+								console.log(9);
+							}
+						})
+						
+						$("#endExam").on("click",function(){
+							var msg = "您确定要退出考试吗？"
+							if (confirm(msg)==true){
+							    window.location.href = 'about:blank ';
+							    return true;
+							}else{
+							    
+							    return false;
+							}
+							
+							
+						})
 					})
 
 				})
@@ -168,13 +229,20 @@
 				}
 			}
 		</script>
+		
 	</head>
 	<body>
 		<div class="left">
+			
 			<div class="questionCard">
+				<p>距离2019年还有<span id="cutTime"></span></p>
+				 
+				<!-- <p><span id="cutTime"></span></p> -->
+				 
 				<table class="questionCardTable">
 					<thead>
-
+					
+					
 					</thead>
 					<tbody class="x-cate" id="questionCard">
 
@@ -192,7 +260,11 @@
 
 		</div>
 		<div class="right">
-			<div class="question" id="question">
+			<div class="question">
+				<div id="question">
+					
+				</div>
+				<button type="button" id="endExam">提交试卷</button>
 			</div>
 			<div class="answer">
 				<table class="questionCardTable">
@@ -203,7 +275,60 @@
 					
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
+		<script>
+		 
+		  var oSpan = document.getElementById('cutTime');
+		 
+		  function tow(n) {
+		 
+		    return n >= 0 && n < 10 ? '0' + n : '' + n;
+		 
+		  }
+		 
+		  function getDate(time) {
+		 
+		    var oDate = new Date();//获取日期对象
+		 
+		    var oldTime = oDate.getTime();//现在距离1970年的毫秒数
+		 
+		    var newDate = new Date(time);
+			
+			console.log(newDate);
+		 
+		    var newTime = newDate.getTime();//2019年距离1970年的毫秒数
+		 
+		    var second = Math.floor((newTime - oldTime) / 1000);//未来时间距离现在的秒数
+		 
+		    // var day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
+		 
+		    second = second % 86400;//余数代表剩下的秒数；
+		 
+		    var hour = Math.floor(second / 3600);//整数部分代表小时；
+		 
+		    second %= 3600; //余数代表 剩下的秒数；
+		 
+		    var minute = Math.floor(second / 60);
+		 
+		    second %= 60;
+			
+		 
+		    var str =  tow(hour) + '<span class="time">小时</span>'
+		 
+		        + tow(minute) + '<span class="time">分钟</span>'
+		 
+		        + tow(second) + '<span class="time">秒</span>';
+		 
+		    oSpan.innerHTML = str;
+		 
+		  }
+		 
+		  setInterval(function(){
+			  getDate('2022/04/28 00:00:00');
+		  }, 1000);
+		 
+		</script>
 	</body>
 </html>
