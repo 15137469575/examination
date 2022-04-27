@@ -5,45 +5,129 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
+		
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		
+
 		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
-		
-		
+
+<style type="text/css">
+			.num_select {
+				position: relative;
+				z-index: 1;
+				width: 10vw;
+				height: 3vh;
+				border-radius: 3px;
+				font-weight: bold;
+				font-size: 14px;
+				color: #9a9a9c;
+				border: 1px solid #cccccc;
+				box-sizing: border-box;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+			#searchButton,
+			#makePaperButton {
+				width: 10%;
+				margin-left: 5%;
+				padding: 0.2%;
+
+
+			}
+
+			.questionView {
+				overflow-y: scroll;
+				width: 89%;
+				height: 80vh;
+				border: 2px solid #000000;
+				border-radius: 10px;
+				background-color: #9a9a9c;
+				/* opacity: 0.5; */
+				background: rgba(100, 100, 100, 0.3);
+				text-align: center;
+				margin-left: 5%;
+				margin-top: 1vh;
+			}
+
+			#savePaper {
+				width: 10%;
+				margin-left: 50%;
+				padding: 0.2%;
+				float: right;
+			}
+
+			table {
+				background-color: #9a9a9c;
+
+			}
+		</style>
 		<script type="text/javascript">
-			$(function(){
-				$(document).ready(function(){
-					var form  = {
-						"paperId":handleLocalStorage("get","paperId")
+			$(function() {
+				$(document).ready(function() {
+					var form = {
+						"paperId": handleLocalStorage("get", "id")
 					};
-					$.get("",form,function(res){
-						var str = "";
-						str += "<tr cate-id='0' fid='0'>" +
-						"<td>" + "<button id = 'check'>" + "查看题目完整信息" + "</button>" + "</td>"+
-						"<td>" + "<button id = 'add'>" + "删除" + "</button>" + "</td>";	
+					$.get("/questionPaper/selectByPaperID", form, function(res) {
+						console.log(res);
+						var str1 = "";
 						
-						//显示题目的代码
-						
-						
-						//
-						
-						
-						replay.onclick = function(){
+						var str2 = "";
+
+						for (var i = 0; i < res.length; i++) {
+							if(res[i].questionBank.type == "单选"){
+								if(res[i].questionBank.answer[0] == "A"){
+									str2 = res[i].questionBank.optionA;
+								}
+								else if(res[i].questionBank.answer[0] == "B"){
+									str2 = res[i].questionBank.optionB;
+								}
+								else if(res[i].questionBank.answer[0] == "C"){
+									str2 = res[i].questionBank.optionC;
+								}
+								else if(res[i].questionBank.answer[0] == "D"){
+									str2 = res[i].questionBank.optionD;
+								}
+								str1 += "<tr cate-id='0' fid='0'>" +
+									"<td>" + res[i].questionBank.question + "</td>" +
+									"<td>" + str2 + "</td>" +
+									"<td>" + res[i].questionBank.subject + "</td>" +
+									"<td>" + res[i].questionBank.type + "</td>" +
+									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
+									"<td>" + "<button id = 'delectQuestion'>" + "删除" + "</button>" + "</td>";
+							}
+							else {
+								str1 += "<tr cate-id='0' fid='0'>" +
+									"<td>" + res[i].questionBank.question + "</td>" +
+									"<td>" + res[i].questionBank.answer + "</td>" +
+									"<td>" + res[i].questionBank.subject + "</td>" +
+									"<td>" + res[i].questionBank.type + "</td>" +
+									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
+									"<td>" + "<button id = 'delectQuestion'>" + "删除" + "</button>" + "</td>";
+							}
+
+
+
+						}
+						test.innerHTML = str1;
+
+
+						replay.onclick = function() {
 							window.location.href = "makePaperInPerson.html";
-							
+
 						}
-						delect.onclick = function(){
-							window.location.href = "checkPaper.html";
+						delect.onclick = function() {
+							handleLocalStorage("set","id","");
+							window.location.href = "createPaper.html";
 						}
-						
-						
-						
+
+
+
 					})
 				})
 			})
 		</script>
-		
+
 	</head>
 	<body>
 
@@ -56,11 +140,11 @@
 			</div>
 		</header>
 
-		
+
 
 		<div class="mbody">
 			<div class="left">
-				
+
 				<div>
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
@@ -77,15 +161,25 @@
 			<div class="right">
 				<button type="button" id="replay">重组试卷</button>
 				<button type="button" id="delect">删除试卷</button>
-			<table class="questionTable">
-				<thead>
-					<th style="width: 500px;">题目</th>
-					<th style="width: 100px;">操作</th>
-				</thead>
-				<tbody class="x-cate" id="test">
-			
-				</tbody>
-			</table>
+				<div class="questionView">
+					<table class="questionTable">
+						<thead>
+							<tr>
+				
+								<th width="32%">问题</th>
+								<th width="5%">答案</th>
+								<th width="5%">科目</th>
+								<th width="5%">题型</th>
+								<th width="5%">难度</th>
+								<th width="5%">&nbsp;操作</th>
+						</thead>
+						<tbody class="x-cate" id="test">
+				
+						</tbody>
+					</table>
+				
+				
+				</div>
 			</div>
 		</div>
 
