@@ -39,7 +39,9 @@ public class AnswerInforServiceImpl implements AnswerInforService {
             if(answerInformantion.getAnswer()!=null){
                 answerInforMapper.updateAnswerInformantion(answerInformantion);
             }
+
         }
 
     }
+
 }
