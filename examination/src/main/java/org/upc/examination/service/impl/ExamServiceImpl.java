@@ -2,6 +2,7 @@ package org.upc.examination.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.upc.examination.entity.Exam;
+import org.upc.examination.entity.ExamAnswer;
 import org.upc.examination.mapper.ExamMapper;
 import org.upc.examination.service.ExamService;
 import org.upc.examination.utils.TimeFormat;
@@ -63,8 +64,8 @@ public class ExamServiceImpl implements ExamService {
      *       返回值是Exam，是因为在Exam中设置了questionBank的属性
      * */
     @Override
-    public Exam selectQuestionIn(int examId, int questionId) {
-        Exam exam = examMapper.selectQuestionIn(examId, questionId);
+    public ExamAnswer selectQuestionIn(int examId, int questionId, int studentId) {
+        ExamAnswer exam = examMapper.selectQuestionIn(examId, questionId,studentId);
         return exam;
     }
     /**
@@ -96,4 +97,5 @@ public class ExamServiceImpl implements ExamService {
         }
         return examList;
     }
+
 }

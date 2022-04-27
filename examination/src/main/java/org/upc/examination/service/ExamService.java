@@ -2,6 +2,7 @@ package org.upc.examination.service;
 
 
 import org.upc.examination.entity.Exam;
+import org.upc.examination.entity.ExamAnswer;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface ExamService {
      * 通过examId和questId来筛选出和四个选项和题目类型
      *       返回值是Exam，是因为在Exam中设置了questionBank的属性
      * */
-    Exam selectQuestionIn(int examId,int questionId);
+    ExamAnswer selectQuestionIn(int examId, int questionId, int studentId);
     /**
      * 根据examId来查询出Exam对象,用于向学生展示考试信息
      * */

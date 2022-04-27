@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.upc.examination.entity.Exam;
+import org.upc.examination.entity.ExamAnswer;
 import org.upc.examination.service.ExamService;
 
 import javax.annotation.Resource;
@@ -50,8 +51,8 @@ public class ExamController {
      * 返回值是Exam，是因为在Exam中设置了questionBank的属性
      * **/
     @RequestMapping("/selectQuestionIn")
-    public Exam selectQuestionIn(int examId,int questionId){
-        return examService.selectQuestionIn(examId, questionId);
+    public ExamAnswer selectQuestionIn(int examId, int questionId, int studentId){
+        return examService.selectQuestionIn(examId, questionId,studentId);
     }
 
     /**
