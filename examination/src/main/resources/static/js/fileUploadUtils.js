@@ -113,13 +113,28 @@ function compressRegister(fileName) {
 	var form = {
 		"fileName": fileName,
 	};
-	jQuery("/face/compressRegister",form,function (rst) {
-		if(rst){
+	$.ajax({
+		type : "post",
+		url : "/face/compressRegister",
+		data : form,
+		success : function (rst) {
+			if(rst.length != 0){
+				var span = document.getElementById("msg");
+				let msg = "";
+
+				rst.forEach((item,index,rst) => {
+					msg = msg + item + "\n";
+				});
+
+				span.innerText = msg + "认证失败";
+			}else{
+				var span = document.getElementById("msg");
+				span.innerText = "全部人脸注册成功";
+			}
+		},
+		error : function (rst) {
 			var span = document.getElementById("msg");
-			span.innerText = "全部人脸注册成功";
-		}else{
-			var span = document.getElementById("msg");
-			span.innerText = "存在一些人脸认证失败";
-		}
+			span.innerText = "人脸注册出现异常";
+		},
 	});
 }

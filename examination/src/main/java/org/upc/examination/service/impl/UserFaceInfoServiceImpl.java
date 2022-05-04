@@ -142,7 +142,17 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
         File[] files = dirFile.listFiles();
 
         for (File file : files){
+            if(file.isDirectory()){
+                continue;
+            }
             String name = file.getName().split("\\.")[0];
+            String prefix = file.getName().split("\\.")[1];
+            if(prefix.equals("png") || prefix.equals("jpg") || prefix.equals("bmp")){
+
+            }else{
+                file.delete();
+                continue;
+            }
             imageInfo = getRGBData(file);
             faceEngine.detectFaces(imageInfo.getImageData(),
                     imageInfo.getWidth(),
