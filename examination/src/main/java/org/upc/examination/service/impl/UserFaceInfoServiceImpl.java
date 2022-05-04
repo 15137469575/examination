@@ -150,6 +150,7 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
             if(prefix.equals("png") || prefix.equals("jpg") || prefix.equals("bmp")){
 
             }else{
+                failList.add(name);
                 file.delete();
                 continue;
             }
