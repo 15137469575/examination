@@ -1,3 +1,4 @@
+// dataURL转file文件
 function dataURL2File(dataUrl) {
     var type1 = dataUrl.split(',')[0].split(':')[1].split(';')[0];
     var bytes = window.atob(dataUrl.split(',')[1]);
@@ -9,6 +10,7 @@ function dataURL2File(dataUrl) {
     return new File([bites], "compare.png", {type: type1});
 }
 
+// 人脸识别请求
 function compare(file, index) {
     var formData = new FormData();
     formData.append("img", file);
@@ -37,6 +39,7 @@ function compare(file, index) {
     })
 }
 
+// 单图片注册
 function register(file, id) {
     var formData = new FormData();
     formData.append("img", file);
@@ -51,7 +54,7 @@ function register(file, id) {
         contentType: false,
         success: function (rst) {
             if (rst == "success"){
-                alert("成功")
+                alert("成功");
             }else {
                 alert("失败");
             }

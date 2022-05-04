@@ -4,8 +4,10 @@ import com.arcsoft.face.*;
 import com.arcsoft.face.enums.DetectMode;
 import com.arcsoft.face.enums.DetectOrient;
 import com.arcsoft.face.enums.ErrorInfo;
+import com.arcsoft.face.toolkit.ImageInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.upc.examination.entity.UserFaceInfo;
 import org.upc.examination.mapper.UserFaceInfoMapper;
@@ -16,6 +18,12 @@ import org.upc.examination.utils.FileUtils;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.arcsoft.face.toolkit.ImageFactory.getRGBData;
 
 @Service
 public class UserFaceInfoServiceImpl implements UserFaceInfoService {
@@ -108,4 +116,72 @@ public class UserFaceInfoServiceImpl implements UserFaceInfoService {
 
         return faceSimilar.getScore();
     }
+
+    @Override
+    public int sliceUpload(MultipartFile file,String fileName) throws IOException {
+        if (file == null){
+            return 0;
+        }
+        File myFile = new File(baseDir + File.separator + fileName);
+        int result = FileCopyUtils.copy(file.getInputStream(),new FileOutputStream(myFile));
+        if(result != 0){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<String> compressRegister(String fileName) {
+        List<String> failList = new ArrayList<>();
+        UserFaceInfo userFaceInfo = null;
+        ImageInfo imageInfo = null;
+        List<FaceInfo> faceInfoList = new ArrayList<>();
+
+        File dirFile = new File(baseDir + File.separator + fileName.split("\\.")[0]);
+        File[] files = dirFile.listFiles();
+
+        for (File file : files){
+            String name = file.getName().split("\\.")[0];
+            imageInfo = getRGBData(file);
+            faceEngine.detectFaces(imageInfo.getImageData(),
+                    imageInfo.getWidth(),
+                    imageInfo.getHeight(),
+                    imageInfo.getImageFormat(),
+                    faceInfoList);
+            if (faceInfoList.size() == 1){
+                FaceFeature faceFeature = new FaceFeature();
+                faceEngine.extractFaceFeature(imageInfo.getImageData(),
+                        imageInfo.getWidth(),
+                        imageInfo.getHeight(),
+                        imageInfo.getImageFormat(),
+                        faceInfoList.get(0),
+                        faceFeature);
+                userFaceInfo = new UserFaceInfo(Integer.valueOf(name),faceFeature.getFeatureData());
+                file.delete();
+                userFaceInfoMapper.UserFaceRegister(userFaceInfo);
+            }else {
+                file.delete();
+                failList.add(name);
+            }
+        }
+
+        dirFile.delete();
+
+        return failList;
+    }
+
+    @Override
+    public boolean mergeFile(String fileName, int size) {
+        if (FileUtils.mergeFile(fileName,baseDir,size)){
+            if (FileUtils.unZip(fileName,baseDir)){
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
 }
