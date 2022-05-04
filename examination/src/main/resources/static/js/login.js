@@ -12,8 +12,13 @@ function getMsg() {
         } else if (rst.identidy == "teacher") {
             handleLocalStorage('set', 'userId', id);
             window.location.href = "createPaper.html";
+		
         } else if (!rst) {
             alert("您的登录信息有误，请重新登录");
         }
+		else if(rst.identidy == "admin"){
+			 handleLocalStorage('set', 'userId', id);
+			   window.location.href = "admin01.html";
+		}
     });
 }
