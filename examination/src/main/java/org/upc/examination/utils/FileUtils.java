@@ -1,7 +1,5 @@
 package org.upc.examination.utils;
 
-import com.github.junrar.Archive;
-import com.github.junrar.exception.RarException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;

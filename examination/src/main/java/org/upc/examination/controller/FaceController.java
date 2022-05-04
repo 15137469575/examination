@@ -39,7 +39,7 @@ public class FaceController {
 
     @PostMapping("/compressRegister")
     public List<String> compressRegister(String fileName) {
-        return userFaceInfoService.compressRegister(fileName);
+        return userFaceInfoService.compressRegister(fileName.split("\\.")[0]);
     }
 
 }
