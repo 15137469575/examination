@@ -1,56 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
-	<link rel="stylesheet" type="text/css" href="css/student.css" />
-	<link rel="stylesheet" type="text/css" href="css/student_02.css" />
-</head>
-<body>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
+		<link rel="stylesheet" type="text/css" href="css/student.css" />
+		<link rel="stylesheet" type="text/css" href="css/student_02.css" />
+		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/getNowTime.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.right {
+				overflow-y: scroll;
+			}
 
-<header class="mheader">
-	<div class="welcom">
-		欢迎来到线上考试平台
-	</div>
-	<div class="back">
-		<a href="login.html">返回</a>
-	</div>
-</header>
+			table {
+				width: 100%;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				console.log(typeof(handleLocalStorage("get", "userId")));
+				var std = Number(handleLocalStorage("get", "userId"));
+				console.log(typeof(std))
 
-<div class="mbody">
-	<div class="left">
-		<div>
-			<a class="notice" href="student_01.html">查看通知</a>
+				$(document).ready(function() {
+					var form = {
+						"studentId": std
+
+					};
+					$.get("/exam/selectAllByStudent", form, function(res) {
+
+						console.log(res);
+						var str1 = "";
+
+						for (var i = 0; i < res.length; i++) {
+							str1 += "<tr cate-id='0' fid='0'>" +
+								"<td>" + res[i].examId + "</td>" +
+								"<td>" + res[i].examName + "</td>" +
+								"<td>" + res[i].paperId + "</td>" +
+								"<td>" + res[i].examTime + "</td>" +
+								"<td>" + res[i].limTimeEntry + "</td>" +
+								"<td>" + res[i].limTimeSub + "</td>" +
+								"<td>" + "<button id = 'in'>" + "进入考试" + "</button>" + "</td>";
+						}
+
+						test.innerHTML = str1;
+
+
+
+						$(document).on("click", "#in", function() {
+							var str2 = $(this).parents("tr").find("td").eq(3).text();
+							handleLocalStorage("set","examTime",str2);
+							var str3 = $(this).parents("tr").find("td").eq(4).text();
+							handleLocalStorage("set","limTimeEntry",str3);
+							var str6 = $(this).parents("tr").find("td").eq(5).text();
+							handleLocalStorage("set","limTimeSub",str6);
+							
+							// if(getNowTime() < str2){
+							// 	alert("考试还未开始")
+							// }
+							// else if(getNowTime() >= str2 && )
+							var str4 = $(this).parents("tr").find("td").eq(2).text();
+							
+							
+							handleLocalStorage("set", "paperId", str4);
+							
+							var str5 = $(this).parents("tr").find("td").eq(0).text();
+							
+							handleLocalStorage("set", "examId", str5);
+							
+							window.location.href = "face.html";
+							
+						})
+
+					})
+				})
+			}
+		</script>
+	</head>
+
+	<body>
+
+		<header class="mheader">
+			<div class="welcom">
+				欢迎来到线上考试平台
+			</div>
+			<div class="back">
+				<a href="login.html">返回</a>
+			</div>
+		</header>
+
+		<div class="mbody">
+			<div class="left">
+				<div>
+					<a class="notice" href="student_01.html">查看通知</a>
+				</div>
+				<div>
+					<a class="jionExame" href="student_02.html">参加考试</a>
+				</div>
+				<div>
+					<a class="viewResults" href="student_03.html">查看成绩</a>
+				</div>
+				<div class="backgroud"></div>
+			</div>
+			<div class="right">
+
+				<table class="questionTable">
+					<thead>
+						<tr>
+
+
+							<th width="10%">考试编号</th>
+							<th width="10%">考试科目</th>
+							<th width="10%">试卷编号</th>
+							<th width="20%">考试开始时间</th>
+							<th width="20%">禁止进入时间</th>
+							<th width="20%">考试结束时间</th>
+							<th width="10%">操作</th>
+					</thead>
+					<tbody class="x-cate" id="test">
+
+					</tbody>
+				</table>
+
+
+
+
+
+
+			</div>
 		</div>
-		<div>
-			<a class="jionExame" href="student_02.html">参加考试</a>
-		</div>
-		<div>
-			<a class="viewResults" href="student_03.html">查看成绩</a>
-		</div>
-		<div class="backgroud"></div>
-	</div>
-	<div class="right">
 
-
-		<div class="english">
-
-			<a
-					href="examPrepare.html">大学英语4-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间：2022/04/28&nbsp;&nbsp;16:00PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请考生注意时间，准时考试！</a>
-
-		</div>
-
-
-		<div class="english">
-
-			<a
-					href="examPrepare.html">高等数学4-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间：2022/04/28&nbsp;&nbsp;16:00PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请考生注意时间，准时考试！</a>
-
-		</div>
-
-	</div>
-</div>
-
-</body>
+	</body>
 </html>

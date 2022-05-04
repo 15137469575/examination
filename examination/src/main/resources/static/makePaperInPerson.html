@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title></title>
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" href="css/student.css" />
 
@@ -78,14 +79,12 @@
 				// 这里是给自动组卷的响应函数
 				$("#makePaperButton").on("click", function() {
 
-					if ($("#object_select").val() == -1) {
-						alert("请选择考试科目");
-					} else {
+				
 						$.ajax({
 							url: "/questionPaper/random",
 							type: "get",
 							data: {
-								"subject": $("#object_select").val(),
+								"subject": handleLocalStorage("get","subject"),
 								"paperId": $("#paperId").val()
 							},
 							success: function(res) {
@@ -93,18 +92,15 @@
 								window.location.href = "checkPaper.html";
 							}
 						})
-					}
+					
 
 				})
 				//这是手动组卷的响应函数
 				$("#searchButton").on("click", function() {
 
-					if ($("#object_select").val() == -1) {
-						alert("请选择考试科目");
-					} else {
 						var form = {
 
-							"object": $("#object_select").val(),
+							"object": handleLocalStorage("get","subject"),
 							"type": $("#questionType_select").val(),
 							"pageNum": 1,
 							"pageSize": 10
@@ -160,15 +156,12 @@
 
 
 
-					};
+					
 				})
 
 
 				//这是select
 				$(document).ready(function() {
-					$("#object_select").change(function() {
-						$("#object_select").val();
-					});
 					$("#questionType_select").change(function() {
 						$("#questionType_select").val();
 					});
@@ -204,21 +197,13 @@
 				<div>
 					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
+				<div>
+					<a class="markingExaminationPaper" href="markingExaminationPaper.html">批阅试卷</a>
+				</div>
 			</div>
 			<div class="right">
 				<div class="rightTop">
 					试卷编号：<input type="text" id="paperId" value="" />
-					科目(必选):
-					<select id="object_select" class="num_select">
-						<option value='-1' style='display: none'></option>
-						<option value="语文">语文</option>
-						<option value="数学">数学</option>
-						<option value="政治">政治</option>
-						<option value="历史">历史</option>
-						<option value="地理">地理</option>
-						<option value="生物">生物</option>
-					</select>
-
 					题型:
 					<select id="questionType_select" class="num_select">
 						<option value='-1' style='display: none'></option>

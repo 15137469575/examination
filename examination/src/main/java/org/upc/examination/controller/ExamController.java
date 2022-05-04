@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.upc.examination.entity.Exam;
+import org.upc.examination.entity.ExamAnswer;
 import org.upc.examination.service.ExamService;
 
 import javax.annotation.Resource;
@@ -41,14 +42,8 @@ public class ExamController {
     @RequestMapping("/selectQuestSort")
     public List<Integer> selectQuestSort(int examId){
 
-        List<Exam> row = examService.selectQuestion(examId);
-        List<Integer> list = new ArrayList<Integer>();
-
-        for(int i= 0;i<row.size();i++){
-            list.add(row.get(i).getQuestionPaper().getQuestionPaperSort()) ;
-        }
-
-        return list;
+        List<Integer> row = examService.selectQuestion(examId);
+        return row;
 
     }
     /**
@@ -56,15 +51,31 @@ public class ExamController {
      * 返回值是Exam，是因为在Exam中设置了questionBank的属性
      * **/
     @RequestMapping("/selectQuestionIn")
-    public Exam selectQuestionIn(int examId,int questionId){
-        return examService.selectQuestionIn(examId, questionId);
+    public ExamAnswer selectQuestionIn(int examId, int questionId, int studentId){
+        return examService.selectQuestionIn(examId, questionId,studentId);
     }
 
+    /**
+     * 和下面的selectExamById()配套，实现考试发布功能
+     * 考试发布：教师选择考试发布
+     * */
+    //@RequestMapping("/reselve")
+    //public void reselve(int examId){
+      //   int temp = examId;
+    //}
     /**
      * 根据examId来查询出Exam对象,用于向学生展示考试信息
      * */
     @RequestMapping("/selectExamById")
     public Exam selectExamById(int examId){
-        return examService.selectExamById(examId);
+        Exam exam = examService.selectExamById(examId);
+
+        return exam;
+    }
+
+
+    @RequestMapping("/selectAllByStudent")
+    public List<Exam> selectAllByStudent(int studentId){
+        return examService.selectAllByStudent(studentId);
     }
 }

@@ -80,13 +80,13 @@ public class QuestionPaper {
   @Override
   public String toString() {
     return "QuestionPaper{" +
-            "questionPaperId=" + questionPaperId +
-            ", paperId=" + paperId +
-            ", questionId=" + questionId +
-            ", questionPaperSort=" + questionPaperSort +
-            ", remark='" + remark + '\'' +
-            ", paperInformation=" + paperInformation +
-            ", questionBank=" + questionBank +
+
+
+
+            " questionPaperSort=" + questionPaperSort +
+
+
+            ",questionBank=" + questionBank +
             '}';
   }
 }

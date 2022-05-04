@@ -18,10 +18,22 @@ public interface QuestionPaperMapper {
      * 根据试卷序号来选择题目
      * */
     List<QuestionPaper> selectByPaperId(int index);
-
+/**
+ * 通过一个paperId来筛选出该试卷中中的questionId
+ * */
     List<Integer>  isSame(int paperId);
-
+/**
+ * 智能组卷，限定量是20
+ * */
     List<Integer> randomSelectFromBank(String subject);
+/**
+ * 根据paperId来筛选出question_paper_sord
+ * */
+    List<Integer> selectQuestionPaperSortList(int paperId);
+
+    int updateQuestionPaperSortInt(int questionPaperId,int questionPaperSort);
+
+    QuestionPaper selectQuestionPaper(int questionPaperId);
 
 
 }

@@ -2,14 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.upc.examination.mapper.ExamMapper">
-
-    <resultMap id="selectList" type="org.upc.examination.entity.Exam">
+<!--
+    <resultMap id="selectList" type="integer">
         <association property="questionPaper" javaType="org.upc.examination.entity.QuestionPaper">
             <result property="questionPaperSort" column="qps"/>
 
         </association>
     </resultMap>
-    <resultMap id="selectNo2" type="org.upc.examination.entity.Exam">
+    -->
+    <!--
+    <resultMap id="selectNo2" type="org.upc.examination.entity.ExamAnswer">
         <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
             <result property="question" column="question"/>
             <result property="optionA" column="optionA"/>
@@ -18,7 +20,9 @@
             <result property="optionD" column="optionD"/>
             <result property="type" column="type"/>
         </association>
+        <association property="answerInformation"
     </resultMap>
+    -->
     <insert id="insert">
         INSERT INTO exam (exam_id,exam_name,paper_id,invigilator_teacher_id,exam_time,length_exam,lim_time_entry,lim_time_sub,exam_batches,exam_room_batch,state,remark)
         VALUES (#{examId},#{examName},#{paperId},#{invigilatorTeacherId},#{examTime},#{lengthExam},#{limTimeEntry},#{limTimeSub},#{examBatches},#{examRoomBatch},#{state},#{remark})
@@ -42,18 +46,18 @@
                FROM exam
                WHERE exam_id = #{examId})
     </select>
-    <select id="selectQuestion" resultMap="selectList">
+    <select id="selectQuestion" resultType="integer">
         SELECT question_paper_sort qps
         FROM question_paper
         WHERE paper_id =
               (SELECT paper_id
                FROM exam
                WHERE exam_id = #{examId})
-        <!--paper_sort ASC-->
+        ORDER BY question_paper_sort ASC
 
     </select>
-    <select id="selectQuestionIn" resultMap="selectNo2">
-
+    <select id="selectQuestionIn" resultType="org.upc.examination.entity.ExamAnswer">
+<!--
         SELECT question,optionA,optionB,optionC,optionD,type
         FROM question_bank
         WHERE question_id =
@@ -65,10 +69,36 @@
                                                      FROM exam
                                                      WHERE exam_id = #{examId}
                                                  ))
+                                                 -->
+        SELECT QB.question Question,QB.optionA A,QB.optionB B,QB.optionC C,QB.optionD D,QB.type Type,AI.answer Answer
+        FROM question_bank QB,answer_informantion AI
+        WHERE QB.question_id IN (
+        SELECT QP.question_id
+        FROM question_paper QP
+        WHERE QP.question_paper_sort = #{questionId} AND QP.paper_id =
+                                                         (SELECT EX.paper_id
+                                                         FROM exam EX
+                                                         WHERE EX.exam_id = #{examId} ))
+        AND AI.user_id = #{studentId}
+        AND AI.exam_id = #{examId}
+        AND AI.question_paper_id = #{questionId}
     </select>
     <select id="selectExamById" resultType="org.upc.examination.entity.Exam">
         SELECT *
         FROM exam
         WHERE exam_id = #{examId}
     </select>
+    <select id="selectAllByStudent" resultType="org.upc.examination.entity.Exam">
+        SELECT *
+        FROM exam
+        WHERE exam_id IN
+              (
+                  SELECT exam_id
+                  FROM exam_student
+                  WHERE student_id = #{studentId}
+              )
+    </select>
+
+
+
 </mapper>
