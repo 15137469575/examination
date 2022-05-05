@@ -29,4 +29,6 @@ public class AnswerInforController {
     public void insert(AnswerInformantion answerInformantion){
         answerInforService.insert(answerInformantion);
     }
+
+
 }

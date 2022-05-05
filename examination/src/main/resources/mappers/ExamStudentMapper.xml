@@ -10,4 +10,14 @@
         VALUES
             (#{examId},#{studentId})
     </insert>
+    <update id="updateState">
+        UPDATE exam_student
+        SET examState = 1
+        WHERE exam_id = #{examId}  AND student_id = #{studentId}
+    </update>
+    <select id="selectState" resultType="org.upc.examination.entity.ExamStudent">
+        SELECT *
+        FROM exam_student
+        WHERE exam_id = #{examId} AND student_id = #{studentId}
+    </select>
 </mapper>

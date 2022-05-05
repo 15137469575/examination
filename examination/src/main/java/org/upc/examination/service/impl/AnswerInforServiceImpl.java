@@ -3,7 +3,9 @@ package org.upc.examination.service.impl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 import org.upc.examination.entity.AnswerInformantion;
+import org.upc.examination.entity.ExamStudent;
 import org.upc.examination.mapper.AnswerInforMapper;
+import org.upc.examination.mapper.ExamStudentMapper;
 import org.upc.examination.service.AnswerInforService;
 
 import javax.annotation.Resource;
@@ -12,6 +14,8 @@ import javax.annotation.Resource;
 public class AnswerInforServiceImpl implements AnswerInforService {
     @Resource
     private AnswerInforMapper answerInforMapper;
+    @Resource
+    private ExamStudentMapper examStudentMapper;
     /**
      * 插入考生回答内容
      * 首先检查数据表中是否有同一位考生在同一场考试的同一道试题是否已经存在
@@ -27,6 +31,15 @@ public class AnswerInforServiceImpl implements AnswerInforService {
      * */
     @Override
     public void insert(AnswerInformantion answerInformantion) {
+        /**
+         * 根据前台传来的answerInformantion中的examId和studentId
+         *      来更改exam_student中的examState为1
+         *      表示：考生参加考试的状态
+         * */
+        ExamStudent examStudent = examStudentMapper.selectState(answerInformantion.getExamId(),answerInformantion.getUserId());
+        if(examStudent.getExamState()==0){
+            examStudentMapper.updateState(answerInformantion.getExamId(),answerInformantion.getUserId());
+        }
         AnswerInformantion answerInformantion1 = new AnswerInformantion();
         answerInformantion1 = answerInforMapper.selectAnswerInformantion(answerInformantion.getUserId(),answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
         if(answerInformantion1 == null){

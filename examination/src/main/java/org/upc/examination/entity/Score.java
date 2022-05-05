@@ -9,9 +9,6 @@ public class Score {
   private Integer paperId;
   private Integer questionPaperId;
   private Double score;
-
-
-
   private Integer state;
   private Integer teacherId;
   private String remark;

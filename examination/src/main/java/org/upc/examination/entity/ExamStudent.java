@@ -4,6 +4,17 @@ public class ExamStudent {
     private Integer id;
     private Integer examId;
     private Integer studentId;
+    private Integer examState;
+    public Integer getExamState() {
+        return examState;
+    }
+
+    public void setExamState(Integer examState) {
+        this.examState = examState;
+    }
+
+
+
     public Integer getId() {
         return id;
     }
