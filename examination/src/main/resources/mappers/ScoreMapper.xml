@@ -12,15 +12,54 @@
              #{score},#{teacherId},#{state},#{remark})
     </insert>
     <select id="selectAnswer" resultType="org.upc.examination.entity.AnswerInformantion">
-        SELECT *
-        FROM answer_informantion
-        WHERE exam_id = #{examId} AND user_id = #{studentId}
+        SELECT ans.answer_id,ans.exam_id,ans.question_paper_id,ans.user_id,
+               ans.answer,ans.remark
+        FROM answer_informantion ans
+        WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}
     </select>
     <select id="selectStudent" resultType="org.upc.examination.entity.ScoreStudent">
         SELECT *
         FROM exam_student
         WHERE exam_id =#{examId}
     </select>
+    <select id="selectedType" resultType="java.lang.String">
+        SELECT qb.type
+        FROM question_bank qb
+        WHERE qb.question_id IN (
+            SELECT qp.question_id
+            FROM question_paper qp
+            WHERE qp.paper_id = (
+                SELECT exam.paper_id
+                FROM exam
+                WHERE exam.exam_id = #{examId})
+              AND qp.question_paper_sort IN(
+                SELECT ans.question_paper_id
+                FROM answer_informantion ans
+                WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}))
 
+    </select>
+    <!--
+    <select id="selectedAnswer" resultType="org.upc.examination.entity.AnswerInformantion">
+        SELECT ans.answer_id,ans.exam_id,ans.question_paper_id,ans.user_id,
+               ans.answer,ans.remark
+        FROM answer_informantion ans
+        WHERE ans.exam_id = #{examId}
+    </select>
+    <select id="selectType" resultType="java.lang.String">
+        SELECT qb.type
+        FROM question_bank qb
+        WHERE qb.question_id IN (
+            SELECT qp.question_id
+            FROM question_paper qp
+            WHERE qp.paper_id = (
+                SELECT exam.paper_id
+                FROM exam
+                WHERE exam.exam_id = #{examId})
+              AND qp.question_paper_sort IN(
+                SELECT ans.question_paper_id
+                FROM answer_informantion ans
+                WHERE ans.exam_id = #{examId} ))
+    </select>
+-->
 
 </mapper>

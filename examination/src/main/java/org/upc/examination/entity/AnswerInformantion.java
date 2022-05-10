@@ -11,6 +11,15 @@ public class AnswerInformantion {
 
   private String answer;
   private String remark;
+  private String type;
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
 
 
   public Integer getAnswerId() {
@@ -88,6 +97,7 @@ public class AnswerInformantion {
             ", questionPaperId=" + questionPaperId +
             ", answer='" + answer + '\'' +
             ", remark='" + remark + '\'' +
+            ", type='" + type + '\'' +
             '}';
   }
 }

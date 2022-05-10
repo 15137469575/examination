@@ -44,4 +44,6 @@ public class ScoreController {
     public List<ScoreStudent> selectStudent(int examId) {
         return scoreService.selectStudent(examId);
     }
+
+
 }
