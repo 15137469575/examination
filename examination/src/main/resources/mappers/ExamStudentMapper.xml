@@ -6,9 +6,9 @@
 
     <insert id="insert">
         INSERT INTO exam_student
-            (exam_id,student_id)
+            (exam_id,student_id,examState)
         VALUES
-            (#{examId},#{studentId})
+            (#{examId},#{studentId},0)
     </insert>
     <update id="updateState">
         UPDATE exam_student

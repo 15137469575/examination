@@ -37,7 +37,9 @@ public class ScoreController {
     public List<AnswerInformantion> selectAnswer(int examId, int studentId) {
         return scoreService.selectAnswer(examId, studentId);
     }
-    //通过此方法可以实现返回：studentId\studentName\和考生参加考试状态
+    /**
+     * 通过此方法可以实现返回：studentId\studentName\和考生参加考试状态
+     * */
     @RequestMapping("/selectStudent")
     public List<ScoreStudent> selectStudent(int examId) {
         return scoreService.selectStudent(examId);

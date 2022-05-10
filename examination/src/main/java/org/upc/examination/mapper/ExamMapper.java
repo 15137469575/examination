@@ -44,6 +44,13 @@ public interface ExamMapper {
  * */
     ExamAnswer selectQuestionIn(int examId, int questionId , int studentId);
     /**
+     * 使用int examId,int questionId,int studentId来从表中是否有该名学生在该场考试中
+     *      该题中是否有回答，如果没有，那么返回是空
+     * */
+    String selectAnswer(int examId,int questionId,int studentId);
+    ExamAnswer  selectQuestionIn1(int examId, int questionId , int studentId);
+
+    /**
      * 根据examId来查询出Exam对象
      * */
     Exam selectExamById(int examId);

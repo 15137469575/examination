@@ -98,7 +98,23 @@
                   WHERE student_id = #{studentId}
               )
     </select>
+    <select id="selectAnswer" resultType="java.lang.String">
+        SELECT ans.answer
+        FROM answer_informantion ans
+        WHERE ans.exam_id = #{examId} AND ans.question_paper_id = #{questionId} AND ans.user_id = #{studentId}
+    </select>
+    <select id="selectQuestionIn1" resultType="org.upc.examination.entity.ExamAnswer">
+        SELECT QB.question Question,QB.optionA A,QB.optionB B,QB.optionC C,QB.optionD D,QB.type Type
+        FROM question_bank QB
+        WHERE QB.question_id IN (
+            SELECT QP.question_id
+            FROM question_paper QP
+            WHERE QP.question_paper_sort = #{questionId} AND QP.paper_id =
+                                                 (SELECT EX.paper_id
+                                                  FROM exam EX
+                                                  WHERE EX.exam_id = #{examId} ))
 
+    </select>
 
 
 </mapper>

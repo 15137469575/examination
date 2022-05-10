@@ -65,8 +65,14 @@ public class ExamServiceImpl implements ExamService {
      * */
     @Override
     public ExamAnswer selectQuestionIn(int examId, int questionId, int studentId) {
-        ExamAnswer exam = examMapper.selectQuestionIn(examId, questionId,studentId);
-        return exam;
+        String string = examMapper.selectAnswer(examId, questionId, studentId);
+        ExamAnswer examAnswer = new ExamAnswer();
+        if(string == null){
+            examAnswer = examMapper.selectQuestionIn1(examId, questionId, studentId);
+        }else {
+            examAnswer = examMapper.selectQuestionIn(examId, questionId, studentId);
+        }
+        return examAnswer;
     }
     /**
      * 根据examId来查询出Exam对象
