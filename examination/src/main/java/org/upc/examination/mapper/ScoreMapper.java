@@ -2,6 +2,7 @@ package org.upc.examination.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.upc.examination.entity.AnswerInformantion;
+import org.upc.examination.entity.QuestionBank;
 import org.upc.examination.entity.Score;
 import org.upc.examination.entity.ScoreStudent;
 
@@ -27,6 +28,9 @@ public interface ScoreMapper {
      *      然后挑选这些questionId的正确答案
      *      然后，使用这些答案来匹配回答，比较对错，对score进行修改和插入
      * */
-    //List<AnswerInformantion> selectedAnswer(int examId);
-    //List<String> selectType(int examId);
+    List<AnswerInformantion> selectedAnswer(int examId);
+    List<String> selectType(int examId);
+    List<String> selectQuestion(int examId);
+    Double selectGrade(int examId,int questionId);
+
 }

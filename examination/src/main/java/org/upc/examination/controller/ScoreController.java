@@ -44,6 +44,9 @@ public class ScoreController {
     public List<ScoreStudent> selectStudent(int examId) {
         return scoreService.selectStudent(examId);
     }
-
-
+    //智能阅卷，需要一个examId参数
+    @RequestMapping("/intelligent")
+    public void intelligent(int examId){
+        scoreService.intelligent(examId);
+    }
 }

@@ -38,7 +38,7 @@
                 WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}))
 
     </select>
-    <!--
+
     <select id="selectedAnswer" resultType="org.upc.examination.entity.AnswerInformantion">
         SELECT ans.answer_id,ans.exam_id,ans.question_paper_id,ans.user_id,
                ans.answer,ans.remark
@@ -60,6 +60,30 @@
                 FROM answer_informantion ans
                 WHERE ans.exam_id = #{examId} ))
     </select>
--->
+    <select id="selectQuestion" resultType="java.lang.String">
+        SELECT qb.answer
+        FROM question_bank qb
+        WHERE qb.question_id IN (
+            SELECT qp.question_id
+            FROM question_paper qp
+            WHERE qp.paper_id = (
+                SELECT exam.paper_id
+                FROM exam
+                WHERE exam.exam_id = #{examId})
+              AND qp.question_paper_sort IN(
+                SELECT ans.question_paper_id
+                FROM answer_informantion ans
+                WHERE ans.exam_id = #{examId} ))
+    </select>
+    <select id="selectGrade" resultType="java.lang.Double">
+        SELECT qp.grade
+        FROM question_paper qp
+        WHERE qp.question_paper_sort = 1 AND qp.paper_id = (
+            SELECT exam.paper_id
+            FROM exam
+            WHERE exam.exam_id = 103
+        )
+    </select>
+
 
 </mapper>

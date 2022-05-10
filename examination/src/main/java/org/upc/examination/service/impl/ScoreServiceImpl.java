@@ -47,4 +47,44 @@ public class ScoreServiceImpl implements ScoreService {
     public List<ScoreStudent> selectStudent(int examId) {
         return scoreMapper.selectStudent(examId);
     }
+
+    @Override
+    public void intelligent(int examId) {
+        List<AnswerInformantion> answerInformantionList = scoreMapper.selectedAnswer(examId);
+        List<String> stringType = scoreMapper.selectType(examId);
+        List<String> stringAnswer = scoreMapper.selectQuestion(examId);
+        List<AnswerInformantion> answerInformantionList1 = new LinkedList<>();
+        for(int i = 0; i < answerInformantionList.size();i++ ){
+            answerInformantionList.get(i).setType(stringType.get(i));
+            answerInformantionList.get(i).setCorrectAnswer(stringAnswer.get(i));
+        }
+        for(int j = 0;j < answerInformantionList.size();j++){
+            String stringType1 = answerInformantionList.get(j).getType();
+            if(stringType1.equals("单选") || stringType1.equals("多选") || stringType1.equals("判断")){
+                answerInformantionList1.add(answerInformantionList.get(j));
+            }
+        }
+
+        for(int k = 0;k < answerInformantionList1.size();k++){
+            AnswerInformantion answerInformantion = answerInformantionList1.get(k);
+
+            Score score1 = new Score();
+            score1.setUserId(answerInformantion.getUserId());
+            score1.setExamId(answerInformantion.getExamId());
+            score1.setQuestionPaperId(answerInformantion.getQuestionPaperId());
+
+            String correctAnswer = answerInformantion.getCorrectAnswer();
+            String answer = answerInformantion.getAnswer();
+            if(answer.equals(correctAnswer)){
+                Double gradeDouble = scoreMapper.selectGrade(answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
+                score1.setScore(gradeDouble);
+                score1.setState(1);
+            }else {
+                score1.setScore(0.0);
+                score1.setState(0);
+            }
+            scoreMapper.insert(score1);
+        }
+
+    }
 }

@@ -12,6 +12,16 @@ public class AnswerInformantion {
   private String answer;
   private String remark;
   private String type;
+  private String correctAnswer;
+  public String getCorrectAnswer() {
+    return correctAnswer;
+  }
+
+  public void setCorrectAnswer(String correctAnswer) {
+    this.correctAnswer = correctAnswer;
+  }
+
+
   public String getType() {
     return type;
   }

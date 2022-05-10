@@ -7,10 +7,19 @@ public class QuestionPaper {
   private Integer paperId;
   private Integer questionId;
   private Integer questionPaperSort;
+  private Double grade;
   private String remark;
 
   private PaperInformation paperInformation;
+  private QuestionBank questionBank;
 
+  public Double getGrade() {
+    return grade;
+  }
+
+  public void setGrade(Double grade) {
+    this.grade = grade;
+  }
   public QuestionBank getQuestionBank() {
     return questionBank;
   }
@@ -19,7 +28,7 @@ public class QuestionPaper {
     this.questionBank = questionBank;
   }
 
-  private QuestionBank questionBank;
+
 
 
 

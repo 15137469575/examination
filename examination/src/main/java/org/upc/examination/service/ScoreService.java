@@ -13,4 +13,6 @@ public interface ScoreService {
     List<AnswerInformantion> selectAnswer(int examId, int studentId);
 
     List<ScoreStudent> selectStudent(int examId);
+
+    void intelligent(int examId);
 }
