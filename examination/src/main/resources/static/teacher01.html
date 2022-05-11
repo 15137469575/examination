@@ -9,34 +9,6 @@
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		
-		<script type="text/javascript">
-			$(function(){
-				$(document).ready(function(){
-					var form1 = {
-						"examId":handleLocalStorage("get","examId")
-					};
-					$.get("/score/selectStudent",form1,function(res){
-						var str1 = "";
-						for(var i = 0 ; i<res.length;i++ ){
-							str1 += "<tr cate-id='0' fid='0'>" +
-								"<td>" + res[i].studentId + "</td>" +
-								"<td>" + res[i].studentName + "</td>" +
-								"<td>" + res[i].examStuState + "</td>" +
-								"<td>" + "<button id = 'marking'>" + "进入批阅" + "</button>" + "</td>";
-						}
-						test.innerHTML = str1;
-						$(document).on("click","#marking",function(){
-							var str2 = $(this).parents("tr").find("td").eq(0).text();
-							 handleLocalStorage("set","nowStudentId",str2);
-							 window.location.href = "studentPaper.html";
-						})
-						
-					})
-				})
-			})
-		</script>
-		
-		
 	</head>
 	<body>
 
@@ -73,26 +45,9 @@
 				</div>
 			</div>
 			<div class="right">
-				<div class="questionView">
+				使用前请参考下图流程操作：
+				<img src="css/QQ图片20220509121524.png" >
 				
-				
-					<!-- 试卷tabel -->
-					<table class="questionTable">
-						<thead>
-							<tr>
-				
-								<th width="32%">学号</th>
-								<th width="10%">姓名</th>
-								<th width="10%">考试状态</th>
-								<th width="5%">&nbsp;操作</th>
-						</thead>
-						<tbody class="x-cate" id="test">
-				
-						</tbody>
-					</table>
-				
-				
-				</div>
 			</div>
 		</div>
 
