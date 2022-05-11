@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Title</title>
 		<script src="js/echarts.js"></script>
+		<script src="js/jquery-3.6.0.min.js"></script>
 		<style>
 			#main {
 				visibility: hidden;
@@ -13,40 +14,56 @@
 		</style>
 	</head>
 	<body>
+		<input id="examId" type="text" name="examId">
+		<button id="display" onclick="display()">显示</button>
 		<div id="main">
 
 		</div>
 	</body>
 
 	<script>
-		let dom = document.getElementById("main");
-		dom.style.visibility = "visible";
+		function display(){
+			let examId = document.getElementById("examId").value;
+			
+			$.ajax({
+				type: "post",
+				url: "/scoreDisplay/getAllScores",
+				data: {"examId" : examId},
+				success: (rst) => {
+					console.log(rst);
+					let dom = document.getElementById("main");
+					dom.style.visibility = "visible";
+					let echart = echarts.init(dom);
+					let option = {
+						title : {
+							text : "pie graph"
+						},
+						legend: {
+							data: [{
+								name: "radio"
+							}]
+						},
+						xAxis: {
+							data: ["0To9","10To19","20To30"]
+						},
+						yAxis:{
+							
+						},
+						series: [
+							{
+								name: "radio",
+								type: "bar",
+								data: rst
+							}
+						]
+					}
+					echart.setOption(option);
+				},
+				error: (rst) => {
+					
+				}
+			})
+		}
 
-		let echart = echarts.init(dom);
-
-		let option = {
-			title: {
-				text: "my first echart dom"
-			},
-			tooltip: {
-
-			},
-			legend: {
-				data: [{
-					name: "consume"
-				}]
-			},
-			xAxis: {
-				data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-			},
-			yAxis: {},
-			series: [{
-				name: 'consume',
-				type: 'bar',
-				data: [5, 20, 36, 10, 10, 20]
-			}]
-		};
-
-		echart.setOption(option);
 	</script>
 </html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.upc.examination.mapper.ScoreDisplayMapper">
+
+    <select id="queryAllStudent" resultType="java.lang.Integer">
+        select student_id
+        from exam_student
+        where exam_id = #{examId}
+    </select>
+
+    <select id="queryAllScore"
+            resultType="java.lang.Double"
+            parameterType="java.util.List">
+        select score from score
+        <where>
+            user_id in
+            <foreach collection="list" separator="," close=")" open="(" item="index">
+                #{index}
+            </foreach>
+            and exam_id = #{examId}
+        </where>
+    </select>
+
+</mapper>

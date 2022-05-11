@@ -8,10 +8,7 @@ import org.upc.examination.service.ExamService;
 import org.upc.examination.utils.TimeFormat;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-
-import static jdk.nashorn.internal.objects.Global.undefined;
 
 @Service
 public class ExamServiceImpl implements ExamService {
