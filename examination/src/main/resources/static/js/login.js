@@ -11,7 +11,7 @@ function getMsg() {
             window.location.href = "student_01.html";
         } else if (rst.identidy == "teacher") {
             handleLocalStorage('set', 'userId', id);
-            window.location.href = "createPaper.html";
+            window.location.href = "teacher01.html";
 		
         } else if (!rst) {
             alert("您的登录信息有误，请重新登录");
