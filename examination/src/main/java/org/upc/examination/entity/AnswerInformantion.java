@@ -11,8 +11,18 @@ public class AnswerInformantion {
 
   private String answer;
   private String remark;
-  private String type;
-  private String correctAnswer;
+  //private String type;
+  //private String correctAnswer;
+  private QuestionBank questionBank;
+  public QuestionBank getQuestionBank() {
+    return questionBank;
+  }
+
+  public void setQuestionBank(QuestionBank questionBank) {
+    this.questionBank = questionBank;
+  }
+
+  /**
   public String getCorrectAnswer() {
     return correctAnswer;
   }
@@ -29,7 +39,7 @@ public class AnswerInformantion {
   public void setType(String type) {
     this.type = type;
   }
-
+**/
 
 
   public Integer getAnswerId() {
@@ -107,7 +117,7 @@ public class AnswerInformantion {
             ", questionPaperId=" + questionPaperId +
             ", answer='" + answer + '\'' +
             ", remark='" + remark + '\'' +
-            ", type='" + type + '\'' +
+
             '}';
   }
 }

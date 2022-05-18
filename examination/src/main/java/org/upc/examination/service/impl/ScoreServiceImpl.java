@@ -3,6 +3,7 @@ package org.upc.examination.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.upc.examination.entity.AnswerInformantion;
+import org.upc.examination.entity.QuestionBank;
 import org.upc.examination.entity.Score;
 import org.upc.examination.entity.ScoreStudent;
 import org.upc.examination.mapper.ScoreMapper;
@@ -25,13 +26,14 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<AnswerInformantion> selectAnswer(int examId, int studentId) {
         List<AnswerInformantion> answerInformantionList =  scoreMapper.selectAnswer(examId, studentId);
-        List<String> typeString = scoreMapper.selectedType(examId, studentId);
+        //List<String> typeString = scoreMapper.selectedType(examId, studentId);
+        List<QuestionBank> questionBankLists = scoreMapper.selectQuestionBank(examId, studentId);
         List<AnswerInformantion> answerInformantionList1 = new LinkedList<AnswerInformantion>();
         for(int i = 0;i<answerInformantionList.size();i++){
-            answerInformantionList.get(i).setType(typeString.get(i));
+            answerInformantionList.get(i).setQuestionBank(questionBankLists.get(i));
         }
         for(int j = 0;j<answerInformantionList.size();j++){
-            String typeStr = answerInformantionList.get(j).getType();
+            String typeStr = answerInformantionList.get(j).getQuestionBank().getType();
             if(!typeStr.equals("单选") && !typeStr.equals("多选") && !typeStr.equals("判断")){
                 answerInformantionList1.add(answerInformantionList.get(j));
             }
@@ -49,17 +51,19 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public void intelligent(int examId) {
-        List<AnswerInformantion> answerInformantionList = scoreMapper.selectedAnswer(examId);
-        List<String> stringType = scoreMapper.selectType(examId);
-        List<String> stringAnswer = scoreMapper.selectQuestion(examId);
+    public void intelligent(int examId,int studentId) {
+        List<AnswerInformantion> answerInformantionList = scoreMapper.selectedAnswer(examId,studentId);
+        //List<String> stringType = scoreMapper.selectType(examId);
+        //List<String> stringAnswer = scoreMapper.selectQuestion(examId);
+        List<QuestionBank> questionBankList = scoreMapper.selectQuestionBank(examId, studentId);
         List<AnswerInformantion> answerInformantionList1 = new LinkedList<>();
         for(int i = 0; i < answerInformantionList.size();i++ ){
-            answerInformantionList.get(i).setType(stringType.get(i));
-            answerInformantionList.get(i).setCorrectAnswer(stringAnswer.get(i));
+            //answerInformantionList.get(i).setType(stringType.get(i));
+            //answerInformantionList.get(i).setCorrectAnswer(stringAnswer.get(i));
+            answerInformantionList.get(i).setQuestionBank(questionBankList.get(i));
         }
         for(int j = 0;j < answerInformantionList.size();j++){
-            String stringType1 = answerInformantionList.get(j).getType();
+            String stringType1 = answerInformantionList.get(j).getQuestionBank().getType();
             if(stringType1.equals("单选") || stringType1.equals("多选") || stringType1.equals("判断")){
                 answerInformantionList1.add(answerInformantionList.get(j));
             }
@@ -73,7 +77,7 @@ public class ScoreServiceImpl implements ScoreService {
             score1.setExamId(answerInformantion.getExamId());
             score1.setQuestionPaperId(answerInformantion.getQuestionPaperId());
 
-            String correctAnswer = answerInformantion.getCorrectAnswer();
+            String correctAnswer = answerInformantion.getQuestionBank().getAnswer();
             String answer = answerInformantion.getAnswer();
             if(answer.equals(correctAnswer)){
                 Double gradeDouble = scoreMapper.selectGrade(answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
@@ -85,6 +89,8 @@ public class ScoreServiceImpl implements ScoreService {
             }
             scoreMapper.insert(score1);
         }
+
+
 
     }
 }

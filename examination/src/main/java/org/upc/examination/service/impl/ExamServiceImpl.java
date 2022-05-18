@@ -27,7 +27,7 @@ public class ExamServiceImpl implements ExamService {
         exam.setExamTime(strings);
 
         if(exam.getExamId()==null){
-            int row = examMapper.insert2(exam);
+            examMapper.insert2(exam);
             return exam.getExamId();
         }else {
             int row = examMapper.insert(exam);

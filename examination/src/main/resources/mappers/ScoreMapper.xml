@@ -43,7 +43,7 @@
         SELECT ans.answer_id,ans.exam_id,ans.question_paper_id,ans.user_id,
                ans.answer,ans.remark
         FROM answer_informantion ans
-        WHERE ans.exam_id = #{examId}
+        WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}
     </select>
     <select id="selectType" resultType="java.lang.String">
         SELECT qb.type
@@ -78,11 +78,26 @@
     <select id="selectGrade" resultType="java.lang.Double">
         SELECT qp.grade
         FROM question_paper qp
-        WHERE qp.question_paper_sort = 1 AND qp.paper_id = (
+        WHERE qp.question_paper_sort = #{questionId} AND qp.paper_id = (
             SELECT exam.paper_id
             FROM exam
-            WHERE exam.exam_id = 103
+            WHERE exam.exam_id = #{examId}
         )
+    </select>
+    <select id="selectQuestionBank" resultType="org.upc.examination.entity.QuestionBank">
+        SELECT qb.question_id,qb.question,qb.optionA,qb.optionB,qb.optionC,qb.optionD,qb.`subject`,qb.type,qb.answer,qb.degree_difficulty
+        FROM question_bank qb
+        WHERE qb.question_id IN (
+            SELECT qp.question_id
+            FROM question_paper qp
+            WHERE qp.paper_id = (
+                SELECT exam.paper_id
+                FROM exam
+                WHERE exam.exam_id = #{examId})
+              AND qp.question_paper_sort IN(
+                SELECT ans.question_paper_id
+                FROM answer_informantion ans
+                WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}))
     </select>
 
 

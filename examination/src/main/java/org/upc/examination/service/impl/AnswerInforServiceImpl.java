@@ -40,8 +40,8 @@ public class AnswerInforServiceImpl implements AnswerInforService {
         if(examStudent.getExamState()==0){
             examStudentMapper.updateState(answerInformantion.getExamId(),answerInformantion.getUserId());
         }
-        AnswerInformantion answerInformantion1 = new AnswerInformantion();
-        answerInformantion1 = answerInforMapper.selectAnswerInformantion(answerInformantion.getUserId(),answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
+        //AnswerInformantion answerInformantion1 = new AnswerInformantion();
+        AnswerInformantion answerInformantion1 = answerInforMapper.selectAnswerInformantion(answerInformantion.getUserId(),answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
         if(answerInformantion1 == null){
             if(answerInformantion.getAnswerId()==null){
                  answerInforMapper.insert2(answerInformantion);

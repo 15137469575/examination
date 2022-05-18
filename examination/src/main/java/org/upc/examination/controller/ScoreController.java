@@ -46,7 +46,7 @@ public class ScoreController {
     }
     //智能阅卷，需要一个examId参数
     @RequestMapping("/intelligent")
-    public void intelligent(int examId){
-        scoreService.intelligent(examId);
+    public void intelligent(int examId,int studentId){
+        scoreService.intelligent(examId,studentId);
     }
 }

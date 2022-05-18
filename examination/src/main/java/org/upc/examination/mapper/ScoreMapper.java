@@ -28,9 +28,10 @@ public interface ScoreMapper {
      *      然后挑选这些questionId的正确答案
      *      然后，使用这些答案来匹配回答，比较对错，对score进行修改和插入
      * */
-    List<AnswerInformantion> selectedAnswer(int examId);
+    List<AnswerInformantion> selectedAnswer(int examId,int studentId);
     List<String> selectType(int examId);
     List<String> selectQuestion(int examId);
+    List<QuestionBank> selectQuestionBank(int examId,int studentId);
     Double selectGrade(int examId,int questionId);
 
 }
