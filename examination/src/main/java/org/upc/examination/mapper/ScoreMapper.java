@@ -33,5 +33,6 @@ public interface ScoreMapper {
     List<String> selectQuestion(int examId);
     List<QuestionBank> selectQuestionBank(int examId,int studentId);
     Double selectGrade(int examId,int questionId);
+    Double selectSumOfScore(int examId,int studentId);
 
 }

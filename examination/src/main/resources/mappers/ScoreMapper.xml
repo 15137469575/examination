@@ -107,6 +107,11 @@
                 FROM answer_informantion ans
                 WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}))
     </select>
+    <select id="selectSumOfScore" resultType="java.lang.Double">
+        SELECT sum(sc.score)
+        FROM score sc
+        WHERE sc.exam_id = #{examId} AND sc.user_id = #{studentId}
+    </select>
 
 
 </mapper>

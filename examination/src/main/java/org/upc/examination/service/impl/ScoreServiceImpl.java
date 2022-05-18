@@ -51,7 +51,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public void intelligent(int examId,int studentId) {
+    public Double intelligent(int examId,int studentId) {
         List<AnswerInformantion> answerInformantionList = scoreMapper.selectedAnswer(examId,studentId);
         //List<String> stringType = scoreMapper.selectType(examId);
         //List<String> stringAnswer = scoreMapper.selectQuestion(examId);
@@ -89,6 +89,17 @@ public class ScoreServiceImpl implements ScoreService {
             }
             scoreMapper.insert(score1);
         }
+        /**
+         * 实现获取在该场考试中该名考生所有客观题的总成绩
+         * */
+        Double sumOfScore = scoreMapper.selectSumOfScore(examId,studentId);
+        Score sumScore = new Score();
+        sumScore.setExamId(examId);
+        sumScore.setUserId(studentId);
+        sumScore.setScore(sumOfScore);
+        sumScore.setState(1);
+        scoreMapper.insert(sumScore);
+        return sumOfScore;
 
 
 

@@ -14,5 +14,5 @@ public interface ScoreService {
 
     List<ScoreStudent> selectStudent(int examId);
 
-    void intelligent(int examId,int studentId);
+    Double intelligent(int examId,int studentId);
 }

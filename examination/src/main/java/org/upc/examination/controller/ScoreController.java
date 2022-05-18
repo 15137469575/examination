@@ -39,14 +39,20 @@ public class ScoreController {
     }
     /**
      * 通过此方法可以实现返回：studentId\studentName\和考生参加考试状态
-     * */
+     */
     @RequestMapping("/selectStudent")
     public List<ScoreStudent> selectStudent(int examId) {
         return scoreService.selectStudent(examId);
     }
-    //智能阅卷，需要一个examId参数
+
+    /**智能阅卷，需要一个examId和一个studentId参数
+     * 返回值是一个Double类型的数字，也就是一个考试中该名考生的所有客观题的总分数，以及完成了该分数的储存
+     * @param examId
+     * @param studentId
+     * @return
+     */
     @RequestMapping("/intelligent")
-    public void intelligent(int examId,int studentId){
-        scoreService.intelligent(examId,studentId);
+    public Double intelligent(int examId,int studentId){
+        return scoreService.intelligent(examId,studentId);
     }
 }
