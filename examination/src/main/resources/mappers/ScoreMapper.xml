@@ -17,10 +17,18 @@
         FROM answer_informantion ans
         WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}
     </select>
-    <select id="selectStudent" resultType="org.upc.examination.entity.ScoreStudent">
-        SELECT *
+    <resultMap id="selectStudentuser" type="org.upc.examination.entity.ScoreStudent">
+        <result column="id" property="studentId"/>
+        <result column="name" property="studentName"/>
+        <result column="state" property="examStuState"/>
+    </resultMap>
+    <select id="selectStudent" resultMap="selectStudentuser">
+        <!--SELECT *
         FROM exam_student
-        WHERE exam_id =#{examId}
+        WHERE exam_id =#{examId}-->
+        SELECT es.student_id id,users.user_name name,es.examState state
+        FROM exam_student es,users
+        WHERE exam_id =#{examId} and users.user_id = es.student_id
     </select>
     <select id="selectedType" resultType="java.lang.String">
         SELECT qb.type

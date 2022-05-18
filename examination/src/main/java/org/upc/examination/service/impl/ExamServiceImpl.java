@@ -30,7 +30,7 @@ public class ExamServiceImpl implements ExamService {
             examMapper.insert2(exam);
             return exam.getExamId();
         }else {
-            int row = examMapper.insert(exam);
+            examMapper.insert(exam);
             return exam.getExamId();
         }
     }
@@ -63,9 +63,9 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public ExamAnswer selectQuestionIn(int examId, int questionId, int studentId) {
         String string = examMapper.selectAnswer(examId, questionId, studentId);
-        ExamAnswer examAnswer = new ExamAnswer();
+        ExamAnswer examAnswer = null;
         if(string == null){
-            examAnswer = examMapper.selectQuestionIn1(examId, questionId, studentId);
+             examAnswer = examMapper.selectQuestionIn1(examId, questionId, studentId);
         }else {
             examAnswer = examMapper.selectQuestionIn(examId, questionId, studentId);
         }

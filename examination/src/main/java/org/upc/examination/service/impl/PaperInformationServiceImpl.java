@@ -39,8 +39,8 @@ public class PaperInformationServiceImpl implements PaperInformationService {
      * */
     @Override
     public PaperInformation selectById(int index) {
-        PaperInformation paperInformation = new PaperInformation();
-        paperInformation = paperInformationMapper.selectById(index);
+         //paperInformation = new PaperInformation();
+        PaperInformation paperInformation = paperInformationMapper.selectById(index);
         return paperInformation;
     }
 /**

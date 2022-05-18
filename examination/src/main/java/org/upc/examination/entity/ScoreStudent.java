@@ -29,7 +29,12 @@ public class ScoreStudent {
         this.examStuState = examStuState;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "ScoreStudent{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", examStuState=" + examStuState +
+                '}';
+    }
 }
