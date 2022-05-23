@@ -48,4 +48,14 @@ public class QuestionPaperController {
             return 0;
         }
     }
+
+    /**
+     * 插入分数的功能
+     *获取questionPaperId和grade
+     *
+     * */
+    @RequestMapping("/insertGrade")
+    public QuestionPaper insertGrade(int questionPaperId,Double grade){
+        return questionPaperService.insertGrade(questionPaperId, grade);
+    }
 }

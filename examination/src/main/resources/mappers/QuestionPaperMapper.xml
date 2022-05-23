@@ -30,6 +30,11 @@
         SET question_paper_sort = #{questionPaperSort}
         WHERE question_paper_id = #{questionPaperId}
     </update>
+    <update id="updateGradeByQuestionPaperIdInt">
+        UPDATE question_paper
+        SET grade = #{grade}
+        WHERE question_paper_id = #{questionPaperId}
+    </update>
 
 
     <select id="selectByPaperId" resultMap="selectByPaper">

@@ -68,5 +68,12 @@ public class QuestionPaperServiceImpl implements QuestionPaperService {
         return 1;
     }
 
+    @Override
+    public QuestionPaper insertGrade(int questionPaperId, Double grade) {
+        questionPaperMapper.updateGradeByQuestionPaperIdInt(questionPaperId, grade);
+        return questionPaperMapper.selectQuestionPaper(questionPaperId);
+
+    }
+
 
 }

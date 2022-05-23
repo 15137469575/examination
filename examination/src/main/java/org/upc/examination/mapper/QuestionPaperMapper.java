@@ -35,5 +35,6 @@ public interface QuestionPaperMapper {
 
     QuestionPaper selectQuestionPaper(int questionPaperId);
 
+    int updateGradeByQuestionPaperIdInt(int questionPaperId,Double grade);
 
 }

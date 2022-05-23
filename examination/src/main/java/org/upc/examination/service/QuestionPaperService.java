@@ -23,4 +23,9 @@ public interface QuestionPaperService {
      * 智能组卷，
      * */
     int randomInsert(int paperId,String subject);
+
+    /**
+     * 添加试题功能的实现
+     * */
+    QuestionPaper insertGrade(int questionPaperId,Double grade);
 }
