@@ -5,6 +5,8 @@
 
     <resultMap id="selectByPaper" type="org.upc.examination.entity.QuestionPaper">
         <result property="questionPaperSort" column="sort"/>
+        <result property="questionPaperId" column="qpid"/>
+        <result property="paperId" column="paperId"/>
         <association property="questionBank" javaType="org.upc.examination.entity.QuestionBank">
             <result property="question" column="qus"/>
             <result property="optionA" column="A"/>
@@ -39,20 +41,23 @@
 
     <select id="selectByPaperId" resultMap="selectByPaper">
         SELECT
-            question_paper.question_paper_sort sort,
-            question_bank.question qus,
-            question_bank.optionA A,
-            question_bank.optionB B,
-            question_bank.optionC C,
-            question_bank.optionD D,
-            question_bank.answer answer,
-            question_bank.degree_difficulty dd,
-            question_bank.subject sub,
-            question_bank.type ty
-        FROM question_paper ,question_bank
-        WHERE question_paper.paper_id = #{paperId}
-          AND question_paper.question_id = question_bank.question_id
-        ORDER BY(question_paper.question_paper_sort)
+            qp.question_paper_id qpid,
+            qp.paper_id paperId,
+
+            qp.question_paper_sort sort,
+                qb.question qus,
+            qb.optionA A,
+            qb.optionB B,
+            qb.optionC C,
+            qb.optionD D,
+            qb.answer answer,
+            qb.degree_difficulty dd,
+            qb.subject sub,
+            qb.type ty
+        FROM question_paper qp,question_bank qb
+        WHERE qp.paper_id = 137
+          AND qp.question_id = qb.question_id
+        ORDER BY(qp.question_paper_sort)
     </select>
     <select id="randomSelectFromBank" resultType="java.lang.Integer">
         SELECT question_id
