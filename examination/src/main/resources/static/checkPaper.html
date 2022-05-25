@@ -5,13 +5,13 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
-		
+
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-
+		<script src="./js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
 
-<style type="text/css">
+		<style type="text/css">
 			.num_select {
 				position: relative;
 				z-index: 1;
@@ -71,39 +71,43 @@
 					$.get("/questionPaper/selectByPaperID", form, function(res) {
 						console.log(res);
 						var str1 = "";
-						
+
 						var str2 = "";
 
 						for (var i = 0; i < res.length; i++) {
-							if(res[i].questionBank.type == "单选"){
-								if(res[i].questionBank.answer[0] == "A"){
+							if (res[i].questionBank.type == "单选") {
+								if (res[i].questionBank.answer[0] == "A") {
 									str2 = res[i].questionBank.optionA;
-								}
-								else if(res[i].questionBank.answer[0] == "B"){
+								} else if (res[i].questionBank.answer[0] == "B") {
 									str2 = res[i].questionBank.optionB;
-								}
-								else if(res[i].questionBank.answer[0] == "C"){
+								} else if (res[i].questionBank.answer[0] == "C") {
 									str2 = res[i].questionBank.optionC;
-								}
-								else if(res[i].questionBank.answer[0] == "D"){
+								} else if (res[i].questionBank.answer[0] == "D") {
 									str2 = res[i].questionBank.optionD;
 								}
 								str1 += "<tr cate-id='0' fid='0'>" +
+									"<td>" + res[i].questionPaperId + "</td>" +
 									"<td>" + res[i].questionBank.question + "</td>" +
 									"<td>" + str2 + "</td>" +
 									"<td>" + res[i].questionBank.subject + "</td>" +
 									"<td>" + res[i].questionBank.type + "</td>" +
 									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
-									"<td>" + "<button id = 'delectQuestion'>" + "删除" + "</button>" + "</td>";
-							}
-							else {
+									"<td>" + "<input type='text' value='' placeholder= '请赋分' id = res[i].questionPaperId/> " +
+									"</td>" +
+									"<td>" + "<button id = 'delectQuestion'>" + "保存" + "</button>" +
+									"</td>";
+							} else {
 								str1 += "<tr cate-id='0' fid='0'>" +
+									"<td>" + res[i].questionPaperId + "</td>" +
 									"<td>" + res[i].questionBank.question + "</td>" +
 									"<td>" + res[i].questionBank.answer + "</td>" +
 									"<td>" + res[i].questionBank.subject + "</td>" +
 									"<td>" + res[i].questionBank.type + "</td>" +
 									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
-									"<td>" + "<button id = 'delectQuestion'>" + "删除" + "</button>" + "</td>";
+									"<td>" + "<input type='text' value=''  placeholder= '请赋分' id =res[i].questionPaperId/> " +
+									"</td>" +
+									"<td>" + "<button id = 'delectQuestion'>" + "保存" + "</button>" +
+									"</td>";
 							}
 
 
@@ -111,13 +115,36 @@
 						}
 						test.innerHTML = str1;
 
+						$(document).on("click", "#delectQuestion", function() {
+							if ($(this).parents("tr").find("td").eq(5).text() == '') {
+								alert("请先赋分");
+							} else {
+								str8 = $(this).parents("tr").find("td").eq(0)
+										.text();
+								str9 = $(this).parents("tr").find("td").eq(6).id;
+								str10 = parseInt(str8);
+								str11 = parseInt(str9);
+								alert(str9);
+								
+							
+								var form2 = {
+									"questionPaperId": str10,
+									"grade":1
+								}
+								$.get("/questionPaper/insertGrade", form2, function(res) {
+									alert("保存成功");
+									
+								})
 
+							}
+
+						})
 						replay.onclick = function() {
 							window.location.href = "makePaperInPerson.html";
 
 						}
 						delect.onclick = function() {
-							
+
 							window.location.href = "createPaper.html";
 						}
 
@@ -144,14 +171,15 @@
 
 		<div class="mbody">
 			<div class="left">
-<div>
+				<div>
 					<a class="teacher01" href="teacher01.html">流程提示</a>
 				</div>
 				<div>
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
 				<div>
-					<a class="checkPaper" href="checkPaper.html" style="color: white; background-color:#A9A9A9;">查看试卷</a>
+					<a class="checkPaper" href="checkPaper.html"
+						style="color: white; background-color:#A9A9A9;">查看试卷</a>
 				</div>
 				<div>
 					<a class="jionExame" href="createExam.html">创建考试</a>
@@ -164,26 +192,28 @@
 				</div>
 			</div>
 			<div class="right">
+
 				<button type="button" id="replay">重组试卷</button>
 				<button type="button" id="delect">删除试卷</button>
 				<div class="questionView">
 					<table class="questionTable">
 						<thead>
 							<tr>
-				
+								<th width="2%">题号</th>
 								<th width="32%">问题</th>
 								<th width="5%">答案</th>
 								<th width="5%">科目</th>
 								<th width="5%">题型</th>
 								<th width="5%">难度</th>
+								<th width="3%">赋分</th>
 								<th width="5%">&nbsp;操作</th>
 						</thead>
 						<tbody class="x-cate" id="test">
-				
+
 						</tbody>
 					</table>
-				
-				
+
+
 				</div>
 			</div>
 		</div>

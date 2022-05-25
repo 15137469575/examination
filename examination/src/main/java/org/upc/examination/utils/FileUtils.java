@@ -214,7 +214,7 @@ public final class FileUtils {
     public static void deleteTempFile(File file) {
         if (file != null) {
             File del = new File(file.toURI());
-            del.delete();
+            boolean result = del.delete();
         }
     }
 

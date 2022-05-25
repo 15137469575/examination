@@ -93,7 +93,12 @@
 				 width: 90%;
 				 display: inline-block;
 			 }
-					
+			#answerArea{
+				width: 100%;
+				height: 40vh;
+				font-size: 1.5em;
+				background-color: #8FBC8F;
+			}		
 		</style>
 
 		<script type="text/javascript">
@@ -179,11 +184,26 @@
 										"<td>" + "<input type='checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
 										"<td>" +  resg.d + "</td>";
 								}
+								else if(resg.type == "填空"){
+									answer.innerHTML = "<textarea rows='100%' cols='100%' placeholder='答题区' id = 'answerArea'>" + "</textarea>"
+									+ "<button style='display: block;' id = 'answerAreaBtn'  onclick='getMsg()'>" + "保存" +"</btton>";
+									
+								}
+								else if(resg.type == "判断"){
+									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" +   resg.a + "</td>" +
+										"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + resg.b + "</td>" ;
+										
+								}
 								
 							})
 						})
 						$(document).on("click","#checkbox",function(){
 							if(this.checked == true){	
+								 
 								var str3 =  $(this).parents("tr").find("td").eq(1).text()
 								var form2 = {
 									"userId":parseInt(handleLocalStorage("get","userId")),
@@ -202,6 +222,7 @@
 								console.log(9);
 							}
 						})
+						
 						
 						$("#endExam").on("click",function(){
 							var msg = "您确定要退出考试吗？"
@@ -334,7 +355,7 @@
 		 
 		</script>
 	</body>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	//禁用复制粘贴F5及Backspace
 		document.onkeydown=function(){
 			//禁用Ctrl+C
@@ -351,7 +372,7 @@
 			if(event.keyCode==8){
 				var ev=window.event;
 				var obj=ev.srcElement;
-				if	(obj.getAttribute('type')!='text'&& obj.getAttribute('type')!='textarea'){return false;}
+				if	(obj.getAttribute('type')!='text'&& obj.getAttribute('type')=='textarea'){return false;}
 			}
 		}
 	</script>
@@ -398,5 +419,35 @@
 		  window.close();
 		 }
 		}
+	</script> -->
+	<script type="text/javascript">
+		function getMsg(){
+			var form3 = {
+				"userId":parseInt(handleLocalStorage("get","userId")),
+				"examId":parseInt(handleLocalStorage("get","examId")),
+				"questionPaperId":parseInt(handleLocalStorage("get","qi")),
+				"answer":answerArea.value
+			};
+			
+			$.get("/answerInformation/insert",form3,function(resl){
+				
+				console.log(999);
+			})
+		}
 	</script>
+	<!-- <script type="text/javascript">
+		    function siblings(currentNode) {
+		        var siblingss = []; //用来存放其他的兄弟节点
+		        var elseLi = currentNode.children;
+		        for (var i = 0, elseLil = elseLi.length; i < elseLil; i++) {
+		            if (elseLi[i] !== currentNode) {//判断是否是ele节点，是否与触发事件的节点相同
+		                siblingss.push(elseLi[i]);
+		            }
+		        }
+		        for(var j  = 0; j<siblingss.length ; j++){
+					console.log(siblingss[i]);
+				}
+		      
+		    }
+	</script> -->
 </html>

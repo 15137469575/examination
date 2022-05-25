@@ -13,11 +13,22 @@
 			$(function(){
 				$(document).ready(function(){
 					var form1 = {
-						"examId": handleLocalStorage("get","examId"),
-						"studentId": handleLocalStorage("get","nowStudentId"),
+						"examId":handleLocalStorage("get","examId"),
+						"studentId":handleLocalStorage("get","nowStudentId")
 					};
-					$.get("/score/selectAnswer",form1,function(res){
+					$.get("/score/intelligent",form1,function(res){
+						// var str1 = "";
+						// for(var i = 0 ; i<res.length;i++ ){
+						// 	str1 += "<tr cate-id='0' fid='0'>" +
+						// 		"<td>" + res[i].studentId + "</td>" +
+						// 		"<td>" + res[i].studentName + "</td>" +
+						// 		"<td>" + res[i].examStuState + "</td>" +
+						// 		"<td>" + "<button id = 'marking'>" + "进入批阅" + "</button>" + "</td>";
+						// }
+						// test.innerHTML = str1;
+						
 						console.log(res);
+						
 					})
 				})
 			})
@@ -53,14 +64,33 @@
 					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
 				<div>
-					<a class="markingExaminationPaper" href="markingExaminationPaper.html">批阅试卷</a>
+					<a class="markingExaminationPaper" href="markingExaminationPaper.html" style="color: white; background-color:#A9A9A9;">批阅试卷</a>
 				</div>
 				<div>
 					<a class="analyze" href="analyze.html">考试分析</a>
 				</div>
 			</div>
 			<div class="right">
-				999999
+				<div class="questionView">
+				
+				
+					<!-- 试卷tabel -->
+					<table class="questionTable">
+						<thead>
+							<tr>
+				
+								<th width="32%">题目</th>
+								<th width="10%">学生作答</th>
+								<th width="10%">评分</th>
+								<th width="5%">&nbsp;操作</th>
+						</thead>
+						<tbody class="x-cate" id="test">
+				
+						</tbody>
+					</table>
+				
+				
+				</div>
 			</div>
 		</div>
 
