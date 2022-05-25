@@ -12,6 +12,7 @@
 		<script type="text/javascript">
 			$(function(){
 				$(document).ready(function(){
+					
 					var form1 = {
 						"examId":handleLocalStorage("get","examId"),
 						"studentId":handleLocalStorage("get","nowStudentId")
@@ -26,8 +27,8 @@
 						// 		"<td>" + "<button id = 'marking'>" + "进入批阅" + "</button>" + "</td>";
 						// }
 						// test.innerHTML = str1;
-						
 						console.log(res);
+						document.getElementById('ke').value = res;
 						
 					})
 				})
@@ -73,7 +74,8 @@
 			<div class="right">
 				<div class="questionView">
 				
-				
+				学生客观题得分为：
+				<input type="text" name="" id="ke" value="" />
 					<!-- 试卷tabel -->
 					<table class="questionTable">
 						<thead>

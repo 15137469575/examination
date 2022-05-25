@@ -63,13 +63,14 @@
 			}
 		</style>
 		<script type="text/javascript">
+			
 			$(function() {
 				$(document).ready(function() {
 					var form = {
 						"paperId": handleLocalStorage("get", "id")
 					};
 					$.get("/questionPaper/selectByPaperID", form, function(res) {
-						console.log(res);
+						console.log(handleLocalStorage("get", "id"));
 						var str1 = "";
 
 						var str2 = "";
@@ -94,7 +95,7 @@
 									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
 									"<td>" + "<input type='text' value='' placeholder= '请赋分' id = res[i].questionPaperId/> " +
 									"</td>" +
-									"<td>" + "<button id = 'delectQuestion'>" + "保存" + "</button>" +
+									"<td>" + "<button id = 'delectQuestion' onclick='test_click(this)'>" + "保存" + "</button>" +
 									"</td>";
 							} else {
 								str1 += "<tr cate-id='0' fid='0'>" +
@@ -104,9 +105,9 @@
 									"<td>" + res[i].questionBank.subject + "</td>" +
 									"<td>" + res[i].questionBank.type + "</td>" +
 									"<td>" + res[i].questionBank.degreeDifficulty + "</td>" +
-									"<td>" + "<input type='text' value=''  placeholder= '请赋分' id =res[i].questionPaperId/> " +
+									"<td>" + "<input type='text'  value=''  placeholder= '请赋分' id =res[i].questionPaperId/> " +
 									"</td>" +
-									"<td>" + "<button id = 'delectQuestion'>" + "保存" + "</button>" +
+									"<td>" + "<button id = 'delectQuestion' onclick='test_click(this)'>" + "保存" + "</button>" +
 									"</td>";
 							}
 
@@ -114,31 +115,32 @@
 
 						}
 						test.innerHTML = str1;
+						
 
-						$(document).on("click", "#delectQuestion", function() {
-							if ($(this).parents("tr").find("td").eq(5).text() == '') {
-								alert("请先赋分");
-							} else {
-								str8 = $(this).parents("tr").find("td").eq(0)
-										.text();
-								str9 = $(this).parents("tr").find("td").eq(6).id;
-								str10 = parseInt(str8);
-								str11 = parseInt(str9);
-								alert(str9);
+						// $(document).on("click", "#delectQuestion", function() {
+						// 	if ($(this).parents("tr").find("td").eq(5).text() == '') {
+						// 		alert("请先赋分");
+						// 	} else {
+						// 		str8 = $(this).parents("tr").find("td").eq(0)
+						// 				.text();
+						// 		str9 = $(this).parents("tr").find("td").eq(6).id;
+						// 		str10 = parseInt(str8);
+						// 		str11 = parseInt(str9);
+						// 		alert(str9);
 								
 							
-								var form2 = {
-									"questionPaperId": str10,
-									"grade":1
-								}
-								$.get("/questionPaper/insertGrade", form2, function(res) {
-									alert("保存成功");
+							// 	var form2 = {
+							// 		"questionPaperId": str10,
+							// 		"grade":1
+							// 	}
+							// 	$.get("/questionPaper/insertGrade", form2, function(res) {
+							// 		alert("保存成功");
 									
-								})
+							// 	})
 
-							}
+						// 	}
 
-						})
+						// })
 						replay.onclick = function() {
 							window.location.href = "makePaperInPerson.html";
 
@@ -219,4 +221,23 @@
 		</div>
 
 	</body>
+	<script type="text/javascript">
+		let test_click = function(rs){
+			// console.dir(rs.parentElement.previousElementSibling.firstChild.value)
+			var str6 = rs.parentElement.previousElementSibling.firstChild.value;
+			//input 里的值；
+			var str7 = parseInt(str6);
+			var str8 = rs.parentElement.parentElement.firstChild.innerText;
+			var str9 = parseInt(str8);
+			var form2 = {
+				"questionPaperId": str9,
+				"grade":str7
+			}
+			$.get("/questionPaper/insertGrade", form2, function(res) {
+				alert("保存成功");
+				
+			})
+			
+		}
+	</script>
 </html>
