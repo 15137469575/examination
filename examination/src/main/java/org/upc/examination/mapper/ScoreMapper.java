@@ -29,10 +29,31 @@ public interface ScoreMapper {
      *      然后，使用这些答案来匹配回答，比较对错，对score进行修改和插入
      * */
     List<AnswerInformantion> selectedAnswer(int examId,int studentId);
+
+
     List<String> selectType(int examId);
+
+
     List<String> selectQuestion(int examId);
+
+
     List<QuestionBank> selectQuestionBank(int examId,int studentId);
+
     Double selectGrade(int examId,int questionId);
+
     Double selectSumOfScore(int examId,int studentId);
+
+    //更新score表中的数据，主要是通过examId和studentId和questionPaperId来确定要更新的score
+    //
+    int updateScoreQuestionId(int examId,int studentId,int questionPaperId,Double score);
+
+    int updateScore(int examId,int studentId,Double score);
+
+    //通过examId,studentId,questionPaperId来选择出该名学生的分数
+
+    Score selectAll(int examId,int studentId,int questionPaperId);
+
+    Score selectSumScore(int examId,int studentId);
+
 
 }

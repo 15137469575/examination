@@ -11,6 +11,16 @@
             (#{scoreId},#{userId},#{examId},#{questionPaperId},
              #{score},#{teacherId},#{state},#{remark})
     </insert>
+    <update id="updateScoreQuestionId">
+        UPDATE score
+        SET score.score = #{score}
+        WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id =#{questionPaperId}
+    </update>
+    <update id="updateScore">
+        UPDATE score
+        SET score.score = #{score}
+        WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id IS NULL
+    </update>
     <select id="selectAnswer" resultType="org.upc.examination.entity.AnswerInformantion">
         SELECT ans.answer_id,ans.exam_id,ans.question_paper_id,ans.user_id,
                ans.answer,ans.remark
@@ -108,9 +118,20 @@
                 WHERE ans.exam_id = #{examId} AND ans.user_id = #{studentId}))
     </select>
     <select id="selectSumOfScore" resultType="java.lang.Double">
+
         SELECT sum(sc.score)
         FROM score sc
-        WHERE sc.exam_id = #{examId} AND sc.user_id = #{studentId}
+        WHERE sc.exam_id = #{examId} AND sc.user_id = #{studentId} AND sc.question_paper_id IS NOT NULL
+    </select>
+    <select id="selectAll" resultType="org.upc.examination.entity.Score">
+        SELECT *
+        FROM score
+        WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id  = #{questionPaperId}
+    </select>
+    <select id="selectSumScore" resultType="org.upc.examination.entity.Score">
+        SELECT *
+        FROM score
+        WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id  IS NULL
     </select>
 
 

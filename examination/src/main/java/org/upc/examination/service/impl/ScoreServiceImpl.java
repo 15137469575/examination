@@ -42,7 +42,8 @@ public class ScoreServiceImpl implements ScoreService {
          * 两个列表已经回合在一起，接下来要做的工作是将answerInformantionList列表中非人工阅卷的内容给删除掉
          * 已经完成智能阅卷的功能
          * */
-        return answerInformantionList;
+        //return answerInformantionList;
+        return answerInformantionList1;
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ScoreServiceImpl implements ScoreService {
             }
         }
 
-        for(int k = 0;k < answerInformantionList1.size();k++){
+        for(int k = 0;k < answerInformantionList1.size();k++) {
             AnswerInformantion answerInformantion = answerInformantionList1.get(k);
 
             Score score1 = new Score();
@@ -79,15 +80,20 @@ public class ScoreServiceImpl implements ScoreService {
 
             String correctAnswer = answerInformantion.getQuestionBank().getAnswer();
             String answer = answerInformantion.getAnswer();
-            if(answer.equals(correctAnswer)){
-                Double gradeDouble = scoreMapper.selectGrade(answerInformantion.getExamId(),answerInformantion.getQuestionPaperId());
+            if (answer.equals(correctAnswer)) {
+                Double gradeDouble = scoreMapper.selectGrade(answerInformantion.getExamId(), answerInformantion.getQuestionPaperId());
                 score1.setScore(gradeDouble);
                 score1.setState(1);
-            }else {
+            } else {
                 score1.setScore(0.0);
                 score1.setState(0);
             }
-            scoreMapper.insert(score1);
+            Score score3 = scoreMapper.selectAll(score1.getExamId(), score1.getUserId(), score1.getQuestionPaperId());
+            if (null == score3) {
+                scoreMapper.insert(score1);
+            } else {
+                scoreMapper.updateScoreQuestionId(score1.getExamId(), score1.getUserId(), score1.getQuestionPaperId(), score1.getScore());
+            }
         }
         /**
          * 实现获取在该场考试中该名考生所有客观题的总成绩
@@ -98,7 +104,14 @@ public class ScoreServiceImpl implements ScoreService {
         sumScore.setUserId(studentId);
         sumScore.setScore(sumOfScore);
         sumScore.setState(1);
-        scoreMapper.insert(sumScore);
+        Score score3 = scoreMapper.selectSumScore(sumScore.getExamId(), sumScore.getUserId());
+
+        if(null == score3) {
+            scoreMapper.insert(sumScore);
+        }
+        else {
+            scoreMapper.updateScore(sumScore.getExamId(),sumScore.getUserId(),sumScore.getScore());
+        }
         return sumOfScore;
 
 
