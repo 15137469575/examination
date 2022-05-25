@@ -55,7 +55,7 @@
             qb.subject sub,
             qb.type ty
         FROM question_paper qp,question_bank qb
-        WHERE qp.paper_id = 137
+        WHERE qp.paper_id = #{index}
           AND qp.question_id = qb.question_id
         ORDER BY(qp.question_paper_sort)
     </select>
