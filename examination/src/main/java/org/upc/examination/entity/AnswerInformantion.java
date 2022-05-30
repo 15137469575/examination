@@ -117,5 +117,18 @@ public class AnswerInformantion {
     this.remark = remark;
   }
 
-
+  @Override
+  public String toString() {
+    return "AnswerInformantion{" +
+            "answerId=" + answerId +
+            ", userId=" + userId +
+            ", examId=" + examId +
+            ", paperId=" + paperId +
+            ", questionPaperId=" + questionPaperId +
+            ", answer='" + answer + '\'' +
+            ", remark='" + remark + '\'' +
+            ", questionBank=" + questionBank +
+            ", score=" + score +
+            '}';
+  }
 }

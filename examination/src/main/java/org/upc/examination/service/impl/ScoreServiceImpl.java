@@ -31,7 +31,12 @@ public class ScoreServiceImpl implements ScoreService {
         List<AnswerInformantion> answerInformantionList1 = new LinkedList<AnswerInformantion>();
         for(int i = 0;i<answerInformantionList.size();i++){
             answerInformantionList.get(i).setQuestionBank(questionBankLists.get(i));
-            answerInformantionList.get(i).setScore(scoreMapper.selectGradeByPaperId(answerInformantionList.get(i).getPaperId(),answerInformantionList.get(i).getQuestionPaperId()));
+            int examId1 = answerInformantionList.get(i).getExamId();
+            int questionPaperId1 = answerInformantionList.get(i).getQuestionPaperId();
+            //System.out.println(examId1);
+            //System.out.println(questionPaperId);
+            Double grade1 = scoreMapper.selectGradeByPaperId(examId1,questionPaperId1);
+            answerInformantionList.get(i).setScore(grade1);
         }
 
         for(int j = 0;j<answerInformantionList.size();j++){

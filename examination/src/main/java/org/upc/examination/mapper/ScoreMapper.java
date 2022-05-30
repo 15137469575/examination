@@ -21,7 +21,7 @@ public interface ScoreMapper {
 
     List<ScoreStudent> selectStudent(int examId);
 
-    Double selectGradeByPaperId(int paperId,int questionPaperId);
+    Double selectGradeByPaperId(int examId,int questionPaperId);
 
     //智能阅卷
     /**

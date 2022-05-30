@@ -136,7 +136,9 @@
     <select id="selectGradeByPaperId" resultType="java.lang.Double">
         SELECT grade
         FROM question_paper
-        WHERE question_paper.paper_id = #{paperId} AND question_paper.question_paper_sort = #{questionPaperId}
+        WHERE question_paper.question_paper_sort = #{questionPaperId} AND question_paper.paper_id = (SELECT exam.paper_id
+                                                                                  FROM exam
+                                                                                  WHERE exam.exam_id = #{examId} )
     </select>
 
 
