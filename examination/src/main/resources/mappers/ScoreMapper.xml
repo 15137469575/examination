@@ -133,6 +133,11 @@
         FROM score
         WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id  IS NULL
     </select>
+    <select id="selectGradeByPaperId" resultType="java.lang.Double">
+        SELECT grade
+        FROM question_paper
+        WHERE question_paper.paper_id = #{paperId} AND question_paper.question_paper_sort = #{questionPaperId}
+    </select>
 
 
 </mapper>

@@ -31,7 +31,9 @@ public class ScoreServiceImpl implements ScoreService {
         List<AnswerInformantion> answerInformantionList1 = new LinkedList<AnswerInformantion>();
         for(int i = 0;i<answerInformantionList.size();i++){
             answerInformantionList.get(i).setQuestionBank(questionBankLists.get(i));
+            answerInformantionList.get(i).setScore(scoreMapper.selectGradeByPaperId(answerInformantionList.get(i).getPaperId(),answerInformantionList.get(i).getQuestionPaperId()));
         }
+
         for(int j = 0;j<answerInformantionList.size();j++){
             String typeStr = answerInformantionList.get(j).getQuestionBank().getType();
             if(!typeStr.equals("单选") && !typeStr.equals("多选") && !typeStr.equals("判断")){

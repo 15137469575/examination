@@ -14,6 +14,16 @@ public class AnswerInformantion {
   //private String type;
   //private String correctAnswer;
   private QuestionBank questionBank;
+  private Double score;
+  public Double getScore() {
+    return score;
+  }
+
+  public void setScore(Double score) {
+    this.score = score;
+  }
+
+
   public QuestionBank getQuestionBank() {
     return questionBank;
   }

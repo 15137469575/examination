@@ -21,6 +21,8 @@ public interface ScoreMapper {
 
     List<ScoreStudent> selectStudent(int examId);
 
+    Double selectGradeByPaperId(int paperId,int questionPaperId);
+
     //智能阅卷
     /**
      * 首先要从answer_informantion表中选择出examId考试中的所有回答，以及要筛选出适合的题型
