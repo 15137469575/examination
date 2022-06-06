@@ -1,10 +1,10 @@
 package org.upc.examination.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.upc.examination.entity.AnswerInformantion;
 import org.upc.examination.entity.Score;
 import org.upc.examination.entity.ScoreStudent;
+import org.upc.examination.entity.ScoreToStudent;
 import org.upc.examination.service.ScoreService;
 
 import javax.annotation.Resource;
@@ -55,4 +55,17 @@ public class ScoreController {
     public Double intelligent(int examId,int studentId){
         return scoreService.intelligent(examId,studentId);
     }
+    /**
+     * 返回情况：
+     *      根据科目和学生号来查询
+     *      展示考试号、阅卷教师姓名、考试开始时间、学生参见考试状态、学生总成绩
+     * */
+    @RequestMapping("/scoresToStudents")
+    public List<ScoreToStudent> scoresToStudents(String subjects, int studentId){
+        System.out.println(1);
+        List<ScoreToStudent> s = scoreService.scoresToStudents(subjects, studentId);
+        System.out.println(2);
+        return s;
+    }
+
 }

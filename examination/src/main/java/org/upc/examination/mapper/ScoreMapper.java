@@ -1,10 +1,7 @@
 package org.upc.examination.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.upc.examination.entity.AnswerInformantion;
-import org.upc.examination.entity.QuestionBank;
-import org.upc.examination.entity.Score;
-import org.upc.examination.entity.ScoreStudent;
+import org.upc.examination.entity.*;
 
 import java.util.List;
 
@@ -57,5 +54,16 @@ public interface ScoreMapper {
 
     Score selectSumScore(int examId,int studentId);
 
+    /**
+     * 向学生展示成绩功能实现
+     * */
+    List<ScoreToStudent> selectExamIdBySubject(String subject,int studentId);
 
+    String selectTimeByExamID(int examId);
+
+    Double selectScoreOfSum(int examId,int studentId);
+
+    Integer selectState(int examId,int studentId);
+
+    String selectTeacherName(int examId,int studentId);
 }

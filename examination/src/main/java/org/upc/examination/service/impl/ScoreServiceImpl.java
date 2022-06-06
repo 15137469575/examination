@@ -2,12 +2,8 @@ package org.upc.examination.service.impl;
 
 
 import org.springframework.stereotype.Service;
-import org.upc.examination.entity.AnswerInformantion;
-import org.upc.examination.entity.QuestionBank;
-import org.upc.examination.entity.Score;
-import org.upc.examination.entity.ScoreStudent;
+import org.upc.examination.entity.*;
 import org.upc.examination.mapper.ScoreMapper;
-import org.upc.examination.service.AnswerInforService;
 import org.upc.examination.service.ScoreService;
 
 import javax.annotation.Resource;
@@ -124,4 +120,33 @@ public class ScoreServiceImpl implements ScoreService {
 
 
     }
+
+    @Override
+    public List<ScoreToStudent> scoresToStudents(String subjects, int studentId) {
+        List<ScoreToStudent> scoreToStudentLists = new LinkedList<>();
+        //scoreMapper.selectExamIdBySubject(subjects)
+        //for (int j = 0;j<subjects.size();j++){
+            //ScoresToStu scoresToStu = new ScoresToStu();
+            //List<ScoreToStudent> scoreToStudentList =  scoresToStu.scoresToStudent(subjects.get(j),studentId);
+            //
+
+        List<ScoreToStudent> s = scoreMapper.selectExamIdBySubject(subjects,studentId);
+
+        //for(int k = 0;k<s.size();k++){
+            //System.out.println(s.get(k));
+        //}
+        for(int i = 0;i<s.size();i++){
+            s.get(i).setExamStartTime(scoreMapper.selectTimeByExamID(s.get(i).getExamId()));
+            s.get(i).setScoreOfSum(scoreMapper.selectScoreOfSum(s.get(i).getExamId(),studentId));
+            s.get(i).setStudentStatement(scoreMapper.selectState(s.get(i).getExamId(),studentId));
+            s.get(i).setTeacherName(scoreMapper.selectTeacherName(s.get(i).getExamId(),studentId));
+        }
+            //
+        scoreToStudentLists.addAll(s);
+        //}
+        return scoreToStudentLists;
+    }
+
+
+
 }

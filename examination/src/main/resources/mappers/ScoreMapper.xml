@@ -140,6 +140,44 @@
                                                                                   FROM exam
                                                                                   WHERE exam.exam_id = #{examId} )
     </select>
+    <select id="selectExamIdBySubject" resultType="org.upc.examination.entity.ScoreToStudent">
+        SELECT e2.exam_id
+        FROM exam e2
+        WHERE e2.paper_id IN
+              (SELECT pin1.paper_id
+               FROM paper_information pin1
+               WHERE pin1.`subject` = #{subject} )
+          AND e2.exam_id IN
+              (
+                  SELECT exam_id
+                  FROM exam_student
+                  WHERE student_id = #{studentId}
+              )
+    </select>
+    <select id="selectTimeByExamID" resultType="java.lang.String">
+        SELECT exam.exam_time
+        FROM exam
+        WHERE exam.exam_id =#{examId}
+    </select>
+    <select id="selectScoreOfSum" resultType="java.lang.Double">
+        SELECT SUM(score)
+        FROM score
+        WHERE score.exam_id = #{examId} AND score.user_id = #{studentId} AND score.question_paper_id IS NOT NULL
+    </select>
+    <select id="selectState" resultType="java.lang.Integer">
+        SELECT examState
+        FROM exam_student
+        WHERE exam_id = #{examId} AND student_id =#{studentId}
+    </select>
+    <select id="selectTeacherName" resultType="java.lang.String">
+        SELECT users.user_name
+        FROM users
+        WHERE users.user_id IN
+              (
+                  SELECT DISTINCT score.teacher_id
+                  FROM score
+                  WHERE score.exam_id = #{examId} AND score.user_id = #{studentId})
+    </select>
 
 
 </mapper>
