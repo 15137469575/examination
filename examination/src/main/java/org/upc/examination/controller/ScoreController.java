@@ -62,9 +62,9 @@ public class ScoreController {
      * */
     @RequestMapping("/scoresToStudents")
     public List<ScoreToStudent> scoresToStudents(String subjects, int studentId){
-        System.out.println(1);
+
         List<ScoreToStudent> s = scoreService.scoresToStudents(subjects, studentId);
-        System.out.println(2);
+
         return s;
     }
 
