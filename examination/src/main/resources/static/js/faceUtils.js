@@ -29,6 +29,7 @@ function compare(file, index) {
                 location.href="examPrepare.html";
             }else {
                 // alert("认证失败，请确保符合拍照规范");
+				// location.href="student02.html
 				 location.href="examPrepare.html";
 
             }

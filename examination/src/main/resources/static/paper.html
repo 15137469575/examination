@@ -6,19 +6,20 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		<!-- <script src="js/cutTime.js" type="text/javascript" charset="utf-8"></script> -->
+		<!-- <script src="js/cutTime.js" type="text/javascript`8787" charset="utf-8"></script> -->
 		<script src="js/fangzuobi.js" type="text/javascript" charset="utf-8"></script>
 		
 		<style type="text/css">
 			body {
 				overflow: hidden;
+				font-family: "KaiTi";
 			}
 
 			.left {
 				display: inline-block;
 				width: 25%;
 				height: 100rem;
-				border-right: 3px solid #000000;
+				border-right: 3px solid seagreen;
 				background-color: #F5F5DC;
 				font-family: 'KaiTi';
 			}
@@ -35,7 +36,8 @@
 				width: 100%;
 				height: 55vh;
 				overflow-y: scroll;
-				border-bottom: 2px solid #000000;
+				border-bottom: 2px solid seagreen;
+				
 			}
 
 			/* span {
@@ -53,27 +55,34 @@
 				width: 100%;
 				height: 55vh;
 				font-size: 2em;
-				background-color: #A9A9A9;
-				border-bottom: 2px solid #000000;
+				background:url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.bizhizu.com%2Fpic_source%2F24%2F4e%2F5b%2F244e5b8bf4bf524b39dd4ef739903043.jpg&refer=http%3A%2F%2Fup.bizhizu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656645940&t=51088a0f8dcbb648b126f1bfeac6f9cd") fixed no-repeat;
+				background-size: 100% 100%;
+				background-color: rgba(0,0,0,1;);
+				border-bottom: 2px solid seagreen;
 			}
 
 			.answer {
 				width: 100%;
 				height: 45vh;
 				font-size: 1.5em;
-				background-color: aqua;
+				background-color: #80b8b5;
 			}
 
 			#questionCard {
 				color: #F5F5DC;
 			}
 			.qi{
-				width: 70%;
+				width:  200px;
+				/* min-width: 200px; */
 				line-height: 100%;
 				text-align: center;
+				padding: 5px;
+				/* border: 2px solid white; */
+				margin: 5px;
 			}
 			#qi{
 				width: 98%;
+				
 			}
 			p span {
 				
@@ -97,8 +106,12 @@
 				width: 100%;
 				height: 40vh;
 				font-size: 1.5em;
-				background-color: #8FBC8F;
-			}		
+				background-color: #f5f5dc;
+			}	
+				span{
+					font-size: x-large;
+				}
+				
 		</style>
 
 		<script type="text/javascript">
@@ -118,11 +131,11 @@
 						console.log(res);
 						var str1 = "";
 						for (var i = 0; i < res.length; i++) {
-							str1 += "<tr cate-id='0' fid='0'>" +
+							str1 += "<tr cate-id='0' fid='0' style='display: flex;align-items: center;justify-content: space-around;' >" +
 								"<td>" + res[i] + "</td>" +
-								"<td class = 'qi'>" + "<button id = 'qi'>" + res[i]  + "</button>" + "</td>"+
-								"<td>" + "<button id = 'red'>" + "标记该题" + "</button>" + "</td>" + 
-								"<td>" + "<button id = 'black'>" + "取消标记" + "</button>" + "</td>";
+								"<td class = 'qi' style='display: flex;align-items: center;justify-content: center;'>" + "<button id = 'qi'  style='cursor:auto; border-radius: 8px;'>" + res[i]  + "</button>" + "</td>"+
+								"<td style='width: 100px'>" + "<button id = 'red' style='width : 80px ; cursor:pointer; border-radius: 8px;'>" + "标记该题" + "</button>" + "</td>" + 
+								"<td  style = 'width: 100px'>" + "<button id = 'black' style='width : 80px; cursor:pointer; border-radius: 8px;'>" + "取消标记" + "</button>" + "</td>";
 
 
 
@@ -140,7 +153,7 @@
 							
 						})
 						$(document).on("click", "#qi", function() {
-						$(this).css("background-color","yellow");
+						$(this).css("background-color","seagreen");
 						var str2 = $(this).parents("tr").find("td").eq(0).text();
 						handleLocalStorage("set","qi",str2);
 							var form1 = {
@@ -151,50 +164,52 @@
 							$.get("/exam//selectQuestionIn", form1, function(resg) {
 								console.log(resg);
 								var question = document.getElementById('question');
-								question.innerHTML = resg.question;
+								question.innerHTML = "<tr cate-id='0' fid='0'>" + resg.question;
 								var answer = document.getElementById('answer');
 								if (resg.type == "单选") {
 									
-									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' id = 'checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+									answer.innerHTML = "<div>" + "</div>"+"<tr cate-id='0' fid='0'>" +
+									"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' id = 'checkbox' style='width: 20px; height: 20px; cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.a + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox'  id = 'checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox'  id = 'checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.b + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.c + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox'  id = 'checkbox'  style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.d + "</td>";
 										
 								}
 								else if (resg.type == "多选") {
 									
-									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+									answer.innerHTML =  "<div>" + "</div>"+"<tr cate-id='0' fid='0'>" +
+									 "<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" +   resg.a + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.b + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" +  resg.c + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox'  style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox'  style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" +  resg.d + "</td>";
 								}
 								else if(resg.type == "填空"){
 									answer.innerHTML = "<textarea rows='100%' cols='100%' placeholder='答题区' id = 'answerArea'>" + "</textarea>"
-									+ "<button style='display: block;' id = 'answerAreaBtn'  onclick='getMsg()'>" + "保存" +"</btton>";
+									+ "<button style='display: block; padding-lift: 10px; padding-right:10px; font-size: large; cursor:pointer; border-radius: 8px;' id = 'answerAreaBtn'  onclick='getMsg()' >" + "保存" +"</btton>";
 									
 								}
 								else if(resg.type == "判断"){
-									answer.innerHTML = "<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+									answer.innerHTML = "<div>" + "</div>"+"<tr cate-id='0' fid='0'>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" +   resg.a + "</td>" +
 										"<tr cate-id='0' fid='0'>" +
-										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;'/>" + "</td>" +
+										"<td>" + "<input type='checkbox' style='width: 20px; height: 20px;cursor:pointer; border-radius: 8px;'/>" + "</td>" +
 										"<td>" + resg.b + "</td>" ;
 										
 								}
@@ -227,7 +242,7 @@
 						$("#endExam").on("click",function(){
 							var msg = "您确定要退出考试吗？"
 							if (confirm(msg)==true){
-							    window.location.href = 'about:blank ';
+							    window.location.href = 'login.html';
 							    return true;
 							}else{
 							    
@@ -259,7 +274,7 @@
 		<div class="left">
 			
 			<div class="questionCard">
-				<p>距离2019年还有<span id="cutTime"></span></p>
+				<p style="font-size: large;">距离考试结束还有<span id="cutTime"></span></p>
 				 
 				<!-- <p><span id="cutTime"></span></p> -->
 				 
@@ -276,10 +291,10 @@
 			<div>
 				&nbsp;
 			</div>
-			<span>你可以将重要内容暂时记录于下</span>
+			<span style="font-size: 30px;">你可以将重要内容暂时记录于下</span>
 			<span>&nbsp;</span>
 
-			<textarea id="notebook" rows="" cols="">记事本</textarea>
+			<textarea id="notebook" rows="" cols="" placeholder="草稿纸"></textarea>
 
 
 		</div>
@@ -288,7 +303,7 @@
 				<div id="question">
 					
 				</div>
-				<button type="button" id="endExam">提交试卷</button>
+				<button type="button" id="endExam" style="cursor: pointer; border-radius: 8px;">提交试卷</button>
 			</div>
 			<div class="answer">
 				<table class="questionCardTable">
@@ -355,7 +370,7 @@
 		 
 		</script>
 	</body>
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 	//禁用复制粘贴F5及Backspace
 		document.onkeydown=function(){
 			//禁用Ctrl+C
@@ -411,15 +426,31 @@
 		  }
 		 }
 		 else if (navigator.userAgent.indexOf("Firefox") > 0) {
-		  window.location.href = 'about:blank ';
+		  window.location.href = 'login.html';
 		 } else {
 		  window.opener = null;
 		  window.open('', '_self', '');
-		  window.location.href = "about:blank";  
+		  window.location.href = "login.html";  
 		  window.close();
 		 }
 		}
-	</script> -->
+	</script>
+	<script language="javascript">
+	    //防止页面后退
+	    history.pushState(null, null, document.URL);
+	    window.addEventListener('popstate', function () {
+	            history.pushState(null, null, document.URL);
+	    });
+	</script>
+	<script type="text/javascript">
+	            $(function() {
+	                $("a").click(function(e) {
+	                    //alert("默认行为被禁止喽");
+	                    e.preventDefault();
+	                });
+	            })
+	        </script>
+	
 	<script type="text/javascript">
 		function getMsg(){
 			var form3 = {
@@ -435,19 +466,5 @@
 			})
 		}
 	</script>
-	<!-- <script type="text/javascript">
-		    function siblings(currentNode) {
-		        var siblingss = []; //用来存放其他的兄弟节点
-		        var elseLi = currentNode.children;
-		        for (var i = 0, elseLil = elseLi.length; i < elseLil; i++) {
-		            if (elseLi[i] !== currentNode) {//判断是否是ele节点，是否与触发事件的节点相同
-		                siblingss.push(elseLi[i]);
-		            }
-		        }
-		        for(var j  = 0; j<siblingss.length ; j++){
-					console.log(siblingss[i]);
-				}
-		      
-		    }
-	</script> -->
+	
 </html>

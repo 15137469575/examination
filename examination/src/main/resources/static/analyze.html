@@ -6,9 +6,23 @@
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/echarts.js"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		
+		<style>
+			#main {
+				visibility: hidden;
+				width: 800px;
+				height: 600px;
+			}
+			button{
+				font-size: large;
+				border: 1px solid #000000;
+				border-radius: 0.3125rem;
+				background-color: #56a15f;
+				cursor: pointer;
+			}
+		</style>
 	</head>
 	<body>
 
@@ -41,14 +55,107 @@
 					<a class="markingExaminationPaper" href="markingExaminationPaper.html">批阅试卷</a>
 				</div>
 				<div>
-					<a class="analyze" href="analyze.html" style="color: white; background-color:#A9A9A9;">考试分析</a>
+					<a class="analyze" href="analyze.html" style="color: green; background-color:#A9A9A9;">考试分析</a>
 				</div>
 			</div>
 			<div class="right">
 				
-				9999999999
+				<!-- <input id="examId" type="text" name="examId"> -->
+				<button id="display" onclick="display() ">点击查看</button>
+				<div id="main">
+				
+				</div>
 			</div>
 		</div>
 
 	</body>
+	<script>
+		function display() {
+			// let examId = document.getElementById("examId").value;
+			var str1 = handleLocalStorage("get","examId");
+			var str2 = parseInt(str1);
+			$.ajax({
+				type: "post",
+				url: "/scoreDisplay/getAllScores",
+				data: {
+					"examId": 149
+				},
+				success: (rst) => {
+					let radio = getRatio(rst);
+					let option = {
+						title: {
+							text: "成绩分布图"
+						},
+						tooltip: {
+							trigger: 'item'
+						},
+						legend: {
+							top: '5%',
+							left: 'center'
+						},
+						series: [{
+							name: "score ratio",
+							type: "pie",
+							radius: ['40%', '70%'],
+							avoidLabelOverlap: false,
+							itemStyle: {
+								borderRadius: 10,
+								borderColor: '#fff',
+								borderWidth: 5
+							},
+							label: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								label: {
+									show: true,
+									fontSize: '40',
+									fontWeight: 'bold'
+								}
+							},
+							labelLine: {
+								show: false
+							},
+							data: radio
+						}]
+					}
+					draw(option);
+				},
+			})
+		}
+	
+		function draw(option) {
+			let dom = document.getElementById("main");
+			dom.style.visibility = "visible";
+			let echart = echarts.init(dom);
+			echart.setOption(option);
+		}
+	
+		function getRatio(arr) {
+			let number = new Array(3);
+			number[0] = {
+				value: 0,
+				name: "差"
+			};
+			number[1] = {
+				value: 0,
+				name: "良"
+			};
+			number[2] = {
+				value: 0,
+				name: "优秀"
+			};
+			for (let index = 0; index < arr.length; index++) {
+				if (arr[index] < 2) {
+					number[0].value += 1;
+				} else if (arr[index] < 4) {
+					number[1].value += 1;
+				} else {
+					number[2].value += 1;
+				}
+			}
+			return number;
+		}
+	</script>
 </html>

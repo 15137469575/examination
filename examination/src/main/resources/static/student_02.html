@@ -16,7 +16,14 @@
 
 			table {
 				width: 100%;
+				text-align:center;
+				vertical-align:middle;
+				font-size: 1.3em;
+				border-collapse: separate;
+				border-spacing: 5px 15px;
+				
 			}
+			
 		</style>
 		<script type="text/javascript">
 			window.onload = function() {
@@ -42,7 +49,7 @@
 								"<td>" + res[i].examTime + "</td>" +
 								"<td>" + res[i].limTimeEntry + "</td>" +
 								"<td>" + res[i].limTimeSub + "</td>" +
-								"<td>" + "<button id = 'in'>" + "进入考试" + "</button>" + "</td>";
+								"<td>" + "<button id = 'in' style='padding: 5px; border-radius: 5px; font-size: large; background-color: seagreen; cursor:pointer;'>" + "进入考试" + "</button>" + "</td>";
 						}
 
 						test.innerHTML = str1;
@@ -89,6 +96,7 @@
 			<div class="back">
 				<a href="login.html">返回</a>
 			</div>
+			
 		</header>
 
 		<div class="mbody">
@@ -97,7 +105,7 @@
 					<a class="notice" href="student_01.html">查看通知</a>
 				</div>
 				<div>
-					<a class="jionExame" href="student_02.html" style="color: white; background-color:#A9A9A9;">参加考试</a>
+					<a class="jionExame" href="student_02.html" style="color: green; background-color:#A9A9A9;">参加考试</a>
 				</div>
 				<div>
 					<a class="viewResults" href="student_03.html">查看成绩</a>

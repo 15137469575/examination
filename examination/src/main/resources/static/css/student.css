@@ -7,9 +7,10 @@ body {
 	width: 100%;
 	height: 5%;
 	font-size: 20px;
-	background-color: darkseagreen;
-	/* 555 */
-	/* 555 */
+	background:url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.woyaogexing.com%2F2020%2F05%2F02%2Fc12c61ebb46b4b26a88a28bb5144a644%211242x9999.jpeg&refer=http%3A%2F%2Fimg2.woyaogexing.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656646497&t=1e7c51abb2ffffdc9c9cf3f681169cae") fixed no-repeat;
+	background-size: 100% 100%;
+	background-color: rgba(0,0,0,1;);
+	
 }
 
 .welcom {
@@ -17,6 +18,7 @@ body {
 	margin-left: 5vw;
 	line-height:2em;
 	font-size: larger;
+	
 }
 
 .back {
@@ -49,7 +51,7 @@ body {
 	height: 100vh;
 	/* border: 2px solid #20222A; */
 	/* background-color: #FF0000; */
-	background:url("https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3453&q=80.jfif") fixed no-repeat;
+	background:url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.bizhizu.com%2Fpic_source%2F24%2F4e%2F5b%2F244e5b8bf4bf524b39dd4ef739903043.jpg&refer=http%3A%2F%2Fup.bizhizu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656645940&t=51088a0f8dcbb648b126f1bfeac6f9cd") fixed no-repeat;
 	background-size: 100% 100%;
 	background-color: rgba(0,0,0,1;);
 }
@@ -77,6 +79,8 @@ body {
 
 .backgroud {
 	height: 43em;
-	background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi.6art.cn%2F82df0bc66ba6bf07872dc589583421f0%40.jpg&refer=http%3A%2F%2Fi.6art.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649323253&t=52f1211db923afa878a1d12f67ce9c46');
+	/* border-top: 2px solid black; */
+	/* background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi.6art.cn%2F82df0bc66ba6bf07872dc589583421f0%40.jpg&refer=http%3A%2F%2Fi.6art.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649323253&t=52f1211db923afa878a1d12f67ce9c46'); */
+	background-color: seashell;
 	background-size: 100% 100%;
 }

@@ -8,7 +8,28 @@
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		
+		<style type="text/css">
+			table {
+					/* background-color: #16dcb5; */
+					text-align:center;
+					vertical-align:middle;
+					font-size: 1.3em;
+					border-collapse: separate;
+					border-spacing: 5px 15px;}
+				
+			input{
+					font-size: large;
+					border: 1px solid #000000;
+					border-radius: 5px;
+				}
+				button{
+					font-size: large;
+					border: 1px solid #000000;
+					border-radius: 0.3125rem;
+					background-color: seagreen;
+					cursor: pointer;
+				}
+		</style>
 		<script type="text/javascript">
 			$(function(){
 				$(document).ready(function(){
@@ -17,6 +38,15 @@
 					};
 					$.get("/score/selectStudent",form1,function(res){
 						var str1 = "";
+						console.log(res)
+						for(var j= 0;j <res.length;j++){
+							if(res[j].examStuState == 0){
+								res[j].examStuState = '缺考'
+							}
+							else{
+								res[j].examStuState = '正常考试'
+							}
+						}
 						for(var i = 0 ; i<res.length;i++ ){
 							str1 += "<tr cate-id='0' fid='0'>" +
 								"<td>" + res[i].studentId + "</td>" +
@@ -66,7 +96,7 @@
 					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
 				<div>
-					<a class="markingExaminationPaper" href="markingExaminationPaper.html" style="color: white; background-color:#A9A9A9;">批阅试卷</a>
+					<a class="markingExaminationPaper" href="markingExaminationPaper.html" style="color: green; background-color:#A9A9A9;">批阅试卷</a>
 				</div>
 				<div>
 					<a class="analyze" href="analyze.html">考试分析</a>

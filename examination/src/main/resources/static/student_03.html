@@ -6,7 +6,45 @@
 	<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 	<link rel="stylesheet" type="text/css" href="css/student.css" />
 	<link rel="stylesheet" type="text/css" href="css/student_03.css"/>
-	<script src="js/student_03.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="js/student_03.js" type="text/javascript" charset="utf-8"></script> -->
+	
+		<style type="text/css">
+			#year{
+				width:2%;
+			}
+			.num_select {
+				position: relative;
+				z-index: 1;
+				width: 10vw;
+				height: 3vh;
+				border-radius: 3px;
+				font-weight: bold;
+				font-size: larger;
+				color: #9a9a9c;
+				border: 1px solid #cccccc;
+				box-sizing: border-box;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			span{
+				font-size: large;
+				
+			}
+			input{
+				font-size: large;
+				border: 1px solid #000000;
+				border-radius: 0.3125rem;
+			}
+			button{
+				font-size: large;
+				border: 1px solid #000000;
+				border-radius: 0.3125rem;
+				background-color:#56a15f;
+				
+				cursor: pointer;
+			}
+		</style>
+
 </head>
 <body>
 
@@ -28,7 +66,7 @@
 			<a class="jionExame" href="student_02.html">参加考试</a>
 		</div>
 		<div>
-			<a class="viewResults" href="student_03.html" style="color: white; background-color:#A9A9A9;">查看成绩</a>
+			<a class="viewResults" href="student_03.html" style="color: green; background-color:#A9A9A9;">查看成绩</a>
 		</div>
 		<div class="backgroud"></div>
 	</div>
@@ -36,8 +74,17 @@
 		<h1>欢迎进入成绩查询</h1>
 		<div class="viewResultsDiv">
 			<!-- <input id="userNameText" name="userName" placeholder="姓名" /> -->
-			<input id="userIdText" name="userId" placeholder="学号">
-			<input id="object" name="object" placeholder="科目">
+			<!-- <input id="userIdText" name="userId" placeholder="学号"> -->
+			<span>请选择查询的科目：</span>
+			<select id="object_select" class="num_select">
+				<option value='-1' style='display: none ; font-size: xx-large;'></option>
+				<option value="语文">语文</option>
+				<option value="数学">数学</option>
+				<option value="政治">政治</option>
+				<option value="历史">历史</option>
+				<option value="地理">地理</option>
+				<option value="生物">生物</option>
+			</select>
 			<button id="viewResultsBtn">查询</button>
 		</div>
 		<div id="rightBottom">
@@ -46,4 +93,12 @@
 </div>
 
 </body>
+<script type="text/javascript">
+	var viewResultsBtn = document.getElementById('viewResultsBtn');
+	var rightBottom = document.getElementById('rightBottom');
+	
+	viewResultsBtn.onclick = function() {
+		rightBottom.innerHTML = '<div>您的成绩是888分</div>'
+	}
+</script>
 </html>

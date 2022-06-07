@@ -52,7 +52,12 @@
 				})
 			})
 		</script>
-
+		<style type="text/css">
+			input{
+				border: 1px solid #000000;
+				border-radius: 5px;
+			}
+		</style>
 	</head>
 	<body>
 
@@ -62,7 +67,6 @@
 			</div>
 			<div class="back">
 				<a href="login.html">返回</a>
-			</div>
 		</header>
 
 		<div class="mbody">
@@ -71,7 +75,7 @@
 					<a class="teacher01" href="teacher01.html">流程提示</a>
 				</div>
 				<div>
-					<a class="viewResults" href="createPaper.html" style="color: white; background-color:#A9A9A9;">手动组卷</a>
+					<a class="viewResults" href="createPaper.html" style="color: green; background-color:#A9A9A9;">手动组卷</a>
 				</div>
 				<div>
 					<a class="checkPaper" href="checkPaper.html">查看试卷</a>
@@ -89,9 +93,9 @@
 			<div class="right">
 
 
-				科目(必选):
+				<span style="font-size: x-large;">科目(必选):</span>
 				<select id="object_select" class="num_select">
-					<option value='-1' style='display: none'></option>
+					<option value='-1' style='display: none ; font-size: xx-large;'></option>
 					<option value="语文">语文</option>
 					<option value="数学">数学</option>
 					<option value="政治">政治</option>
@@ -100,17 +104,17 @@
 					<option value="生物">生物</option>
 				</select>
 				
-				题目数量：
-				<input type="text" id="queationNumber"  placeholder="请输入纯数字"/>
-				备注：
-				<input type="text" id="normal" />
-				<button id="creatPaper">创建试卷</button>
+				<span style="font-size: x-large;">题目数量：</span>
+				<input type="text" id="queationNumber"  placeholder="请输入纯数字" style="font-size: large;"/>
+				<span style="font-size: x-large;">备注：</span>
+				<input type="text" id="normal" style="font-size: large;"/>
+				<button id="creatPaper" style="font-size: large; background-color: #56a15f; cursor: pointer; border: 1px solid black ; border-radius: 5px;">创建试卷</button>
 
 				<ul id="paperList">
 					<li>
-						试卷编号：
-						<input type="text" readonly="readonly" id="paperId" value="" />
-						<button type="button" id="toCreate">组卷</button>
+						<span style="font-size: x-large;">试卷编号</span>
+						<input type="text" readonly="readonly" id="paperId" value=""  style="font-size: large;"/>
+						<button type="button" id="toCreate" style="font-size: large; background-color: #56a15f; cursor: pointer;border: 1px solid black ; border-radius: 5px;">组卷</button>
 					</li>
 				</ul>
 

@@ -18,7 +18,7 @@
 				height: 3vh;
 				border-radius: 3px;
 				font-weight: bold;
-				font-size: 14px;
+				font-size:large;
 				color: #9a9a9c;
 				border: 1px solid #cccccc;
 				box-sizing: border-box;
@@ -36,16 +36,16 @@
 			}
 
 			.questionView {
-				width: 89%;
+				width: 95%;
 				height: 80vh;
 				border: 2px solid #000000;
 				border-radius: 10px;
-				background-color: #9a9a9c;
+				background-color: #ff8cea;
 				/* opacity: 0.5; */
-				background: rgba(100, 100, 100, 0.3);
+				background: rgba(0, 0, 0, 0.2);
 				text-align: center;
-				margin-left: 5%;
-				margin-top: 1vh;
+				/* margin-left: 5%;
+				margin-top: 1vh; */
 			}
 
 			#savePaper {
@@ -56,8 +56,25 @@
 			}
 
 			table {
-				background-color: #9a9a9c;
-
+				/* background-color: #16dcb5; */
+				text-align:center;
+				vertical-align:middle;
+				font-size: 1.3em;
+				border-collapse: separate;
+				border-spacing: 5px 15px;
+			}
+			span{
+				font-size: x-large;
+			}
+			input{
+				font-size: large;
+			}
+			button{
+				font-size: 13px;
+				border: 1px solid #000000;
+				border-radius: 0.3125rem;
+				background-color: #56a15f;
+				cursor: pointer;
 			}
 		</style>
 		<script type="text/javascript">
@@ -125,7 +142,7 @@
 									"<td>" + data[i].subject + "</td>" +
 									"<td>" + data[i].type + "</td>" +
 									"<td>" + data[i].degreeDifficulty + "</td>" +
-									"<td>" + "<button id = 'add'>" + "添加" + "</button>" + "</td>";
+									"<td>" + "<button id = 'add' style='font-size = small'>" + "添加" + "</button>" + "</td>";
 
 
 
@@ -192,7 +209,7 @@
 					<a class="teacher01" href="teacher01.html">流程提示</a>
 				</div>
 				<div>
-					<a class="viewResults" href="createPaper.html" style="color: white; background-color:#A9A9A9;">手动组卷</a>
+					<a class="viewResults" href="createPaper.html" style="color: green; background-color:#A9A9A9;">手动组卷</a>
 				</div>
 				<div>
 					<a class="checkPaper" href="checkPaper.html">查看试卷</a>
@@ -209,14 +226,14 @@
 			</div>
 			<div class="right">
 				<div class="rightTop">
-					试卷编号：<input type="text" id="paperId" value="" />
-					题型:
-					<select id="questionType_select" class="num_select">
+					<span>试卷编号：</span><input type="text" id="paperId" value="" />
+					<span>题型:</span>
+					<select id="questionType_select" class="num_select" style="font-size: large;">
 						<option value='-1' style='display: none'></option>
 						<option value="单选">单选</option>
 					</select>
 
-					难度:
+					<span>难度:</span>
 					<select id="difficulty_select" class="num_select">
 						<option value='-1' style='display: none'></option>
 						<option value="1">1</option>
@@ -226,8 +243,8 @@
 						<option value="5">5</option>
 					</select>
 
-					<button id="searchButton">查询</button>
-					<button id="makePaperButton">自动组卷</button>
+					<button id="searchButton" style="font-size: large;">查询</button>
+					<button id="makePaperButton" style="font-size: large;">自动组卷</button>
 				</div>
 				<div class="questionView">
 
@@ -237,7 +254,7 @@
 						<thead>
 							<tr>
 
-								<th width="32%">问题</th>
+								<th width="32.29%">问题</th>
 								<th width="10%">选项A</th>
 								<th width="10%">选项B</th>
 								<th width="10%">选项C</th>
@@ -247,7 +264,7 @@
 								<th width="5%">科目</th>
 								<th width="5%">题型</th>
 								<th width="5%">难度</th>
-								<th width="5%">&nbsp;操作</th>
+								<th width="7%">操作</th>
 						</thead>
 						<tbody class="x-cate" id="test">
 

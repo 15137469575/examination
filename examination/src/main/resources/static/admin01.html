@@ -9,7 +9,25 @@
 	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="js/fileUploadUtils.js"></script>
 	
-	
+	<style type="text/css">
+		span{
+			font-size: large;
+			
+		}
+		input{
+			font-size: large;
+			border: 1px solid #000000;
+			border-radius: 0.3125rem;
+		}
+		button{
+			font-size: large;
+			border: 1px solid #000000;
+			border-radius: 0.3125rem;
+			background-color:#56a15f;
+			
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 
@@ -25,7 +43,7 @@
 <div class="mbody">
 	<div class="left">
 		<div>
-			<a class="notice" href="admin01.html" style="color: white; background-color:#A9A9A9;">信息导入</a>
+			<a class="notice" href="admin01.html" style="color: green; background-color:#A9A9A9;">信息导入</a>
 		</div>
 		<div>
 			<a class="jionExame" href="#">题库更新</a>
@@ -36,10 +54,10 @@
 		<div class="backgroud"></div>
 	</div>
 	<div class="right">
-		<span>人脸信息录入：</span>
-			    <input type="file" name="images" id="files"/>
+		<span>学生人脸信息录入：</span>
+			    <input type="file" name="images" id="files" style="border: 1px solid white;"/>
 			    <button id="commit" onclick="upload()">上传</button>
-				<span>压缩文件请以zpi格式上传，图片格式支持png.jpg等，图片文件请以对应的学生学号命名</span>
+				<span style="color: indianred;">压缩文件请以zpi格式上传，图片格式支持png.jpg等，图片文件请以对应的学生学号命名</span>
 				<span id="msg"></span>
 	</div>
 </div>

@@ -5,37 +5,132 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/resetting.css" />
 		<link rel="stylesheet" type="text/css" href="css/student.css" />
+
 		<script src="js/jquery-3.6.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script src="./js/localStorageUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/xlsx.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			.num_select {
+				position: relative;
+				z-index: 1;
+				width: 10vw;
+				height: 3vh;
+				border-radius: 3px;
+				font-weight: bold;
+				font-size: 14px;
+				color: #9a9a9c;
+				border: 1px solid #cccccc;
+				box-sizing: border-box;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+			#searchButton,
+			#makePaperButton {
+				width: 10%;
+				margin-left: 5%;
+				padding: 0.2%;
+
+
+			}
+
+			.questionView {
+				overflow-y: scroll;
+				width: 89%;
+				height: 80vh;
+				border: 2px solid #000000;
+				border-radius: 10px;
+				background-color: #9a9a9c;
+				/* opacity: 0.5; */
+				background: rgba(100, 100, 100, 0.3);
+				text-align: center;
+				margin-left: 5%;
+				margin-top: 1vh;
+			}
+
+			#savePaper {
+				width: 10%;
+				margin-left: 50%;
+				padding: 0.2%;
+				float: right;
+			}
+
+			table {
+					/* background-color: #16dcb5; */
+					text-align:center;
+					vertical-align:middle;
+					font-size: 1.3em;
+					border-collapse: separate;
+					border-spacing: 5px 15px;}
+				
+			input{
+					font-size: large;
+					border: 1px solid #000000;
+					border-radius: 5px;
+				}
+				button{
+					font-size: large;
+					border: 1px solid #000000;
+					border-radius: 0.3125rem;
+					background-color: seagreen;
+					cursor: pointer;
+				}
+		</style>
 		<script type="text/javascript">
-			$(function(){
-				$(document).ready(function(){
-					
-					var form1 = {
-						"examId":handleLocalStorage("get","examId"),
-						"studentId":handleLocalStorage("get","nowStudentId")
+			
+			$(function() {
+				$(document).ready(function() {
+					var str2 = handleLocalStorage("get", "examId");
+					var str3 = parseInt(str2);
+					var str4 = handleLocalStorage("get", "nowStudentId");
+					var str5 = parseInt(str4);
+					var form = {
+						"examId": str3,
+						"studentId":str5
 					};
-					$.get("/score/intelligent",form1,function(res){
-						// var str1 = "";
-						// for(var i = 0 ; i<res.length;i++ ){
-						// 	str1 += "<tr cate-id='0' fid='0'>" +
-						// 		"<td>" + res[i].studentId + "</td>" +
-						// 		"<td>" + res[i].studentName + "</td>" +
-						// 		"<td>" + res[i].examStuState + "</td>" +
-						// 		"<td>" + "<button id = 'marking'>" + "进入批阅" + "</button>" + "</td>";
-						// }
-						// test.innerHTML = str1;
-						console.log(res);
-						document.getElementById('ke').value = res;
+					$.get("/score/intelligent", form, function(rsj) {
+						console.log(rsj);
+						selectQuestion.value = rsj;
 						
+						var form2 = {
+							"examId": str3,
+							"studentId":str5
+						};
+						$.get("/score/selectAnswer",form2,function(res){
+							console.log(res);
+							var str1 = "";
+							
+							var str2 = "";
+							
+							for (var i = 0; i < res.length; i++) {
+								
+									str1 += "<tr cate-id='0' fid='0'>" +
+										
+										"<td>" + res[i].questionBank.question + "</td>" +
+										"<td>" + res[i].questionBank.answer+ "</td>" +
+										
+										"<td>" + res[i].score + "</td>" +
+										"<td>" + res[i].answer + "</td>" +
+										"<td>" + "<input type='text' value='' placeholder= '请赋分' id = res[i].questionPaperId/> " +
+										"</td>" +
+										"<td>" + "<button id = 'delectQuestion' onclick='test_click(this)'>" + "保存" + "</button>" +
+										"</td>";
+						
+							
+							
+							
+							}
+							test.innerHTML = str1;
+						})
+
+
 					})
 				})
 			})
 		</script>
-		
-		
+
 	</head>
 	<body>
 
@@ -48,7 +143,7 @@
 			</div>
 		</header>
 
-		
+
 
 		<div class="mbody">
 			<div class="left">
@@ -59,42 +154,82 @@
 					<a class="viewResults" href="createPaper.html">手动组卷</a>
 				</div>
 				<div>
-					<a class="checkPaper" href="checkPaper.html">查看试卷</a>
+					<a class="checkPaper" href="checkPaper.html"
+						>查看试卷</a>
 				</div>
 				<div>
 					<a class="jionExame" href="createExam.html">创建考试</a>
 				</div>
 				<div>
-					<a class="markingExaminationPaper" href="markingExaminationPaper.html" style="color: white; background-color:#A9A9A9;">批阅试卷</a>
+					<a class="markingExaminationPaper" href="markingExaminationPaper.html" style="color: green; background-color:#A9A9A9;">批阅试卷</a>
 				</div>
 				<div>
 					<a class="analyze" href="analyze.html">考试分析</a>
 				</div>
 			</div>
 			<div class="right">
-				<div class="questionView">
+					该学生客观题总得分为：<input type="text" id="selectQuestion" value="" />分
 				
-				学生客观题得分为：
-				<input type="text" name="" id="ke" value="" />
-					<!-- 试卷tabel -->
+				<div class="questionView">
+					
 					<table class="questionTable">
 						<thead>
 							<tr>
-				
+							
 								<th width="32%">题目</th>
-								<th width="10%">学生作答</th>
-								<th width="10%">评分</th>
+								<th width="5%">标准答案</th>
+								<th width="5%">题目总分</th>
+								<th width="5%">学生回答</th>
+								<th width="5%">评分</th>
 								<th width="5%">&nbsp;操作</th>
 						</thead>
 						<tbody class="x-cate" id="test">
-				
+
 						</tbody>
 					</table>
-				
-				
+
+
 				</div>
 			</div>
 		</div>
 
 	</body>
+	<script type="text/javascript">
+		let test_click = function(rs){
+			// console.dir(rs.parentElement.previousElementSibling.firstChild.value)
+			var str6 = rs.parentElement.previousElementSibling.firstChild.value;
+			//input 里的值；
+			var str7 = parseInt(str6);
+			//考试ID
+			var str8 = handleLocalStorage("get", "examId");
+			var str9 = parseInt(str8);
+			var str10 = handleLocalStorage("get", "nowStudentId");
+			//userId
+			var str11 = parseInt(str10);
+			//paperId
+			var str12 = handleLocalStorage("get", "paperId");
+			var str13 = parseInt(str12);
+			
+			var str14 = handleLocalStorage("get", "userId");
+			var str15 = parseInt(str14);
+			
+			var str16 = handleLocalStorage("get", "qi");
+			var str17 = parseInt(str16);
+			
+			
+			var form3 = {
+				"userId": str11,
+				"examId":str9,
+				"paperId":str13,
+				"score":str7,
+				"teacherId":str15,
+				"questionPaperId":str17
+			}
+			$.get("/score/insert", form3, function(res) {
+				alert("保存成功");
+				
+			})
+			
+		}
+	</script>
 </html>
